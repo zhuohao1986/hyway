@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.way.dao.SysDeptMapper">
+  <resultMap id="BaseResultMap" type="com.way.common.pojos.system.SysDept">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="dept_id" jdbcType="INTEGER" property="deptId" />
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="order_num" jdbcType="INTEGER" property="orderNum" />
+    <result column="create_time" jdbcType="DATETIME" property="createTime" />
+    <result column="modify_time" jdbcType="DATETIME" property="modifyTime" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="modify_by" jdbcType="VARCHAR" property="modifyBy" />
+    <result column="del_state" jdbcType="VARCHAR" property="delState" />
+  </resultMap>
+  <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        dept_id AS deptId, parent_id AS parentId, name, order_num AS orderNum, create_time AS createTime, modify_time AS modifyTime, del_state AS delState
+    </sql>
+  <select id="selectList" resultMap="BaseResultMap" parameterType="map">
+     select 
+      <include refid="Base_Column_List"/> 
+      from t_sys_dept where 1=1 
+     <if test="delState != null ">
+      	AND del_state=#{delState} 
+     </if>
+       ORDER BY dept_id DESC
+  </select>
+  <delete id="deleteDeptRealtion">
+        DELETE
+        FROM
+            t_sys_dept_relation
+        WHERE
+            descendant IN (
+                SELECT
+                    temp.descendant
+                FROM
+                    (
+                        SELECT
+                            descendant
+                        FROM
+                            t_sys_dept_relation
+                        WHERE
+                            ancestor = #{id}
+                    ) temp
+            )
+    </delete>
+    <!--关联查询部门列表-->
+    <select id="selectDeptDtoList" resultType="com.way.common.pojos.system.SysDept">
+		SELECT
+			t.*
+		FROM
+			t_sys_dept t
+		LEFT JOIN t_sys_dept_relation dr ON t.dept_id = dr.descendant
+		WHERE dr.ancestor = 0
+	</select>
+  
+</mapper>

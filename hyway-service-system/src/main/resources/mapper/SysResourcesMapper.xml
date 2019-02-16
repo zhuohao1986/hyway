@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.way.dao.SysResourcesMapper">
+  <resultMap id="BaseResultMap" type="com.way.common.pojos.system.SysResources">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="resource_id" jdbcType="INTEGER" property="resourceId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="permission" jdbcType="VARCHAR" property="permission" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="method" jdbcType="VARCHAR" property="method" />
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="component" jdbcType="VARCHAR" property="component" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="modify_by" jdbcType="VARCHAR" property="modifyBy" />
+    <result column="del_state" jdbcType="VARCHAR" property="delState" />
+  </resultMap>
+  <resultMap id="MenuVoResultMap" type="com.way.common.vo.MenuVO">
+        <id column="menu_id" property="menuId" />
+        <result column="name" property="name" />
+        <result column="permission" property="permission" />
+        <result column="url" property="url" />
+        <result column="method" property="method" />
+        <result column="parent_id" property="parentId" />
+        <result column="icon" property="icon" />
+        <result column="path" property="path" />
+        <result column="component" property="component" />
+        <result column="sort" property="sort" />
+        <result column="type" property="type" />
+        <result column="create_time" property="createTime" />
+        <result column="modify_time" property="updateTime" />
+        <result column="del_flag" property="delFlag" />
+    </resultMap>
+    <select id="findMenuByRoleName" resultMap="MenuVoResultMap">
+         SELECT
+            t_sys_resources.*
+        FROM
+        t_sys_role
+        LEFT JOIN t_sys_role_resources ON t_sys_role_resources.role_id = t_sys_role.role_id
+        LEFT JOIN t_sys_resources ON t_sys_resources.resource_id = t_sys_role_resources.menu_id
+        WHERE
+        t_sys_role.del_state = 0
+        AND t_sys_resources.del_state = 0
+        AND t_sys_role.role_code = #{role}
+        ORDER BY t_sys_resources.sort DESC
+    </select>
+</mapper>

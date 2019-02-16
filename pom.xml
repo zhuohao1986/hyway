@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.way</groupId>
+  <artifactId>hyway</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.8.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<modules>
+		<!-- conmmon -->
+	    <module>hyway-common</module>
+	    <module>hyway-test</module>
+	    <module>hyway-tools</module>
+	    <!-- server -->
+	    <module>hyway-eureka-server</module>
+	    <module>hyway-eureka-server-cluster</module>
+	    <module>hyway-config-server</module>
+	    <module>hyway-config-server-cluster</module>
+	    <module>hyway-service-gateway</module>
+	    
+	    <!-- service-api -->
+	    <module>hyway-service-user-api</module>
+	    <module>hyway-service-system-api</module>
+	    <!-- service -->
+	    <module>hyway-service-user</module>
+	    <module>hyway-service-system</module>
+	    <module>hyway-service-sso</module>
+	    <!-- web -->
+	    <module>hyway-web</module>
+	    <module>hyway-web-admin</module>
+	    <module>hyway-config-monitor</module>
+	    <module>hyway-task</module>
+	    <!-- ui -->
+	    <!-- <module>hyway-app</module>
+	    <module>hyway-vue-web</module> -->
+	</modules>
+	  <properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<hyway.version>0.0.1-SNAPSHOT</hyway.version>
+		<spring-cloud.version>Finchley.SR2</spring-cloud.version>
+		<fastjson.version>1.2.49</fastjson.version>
+		<druid.version>1.1.6</druid.version>
+		<pagehelper.version>3.4.2</pagehelper.version>
+		<common-lang3.version>3.0</common-lang3.version>
+		<slf4j.version>1.7.25</slf4j.version>
+		<lcn.last.version>4.1.0</lcn.last.version>
+	    <jackson.version>2.9.8</jackson.version>
+	    <mapper.version>4.1.0</mapper.version>
+	    <redis.version>2.9.0</redis.version>
+	    <jsoup.version>1.11.3</jsoup.version>
+	    <mail.version>1.4.7</mail.version>
+	    <swagger.version>2.5.0</swagger.version>
+	    <commons-pool2.version>2.5.0</commons-pool2.version>
+	    <servlet.version>4.0.1</servlet.version>
+	    <servlet-api.version>2.5</servlet-api.version>
+	    <zxing.version>3.0.0</zxing.version>
+	</properties>
+	<dependencyManagement>
+		<dependencies>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-dependencies</artifactId>
+			<version>${spring-cloud.version}</version>
+			<type>pom</type>
+			<scope>import</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-feign</artifactId>
+		</dependency>
+		<dependency>
+				<groupId>com.way</groupId>
+				<artifactId>hyway-common</artifactId>
+				<version>${hyway.version}</version>
+	    </dependency>
+	    <dependency>
+				<groupId>com.way</groupId>
+				<artifactId>hyway-service-user-api</artifactId>
+				<version>${hyway.version}</version>
+	    </dependency>
+	    <dependency>
+				<groupId>com.way</groupId>
+				<artifactId>hyway-service-system-api</artifactId>
+				<version>${hyway.version}</version>
+	    </dependency>
+	    <dependency>
+		   <groupId>com.way</groupId>
+		   <artifactId>hyway-tools</artifactId>
+		   <version>${hyway.version}</version>
+		</dependency>
+	    <!-- 添加Druid依赖 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>${druid.version}</version>
+		</dependency>
+		<!-- 分页 -->
+		<dependency>
+			<groupId>tk.mybatis</groupId>
+			<artifactId>mapper</artifactId>
+			<version>${mapper.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper</artifactId>
+			<version>${pagehelper.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.alibaba</groupId>
+		    <artifactId>fastjson</artifactId>
+		    <version>${fastjson.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-lang3</artifactId>
+		    <version>${common-lang3.version}</version>
+		</dependency>
+		<!-- log4j日志 -->
+		<dependency>
+		   <groupId>org.slf4j</groupId>
+		   <artifactId>slf4j-api</artifactId>
+		   <version>${slf4j.version}</version>
+		 </dependency>
+		<dependency>
+		   <groupId>org.slf4j</groupId>
+		   <artifactId>slf4j-log4j12</artifactId>
+		   <version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>${jackson.version}</version>
+		</dependency>
+		<!-- 分布式事务 -->
+		<dependency>
+		    <groupId>com.codingapi</groupId>
+		    <artifactId>transaction-springcloud</artifactId>
+		    <version>${lcn.last.version}</version>
+		</dependency>
+		<dependency>
+		   <groupId>com.codingapi</groupId>
+		   <artifactId>tx-plugins-db</artifactId>
+		   <version>${lcn.last.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
+		<dependency>
+		    <groupId>redis.clients</groupId>
+		    <artifactId>jedis</artifactId>
+		    <version>${redis.version}</version>
+		</dependency>
+		<!-- 邮件类 -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>${mail.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>javax.servlet-api</artifactId>
+		    <version>${servlet.version}</version>
+		    <scope>provided</scope>
+		</dependency>
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>servlet-api</artifactId>
+		    <version>${servlet-api.version}</version>
+		    <scope>provided</scope>
+		</dependency>
+		<!-- 网页解析 -->
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>${jsoup.version}</version>
+		</dependency>
+		<dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>core</artifactId>
+			<version>${zxing.version}</version>
+			</dependency>
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>javase</artifactId>
+			<version>${zxing.version}</version>
+		</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<profiles>
+		<profile>
+			<!-- 本地开发环境 -->
+			<id>dev</id>
+			<properties>
+				<profiles.active>dev</profiles.active>
+			</properties>
+			<!-- 默认激活本环境 -->
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		<profile>
+			<!-- 测试环境 -->
+			<id>test</id>
+			<properties>
+				<profiles.active>test</profiles.active>
+			</properties>
+		</profile>
+		<profile>
+			<!-- 生产环境 -->
+			<id>prod</id>
+			<properties>
+				<profiles.active>prod</profiles.active>
+			</properties>
+		</profile>
+	</profiles>
+	<repositories>
+		<repository>
+			<id>maven-central</id>
+			<name>Maven Central Repo</name>
+			<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+		</repository>
+	</repositories>
+	<!-- <pluginRepositories>
+		<pluginRepository>
+			<id>maven-central</id>
+			<name>Maven Central Repo</name>
+			<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+			<layout>default</layout>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories> -->
+</project>
