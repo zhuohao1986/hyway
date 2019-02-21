@@ -11,6 +11,12 @@
 		<version>2.0.8.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+	<developers>
+        <developer>
+            <name>samuelway</name>
+            <email>Samuel_way@163.com</email>
+        </developer>
+    </developers>
 	<modules>
 		<!-- conmmon -->
 	    <module>hyway-common</module>
@@ -24,6 +30,7 @@
 	    <module>hyway-service-gateway</module>
 	    
 	    <!-- service-api -->
+    	<module>hyway-service-sso-api</module>
 	    <module>hyway-service-user-api</module>
 	    <module>hyway-service-system-api</module>
 	    <!-- service -->
@@ -34,11 +41,13 @@
 	    <module>hyway-web</module>
 	    <module>hyway-web-admin</module>
 	    <module>hyway-config-monitor</module>
+	     <!-- tools -->
 	    <module>hyway-task</module>
 	    <!-- ui -->
 	    <!-- <module>hyway-app</module>
 	    <module>hyway-vue-web</module> -->
-	</modules>
+	    
+  </modules>
 	  <properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -88,6 +97,11 @@
 	    <dependency>
 				<groupId>com.way</groupId>
 				<artifactId>hyway-service-system-api</artifactId>
+				<version>${hyway.version}</version>
+	    </dependency>
+	    <dependency>
+				<groupId>com.way</groupId>
+				<artifactId>hyway-service-sso-api</artifactId>
 				<version>${hyway.version}</version>
 	    </dependency>
 	    <dependency>
@@ -230,25 +244,32 @@
 		</profile>
 	</profiles>
 	<repositories>
-		<repository>
-			<id>maven-central</id>
-			<name>Maven Central Repo</name>
-			<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
-		</repository>
-	</repositories>
-	<!-- <pluginRepositories>
-		<pluginRepository>
-			<id>maven-central</id>
-			<name>Maven Central Repo</name>
-			<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
-			<layout>default</layout>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories> -->
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/libs-milestone</url>
+        </repository>
+        <repository>
+            <id>oss</id>
+            <name>oss</name>
+            <url>https://oss.sonatype.org/content/groups/public</url>
+        </repository>
+        <repository>
+            <id>aliyun</id>
+            <name>aliyun</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+        </repository>
+    </repositories>
+    <distributionManagement>
+        <repository>
+            <id>repo.spring.io</id>
+            <name>Spring Release Repository</name>
+            <url>https://repo.spring.io/libs-release-local</url>
+        </repository>
+        <snapshotRepository>
+            <id>repo.spring.io</id>
+            <name>Spring Snapshot Repository</name>
+            <url>https://repo.spring.io/libs-snapshot-local</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>

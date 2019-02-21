@@ -69,6 +69,10 @@
 				<artifactId>hyway-service-user-api</artifactId>
 		</dependency>
 		<dependency>
+				<groupId>com.way</groupId>
+				<artifactId>hyway-service-sso-api</artifactId>
+	    </dependency>
+		<dependency>
 		    <groupId>com.alibaba</groupId>
 		    <artifactId>fastjson</artifactId>
 		</dependency>
