@@ -62,7 +62,7 @@
 		<lcn.last.version>4.1.0</lcn.last.version>
 	    <jackson.version>2.9.8</jackson.version>
 	    <mapper.version>4.1.0</mapper.version>
-	    <redis.version>2.9.0</redis.version>
+	    <redis.version>2.9.1</redis.version>
 	    <jsoup.version>1.11.3</jsoup.version>
 	    <mail.version>1.4.7</mail.version>
 	    <swagger.version>2.5.0</swagger.version>
@@ -70,6 +70,7 @@
 	    <servlet.version>4.0.1</servlet.version>
 	    <servlet-api.version>2.5</servlet-api.version>
 	    <zxing.version>3.0.0</zxing.version>
+	    <quartz.version>2.3.0</quartz.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -213,6 +214,11 @@
 			<groupId>com.google.zxing</groupId>
 			<artifactId>javase</artifactId>
 			<version>${zxing.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.quartz-scheduler</groupId>
+		    <artifactId>quartz</artifactId>
+		    <version>${quartz.version}</version>
 		</dependency>
 		</dependencies>
 	</dependencyManagement>

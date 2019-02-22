@@ -1,4 +1,3 @@
-
 package com.way.common.cache;
 
 import java.io.ByteArrayInputStream;
@@ -19,10 +18,9 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.SortingParams;
 
 @Component
-public class JedisClientSingle {
+public class JedisClientSingle implements JedisClient{
 	
 	private static Logger log = Logger.getLogger(JedisClientSingle.class);
-
 
 	@Autowired
 	private JedisPool jedisPool;
@@ -39,7 +37,7 @@ public class JedisClientSingle {
 	 * @param indexdb 选择redis库 0-15
 	 * @return 成功返回value 失败返回null
 	 */
-
+	@Override
 	public String get(String key, int indexdb) {
 		Jedis jedis = null;
 		String value = null;
@@ -69,7 +67,7 @@ public class JedisClientSingle {
 	 * @param indexdb 选择redis库 0-15
 	 * @return 成功返回value 失败返回null
 	 */
-
+	@Override
 	public byte[] get(byte[] key, int indexdb) {
 		Jedis jedis = null;
 		byte[] value = null;
@@ -99,7 +97,7 @@ public class JedisClientSingle {
 	 * @param indexdb 选择redis库 0-15
 	 * @return 成功 返回OK 失败返回 0
 	 */
-
+	@Override
 	public String set(String key, String value, int indexdb) {
 		Jedis jedis = null;
 		try {
@@ -128,7 +126,7 @@ public class JedisClientSingle {
 	 * @param indexdb 选择redis库 0-15
 	 * @return 成功 返回OK 失败返回 0
 	 */
-
+	@Override
 	public String set(byte[] key, byte[] value, int indexdb) {
 		Jedis jedis = null;
 		try {
@@ -152,7 +150,7 @@ public class JedisClientSingle {
 	 * @param keys 一个key 也可以使 string 数组
 	 * @return 返回删除成功的个数
 	 */
-
+	@Override
 	public Long del(String... keys) {
 		Jedis jedis = null;
 		try {
@@ -176,7 +174,7 @@ public class JedisClientSingle {
 	 * @param keys    一个key 也可以使 string 数组
 	 * @return 返回删除成功的个数
 	 */
-
+	@Override
 	public Long del(int indexdb, String... keys) {
 		Jedis jedis = null;
 		try {
@@ -201,7 +199,7 @@ public class JedisClientSingle {
 	 * @param keys    一个key 也可以使 string 数组
 	 * @return 返回删除成功的个数
 	 */
-
+	@Override
 	public Long del(int indexdb, byte[]... keys) {
 		Jedis jedis = null;
 		try {
@@ -226,7 +224,7 @@ public class JedisClientSingle {
 	 * @param str
 	 * @return 成功返回 添加后value的长度 失败 返回 添加的 value 的长度 异常返回0L
 	 */
-
+	@Override
 	public Long append(String key, String str) {
 		Jedis jedis = null;
 		Long res = null;
@@ -251,7 +249,7 @@ public class JedisClientSingle {
 	 * @param key
 	 * @return true OR false
 	 */
-
+	@Override
 	public boolean exists(String key) {
 		Jedis jedis = null;
 		try {
@@ -273,7 +271,7 @@ public class JedisClientSingle {
 	 *
 	 * @return 总是返回 OK
 	 */
-
+	@Override
 	public String flushDB() {
 		Jedis jedis = null;
 		try {
@@ -296,7 +294,7 @@ public class JedisClientSingle {
 	 * @param value 过期时间，单位：秒
 	 * @return 成功返回1 如果存在 和 发生异常 返回 0
 	 */
-
+	@Override
 	public Long expire(String key, int value, int indexdb) {
 		Jedis jedis = null;
 		try {
@@ -320,7 +318,7 @@ public class JedisClientSingle {
 	 * @return 当 key 不存在时，返回 -2 。当 key 存在但没有设置剩余生存时间时，返回 -1 。否则，以秒为单位，返回 key
 	 *         的剩余生存时间。 发生异常 返回 0
 	 */
-
+	@Override
 	public Long ttl(String key, int indexdb) {
 		Jedis jedis = null;
 		try {
@@ -344,7 +342,7 @@ public class JedisClientSingle {
 	 * @param key
 	 * @return 当生存时间移除成功时，返回 1 .如果 key 不存在或 key 没有设置生存时间，返回 0 ， 发生异常 返回 -1
 	 */
-
+	@Override
 	public Long persist(String key) {
 		Jedis jedis = null;
 		try {
@@ -369,7 +367,7 @@ public class JedisClientSingle {
 	 * @param value
 	 * @return 设置成功时返回 OK 。当 seconds 参数不合法时，返回一个错误。
 	 */
-
+	@Override
 	public String setex(String key, int seconds, String value) {
 		Jedis jedis = null;
 		try {
@@ -393,7 +391,7 @@ public class JedisClientSingle {
 	 * @param value
 	 * @return 成功返回1 如果存在 和 发生异常 返回 0
 	 */
-
+	@Override
 	public Long setnx(String key, String value) {
 		Jedis jedis = null;
 		try {
@@ -420,7 +418,7 @@ public class JedisClientSingle {
 	 * @param value
 	 * @return 返回给定 key 的旧值。当 key 没有旧值时，也即是， key 不存在时，返回 nil
 	 */
-
+	@Override
 	public String getSet(String key, String value) {
 		Jedis jedis = null;
 		try {
@@ -445,7 +443,7 @@ public class JedisClientSingle {
 	 * @param seconds 单位:秒
 	 * @return 成功返回OK 失败和异常返回null
 	 */
-
+	@Override
 	public String setex(String key, String value, int seconds) {
 		Jedis jedis = null;
 		String res = null;
@@ -492,7 +490,7 @@ public class JedisClientSingle {
 	 * @param offset 下标位置
 	 * @return 返回替换后 value 的长度
 	 */
-
+	@Override
 	public Long setrange(String key, String str, int offset) {
 		Jedis jedis = null;
 		try {
@@ -515,7 +513,7 @@ public class JedisClientSingle {
 	 * @param keys string数组 也可以是一个key
 	 * @return 成功返回value的集合, 失败返回null的集合 ,异常返回空
 	 */
-
+	@Override
 	public List<String> mget(String... keys) {
 		Jedis jedis = null;
 		List<String> values = null;
@@ -546,7 +544,7 @@ public class JedisClientSingle {
 	 * @return 成功返回OK 失败 异常 返回 null
 	 *
 	 */
-
+	@Override
 	public String mset(String... keysvalues) {
 		Jedis jedis = null;
 		String res = null;
@@ -576,7 +574,7 @@ public class JedisClientSingle {
 	 * @param keysvalues
 	 * @return 成功返回1 失败返回0
 	 */
-
+	@Override
 	public Long msetnx(String... keysvalues) {
 		Jedis jedis = null;
 		Long res = 0L;
@@ -601,7 +599,7 @@ public class JedisClientSingle {
 	 * @param value
 	 * @return 旧值 如果key不存在 则返回null
 	 */
-
+	@Override
 	public String getset(String key, String value) {
 		Jedis jedis = null;
 		String res = null;
@@ -627,7 +625,7 @@ public class JedisClientSingle {
 	 * @param endOffset
 	 * @return 如果没有返回null
 	 */
-
+	@Override
 	public String getrange(String key, int startOffset, int endOffset) {
 		Jedis jedis = null;
 		String res = null;
@@ -651,7 +649,7 @@ public class JedisClientSingle {
 	 * @param key
 	 * @return 加值后的结果
 	 */
-
+	@Override
 	public long incr(String key) {
 		Jedis jedis = null;
 		Long res = null;
@@ -676,7 +674,7 @@ public class JedisClientSingle {
 	 * @param integer
 	 * @return
 	 */
-
+	@Override
 	public Long incrBy(String key, Long integer) {
 		Jedis jedis = null;
 		Long res = null;
@@ -700,7 +698,7 @@ public class JedisClientSingle {
 	 * @param key
 	 * @return
 	 */
-
+	@Override
 	public Long decr(String key) {
 		Jedis jedis = null;
 		Long res = null;
@@ -725,7 +723,7 @@ public class JedisClientSingle {
 	 * @param integer
 	 * @return
 	 */
-
+	@Override
 	public Long decrBy(String key, Long integer) {
 		Jedis jedis = null;
 		Long res = null;
@@ -749,7 +747,7 @@ public class JedisClientSingle {
 	 * @param key
 	 * @return 失败返回null
 	 */
-
+	@Override
 	public Long serlen(String key) {
 		Jedis jedis = null;
 		Long res = null;
@@ -775,7 +773,7 @@ public class JedisClientSingle {
 	 * @param value
 	 * @return 如果存在返回0 异常返回null
 	 */
-
+	@Override
 	public long hset(String key, String field, String value) {
 		Jedis jedis = null;
 		Long res = null;
@@ -801,7 +799,7 @@ public class JedisClientSingle {
 	 * @param value
 	 * @return
 	 */
-
+	@Override
 	public Long hsetnx(String key, String field, String value) {
 		Jedis jedis = null;
 		Long res = null;
@@ -826,7 +824,7 @@ public class JedisClientSingle {
 	 * @param hash
 	 * @return 返回OK 异常返回null
 	 */
-
+	@Override
 	public String hmset(String key, Map<String, String> hash, int indexdb) {
 		Jedis jedis = null;
 		String res = null;
@@ -852,7 +850,7 @@ public class JedisClientSingle {
 	 * @param field
 	 * @return 没有返回null
 	 */
-
+	@Override
 	public String hget(String key, String field) {
 		Jedis jedis = null;
 		String res = null;
@@ -877,7 +875,7 @@ public class JedisClientSingle {
 	 * @param fields 可以使 一个String 也可以是 String数组
 	 * @return
 	 */
-
+	@Override
 	public List<String> hmget(String key, int indexdb, String... fields) {
 		Jedis jedis = null;
 		List<String> res = null;
@@ -904,7 +902,7 @@ public class JedisClientSingle {
 	 * @param value
 	 * @return
 	 */
-
+	@Override
 	public Long hincrby(String key, String field, Long value) {
 		Jedis jedis = null;
 		Long res = null;
@@ -929,7 +927,7 @@ public class JedisClientSingle {
 	 * @param field
 	 * @return
 	 */
-
+	@Override
 	public Boolean hexists(String key, String field) {
 		Jedis jedis = null;
 		Boolean res = false;
@@ -953,7 +951,7 @@ public class JedisClientSingle {
 	 * @param key
 	 * @return
 	 */
-
+	@Override
 	public Long hlen(String key) {
 		Jedis jedis = null;
 		Long res = null;
@@ -979,7 +977,7 @@ public class JedisClientSingle {
 	 * @param fields 可以是 一个 field 也可以是 一个数组
 	 * @return
 	 */
-
+	@Override
 	public Long hdel(String key, String... fields) {
 		Jedis jedis = null;
 		Long res = null;
@@ -1003,7 +1001,7 @@ public class JedisClientSingle {
 	 * @param key
 	 * @return
 	 */
-
+	@Override
 	public Set<String> hkeys(String key) {
 		Jedis jedis = null;
 		Set<String> res = null;
@@ -1027,7 +1025,7 @@ public class JedisClientSingle {
 	 * @param key
 	 * @return
 	 */
-
+	@Override
 	public List<String> hvals(String key) {
 		Jedis jedis = null;
 		List<String> res = null;
@@ -1051,7 +1049,7 @@ public class JedisClientSingle {
 	 * @param key
 	 * @return
 	 */
-
+	@Override
 	public Map<String, String> hgetall(String key, int indexdb) {
 		Jedis jedis = null;
 		Map<String, String> res = null;
@@ -1076,7 +1074,7 @@ public class JedisClientSingle {
 	 * @param strs 可以使一个string 也可以使string数组
 	 * @return 返回list的value个数
 	 */
-
+	@Override
 	public Long lpush(int indexdb, String key, String... strs) {
 		Jedis jedis = null;
 		Long res = null;
@@ -1102,7 +1100,7 @@ public class JedisClientSingle {
 	 * @param strs 可以使一个string 也可以使string数组
 	 * @return 返回list的value个数
 	 */
-
+	@Override
 	public Long rpush(String key, String... strs) {
 		Jedis jedis = null;
 		Long res = null;
@@ -1129,7 +1127,7 @@ public class JedisClientSingle {
 	 * @param value 添加的value
 	 * @return
 	 */
-
+	@Override
 	public Long linsert(String key, LIST_POSITION where, String pivot, String value) {
 		Jedis jedis = null;
 		Long res = null;
@@ -1158,7 +1156,7 @@ public class JedisClientSingle {
 	 * @param value
 	 * @return 成功返回OK
 	 */
-
+	@Override
 	public String lset(String key, Long index, String value) {
 		Jedis jedis = null;
 		String res = null;
@@ -1184,7 +1182,7 @@ public class JedisClientSingle {
 	 * @param value
 	 * @return 返回被删除的个数
 	 */
-
+	@Override
 	public Long lrem(String key, long count, String value) {
 		Jedis jedis = null;
 		Long res = null;
@@ -1210,7 +1208,7 @@ public class JedisClientSingle {
 	 * @param end
 	 * @return 成功返回OK
 	 */
-
+	@Override
 	public String ltrim(String key, long start, long end) {
 		Jedis jedis = null;
 		String res = null;
@@ -1234,7 +1232,7 @@ public class JedisClientSingle {
 	 * @param key
 	 * @return
 	 */
-
+	@Override
 	synchronized public String lpop(String key) {
 		Jedis jedis = null;
 		String res = null;
@@ -1258,7 +1256,7 @@ public class JedisClientSingle {
 	 * @param key
 	 * @return
 	 */
-
+	@Override
 	synchronized public String rpop(String key, int indexdb) {
 		Jedis jedis = null;
 		String res = null;
@@ -1287,7 +1285,7 @@ public class JedisClientSingle {
 	 * @param dstkey
 	 * @return
 	 */
-
+	@Override
 	public String rpoplpush(String srckey, String dstkey, int indexdb) {
 		Jedis jedis = null;
 		String res = null;
@@ -1313,7 +1311,7 @@ public class JedisClientSingle {
 	 * @param index
 	 * @return 如果没有返回null
 	 */
-
+	@Override
 	public String lindex(String key, long index) {
 		Jedis jedis = null;
 		String res = null;
@@ -1337,7 +1335,7 @@ public class JedisClientSingle {
 	 * @param key
 	 * @return
 	 */
-
+	@Override
 	public Long llen(String key) {
 		Jedis jedis = null;
 		Long res = null;
@@ -1366,7 +1364,7 @@ public class JedisClientSingle {
 	 * @param end
 	 * @return
 	 */
-
+	@Override
 	public List<String> lrange(String key, long start, long end, int indexdb) {
 		Jedis jedis = null;
 		List<String> res = null;
@@ -1393,7 +1391,7 @@ public class JedisClientSingle {
 	 * @param value
 	 * @return 操作成功返回 ok ，否则返回错误信息
 	 */
-
+	@Override
 	public String lset(String key, long index, String value) {
 		Jedis jedis = null;
 		try {
@@ -1417,7 +1415,7 @@ public class JedisClientSingle {
 	 * @param sortingParameters
 	 * @return 返回列表形式的排序结果
 	 */
-
+	@Override
 	public List<String> sort(String key, SortingParams sortingParameters) {
 		Jedis jedis = null;
 		try {
@@ -1440,7 +1438,7 @@ public class JedisClientSingle {
 	 * @param key
 	 * @return 返回列表形式的排序结果
 	 */
-
+	@Override
 	public List<String> sort(String key) {
 		Jedis jedis = null;
 		try {
@@ -1464,7 +1462,7 @@ public class JedisClientSingle {
 	 * @param members 可以是一个String 也可以是一个String数组
 	 * @return 添加成功的个数
 	 */
-
+	@Override
 	public Long sadd(String key, String... members) {
 		Jedis jedis = null;
 		Long res = null;
@@ -1489,7 +1487,7 @@ public class JedisClientSingle {
 	 * @param members 可以是一个String 也可以是一个String数组
 	 * @return 删除的个数
 	 */
-
+	@Override
 	public Long srem(String key, String... members) {
 		Jedis jedis = null;
 		Long res = null;
@@ -1513,7 +1511,7 @@ public class JedisClientSingle {
 	 * @param key
 	 * @return
 	 */
-
+	@Override
 	public String spop(String key) {
 		Jedis jedis = null;
 		String res = null;
@@ -1540,7 +1538,7 @@ public class JedisClientSingle {
 	 * @param keys 可以使一个string 则返回set中所有的value 也可以是string数组
 	 * @return
 	 */
-
+	@Override
 	public Set<String> sdiff(String... keys) {
 		Jedis jedis = null;
 		Set<String> res = null;
@@ -1568,7 +1566,7 @@ public class JedisClientSingle {
 	 * @param keys   可以使一个string 则返回set中所有的value 也可以是string数组
 	 * @return
 	 */
-
+	@Override
 	public Long sdiffstore(String dstkey, String... keys) {
 		Jedis jedis = null;
 		Long res = null;
@@ -1592,7 +1590,7 @@ public class JedisClientSingle {
 	 * @param keys 可以使一个string 也可以是一个string数组
 	 * @return
 	 */
-
+	@Override
 	public Set<String> sinter(String... keys) {
 		Jedis jedis = null;
 		Set<String> res = null;
@@ -1617,7 +1615,7 @@ public class JedisClientSingle {
 	 * @param keys   可以使一个string 也可以是一个string数组
 	 * @return
 	 */
-
+	@Override
 	public Long sinterstore(String dstkey, String... keys) {
 		Jedis jedis = null;
 		Long res = null;
@@ -1641,7 +1639,7 @@ public class JedisClientSingle {
 	 * @param keys 可以使一个string 也可以是一个string数组
 	 * @return
 	 */
-
+	@Override
 	public Set<String> sunion(String... keys) {
 		Jedis jedis = null;
 		Set<String> res = null;
@@ -1666,7 +1664,7 @@ public class JedisClientSingle {
 	 * @param keys   可以使一个string 也可以是一个string数组
 	 * @return
 	 */
-
+	@Override
 	public Long sunionstore(String dstkey, String... keys) {
 		Jedis jedis = null;
 		Long res = null;
@@ -1692,7 +1690,7 @@ public class JedisClientSingle {
 	 * @param member set中的value
 	 * @return
 	 */
-
+	@Override
 	public Long smove(String srckey, String dstkey, String member) {
 		Jedis jedis = null;
 		Long res = null;
@@ -1716,7 +1714,7 @@ public class JedisClientSingle {
 	 * @param key
 	 * @return
 	 */
-
+	@Override
 	public Long scard(String key) {
 		Jedis jedis = null;
 		Long res = null;
@@ -1741,7 +1739,7 @@ public class JedisClientSingle {
 	 * @param member
 	 * @return
 	 */
-
+	@Override
 	public Boolean sismember(String key, String member) {
 		Jedis jedis = null;
 		Boolean res = null;
@@ -1765,7 +1763,7 @@ public class JedisClientSingle {
 	 * @param key
 	 * @return
 	 */
-
+	@Override
 	public String srandmember(String key) {
 		Jedis jedis = null;
 		String res = null;
@@ -1789,7 +1787,7 @@ public class JedisClientSingle {
 	 * @param key
 	 * @return
 	 */
-
+	@Override
 	public Set<String> smembers(String key) {
 		Jedis jedis = null;
 		Set<String> res = null;
@@ -1818,7 +1816,7 @@ public class JedisClientSingle {
 	 * @param member
 	 * @return
 	 */
-
+	@Override
 	public Long zadd(String key, double score, String member) {
 		Jedis jedis = null;
 		Long res = null;
@@ -1844,7 +1842,7 @@ public class JedisClientSingle {
 	 * @param max
 	 * @return 指定区间内的有序集成员的列表。
 	 */
-
+	@Override
 	public Set<String> zrange(String key, long min, long max) {
 		Jedis jedis = null;
 		try {
@@ -1869,7 +1867,7 @@ public class JedisClientSingle {
 	 * @param max
 	 * @return 值在 min 和 max 之间的成员的数量。异常返回0
 	 */
-
+	@Override
 	public Long zcount(String key, double min, double max) {
 		Jedis jedis = null;
 		try {
@@ -1900,7 +1898,7 @@ public class JedisClientSingle {
 	 * @param increment
 	 * @return 执行 HINCRBY 命令之后，哈希表 key 中域 field的值。异常返回0
 	 */
-
+	@Override
 	public Long hincrBy(String key, String value, long increment) {
 		Jedis jedis = null;
 		try {
@@ -1924,7 +1922,7 @@ public class JedisClientSingle {
 	 * @param members 可以使一个string 也可以是一个string数组
 	 * @return
 	 */
-
+	@Override
 	public Long zrem(String key, String... members) {
 		Jedis jedis = null;
 		Long res = null;
@@ -1950,7 +1948,7 @@ public class JedisClientSingle {
 	 * @param member
 	 * @return
 	 */
-
+	@Override
 	public Double zincrby(String key, double score, String member) {
 		Jedis jedis = null;
 		Double res = null;
@@ -1978,7 +1976,7 @@ public class JedisClientSingle {
 	 * @param member
 	 * @return
 	 */
-
+	@Override
 	public Long zrank(String key, String member) {
 		Jedis jedis = null;
 		Long res = null;
@@ -2006,7 +2004,7 @@ public class JedisClientSingle {
 	 * @param member
 	 * @return
 	 */
-
+	@Override
 	public Long zrevrank(String key, String member) {
 		Jedis jedis = null;
 		Long res = null;
@@ -2038,7 +2036,7 @@ public class JedisClientSingle {
 	 * @param end
 	 * @return
 	 */
-
+	@Override
 	public Set<String> zrevrange(String key, long start, long end) {
 		Jedis jedis = null;
 		Set<String> res = null;
@@ -2064,7 +2062,7 @@ public class JedisClientSingle {
 	 * @param min
 	 * @return
 	 */
-
+	@Override
 	public Set<String> zrangebyscore(String key, String max, String min) {
 		Jedis jedis = null;
 		Set<String> res = null;
@@ -2090,7 +2088,7 @@ public class JedisClientSingle {
 	 * @param min
 	 * @return
 	 */
-
+	@Override
 	public Set<String> zrangeByScore(String key, double max, double min) {
 		Jedis jedis = null;
 		Set<String> res = null;
@@ -2116,7 +2114,7 @@ public class JedisClientSingle {
 	 * @param max
 	 * @return
 	 */
-
+	@Override
 	public Long zcount(String key, String min, String max) {
 		Jedis jedis = null;
 		Long res = null;
@@ -2140,7 +2138,7 @@ public class JedisClientSingle {
 	 * @param key
 	 * @return
 	 */
-
+	@Override
 	public Long zcard(String key) {
 		Jedis jedis = null;
 		Long res = null;
@@ -2165,7 +2163,7 @@ public class JedisClientSingle {
 	 * @param member
 	 * @return
 	 */
-
+	@Override
 	public Double zscore(String key, String member) {
 		Jedis jedis = null;
 		Double res = null;
@@ -2191,7 +2189,7 @@ public class JedisClientSingle {
 	 * @param end
 	 * @return
 	 */
-
+	@Override
 	public Long zremrangeByRank(String key, long start, long end) {
 		Jedis jedis = null;
 		Long res = null;
@@ -2217,7 +2215,7 @@ public class JedisClientSingle {
 	 * @param end
 	 * @return
 	 */
-
+	@Override
 	public Long zremrangeByScore(String key, double start, double end) {
 		Jedis jedis = null;
 		Long res = null;
@@ -2247,7 +2245,7 @@ public class JedisClientSingle {
 	 * @param pattern
 	 * @return
 	 */
-
+	@Override
 	public Set<String> keys(String pattern) {
 		Jedis jedis = null;
 		Set<String> res = null;
@@ -2262,7 +2260,7 @@ public class JedisClientSingle {
 		}
 		return res;
 	}
-
+	@Override
 	public Set<String> keysBySelect(String pattern, int database) {
 		Jedis jedis = null;
 		Set<String> res = null;
@@ -2287,7 +2285,7 @@ public class JedisClientSingle {
 	 * @param key
 	 * @return
 	 */
-
+	@Override
 	public String type(String key) {
 		Jedis jedis = null;
 		String res = null;
@@ -2330,7 +2328,6 @@ public class JedisClientSingle {
 	 * @param bytes
 	 * @return 对象需实现Serializable接口
 	 */
-
 	public static Object unserialize(byte[] bytes) {
 		ByteArrayInputStream bais = null;
 		try { // 反序列化
@@ -2348,33 +2345,34 @@ public class JedisClientSingle {
 	 * @param jedisPool
 	 * @param jedis
 	 */
-	public static void returnResource(JedisPool jedisPool, Jedis jedis) {
+	@Override
+	public  void returnResource(JedisPool jedisPool, Jedis jedis) {
 		if (jedis != null) {
 			jedisPool.isClosed();
 		}
 	}
-
+	@Override
 	public String get(String key) {
 		Jedis jedis = jedisPool.getResource();
 		String string = jedis.get(key);
 		jedis.close();
 		return string;
 	}
-
+	@Override
 	public String set(String key, String value) {
 		Jedis jedis = jedisPool.getResource();
 		String string = jedis.set(key, value);
 		jedis.close();
 		return string;
 	}
-
+	@Override
 	public long expire(String key, int second) {
 		Jedis jedis = jedisPool.getResource();
 		Long result = jedis.expire(key, second);
 		jedis.close();
 		return result;
 	}
-
+	@Override
 	public long ttl(String key) {
 		Jedis jedis = jedisPool.getResource();
 		Long result = jedis.ttl(key);
@@ -2388,7 +2386,7 @@ public class JedisClientSingle {
 		jedis.close();
 		return result;
 	}
-
+	@Override
 	public long hdel(String hkey, String key) {
 		Jedis jedis = jedisPool.getResource();
 		Long result = jedis.hdel(hkey, key);
@@ -2396,7 +2394,8 @@ public class JedisClientSingle {
 		return result;
 	}
 
-	public Set<String> getAllKeys() { // TODO Auto-generated method
+	@Override
+	public Set<String> getAllKeys() {
 		Jedis jedis = jedisPool.getResource();
 		Set<String> s = jedis.keys("*");
 		return s;

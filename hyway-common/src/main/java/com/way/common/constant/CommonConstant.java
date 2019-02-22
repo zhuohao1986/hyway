@@ -78,7 +78,7 @@ public interface CommonConstant {
     String ROUTE_KEY = SecurityConstants.TAROCO_PREFIX + "ROUTE_LIST";
 
     /**
-     * 超级管理员用户名
+         * 超级管理员用户名
      */
     String ADMIN_USER_NAME = "admin";
 
