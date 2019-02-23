@@ -27,6 +27,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/dict")
 public class DictController extends BaseController {
+	
     @Autowired
     private SysDictService sysDictService;
 

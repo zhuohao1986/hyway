@@ -10,9 +10,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ComponentScan
 @EnableAutoConfiguration
-//@EnableEurekaClient
-//@EnableFeignClients//(basePackages = "com.way.service.*")
 @SpringBootApplication
+@ComponentScan(basePackages = {"com.way"})
 public class SpringWebApplication {
 
 	public static void main(String[] args) {

@@ -23,9 +23,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class})
 @RestController
 @MapperScan(basePackages = "com.way.dao")
-@ComponentScan(basePackages = {"com.way.system.service",
-							   "com.way.common.config",
-							   "com.way.common.cache"})
+@ComponentScan(basePackages = {"com.way"})
 public class SystemServiceSpringApplication {
 	
 	public static void main(String[] args) {

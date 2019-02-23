@@ -9,8 +9,8 @@
     <result column="parent_id" jdbcType="INTEGER" property="parentId" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="order_num" jdbcType="INTEGER" property="orderNum" />
-    <result column="create_time" jdbcType="DATETIME" property="createTime" />
-    <result column="modify_time" jdbcType="DATETIME" property="modifyTime" />
+    <result column="create_time" jdbcType="DATE" property="createTime" />
+    <result column="modify_time" jdbcType="DATE" property="modifyTime" />
     <result column="create_by" jdbcType="VARCHAR" property="createBy" />
     <result column="modify_by" jdbcType="VARCHAR" property="modifyBy" />
     <result column="del_state" jdbcType="VARCHAR" property="delState" />
