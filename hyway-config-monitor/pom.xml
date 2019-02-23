@@ -7,9 +7,24 @@
   </parent>
   <artifactId>hyway-config-monitor</artifactId>
   <dependencies>
+        <dependency>
+		    <groupId>de.codecentric</groupId>
+		    <artifactId>spring-boot-admin-starter-server</artifactId>
+		    <version>2.0.1</version>
+		    <!-- <exclusions>
+		       <exclusion>
+		          <groupId>io.projectreactor.addons</groupId>
+	      		  <artifactId>reactor-extra</artifactId>
+		       </exclusion>
+		    </exclusions> -->
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -17,25 +32,12 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-		    <groupId>org.apache.commons</groupId>
-		    <artifactId>commons-lang3</artifactId>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		<dependency>
-		    <groupId>com.alibaba</groupId>
-		    <artifactId>fastjson</artifactId>
-		</dependency>
-		<!-- log4j日志 -->
-		<dependency>
-		   <groupId>org.slf4j</groupId>
-		   <artifactId>slf4j-api</artifactId>
-		   </dependency>
-		<dependency>
-		   <groupId>org.slf4j</groupId>
-		   <artifactId>slf4j-log4j12</artifactId>
-		</dependency>
-		<dependency>
-				<groupId>com.way</groupId>
-				<artifactId>hyway-service-user-api</artifactId>
+    		<groupId>org.jolokia</groupId>
+    		<artifactId>jolokia-core</artifactId>
 		</dependency>
 	</dependencies>
   <build>

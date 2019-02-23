@@ -14,6 +14,8 @@ public class CodeConstants {
 	public final static String ALL_REQUEST_CHANNEL_WAP = "wap";
 	// tekon
 	public final static String REDIS_USER_SESSION_KEY = "REDIS_USER_SESSION";
+	//全局COOKIE TOKEN
+	public final static String REDIS_USER_KEY = "HY_TOKEN";
 	
 	
 

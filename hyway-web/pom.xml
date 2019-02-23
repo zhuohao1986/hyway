@@ -50,7 +50,11 @@
 		</dependency>
 		<dependency>
 				<groupId>com.way</groupId>
-				<artifactId>hyway-service-user-api</artifactId>
+				<artifactId>hyway-service-sso-api</artifactId>
+		</dependency>
+		<dependency>
+				<groupId>com.way</groupId>
+				<artifactId>hyway-common</artifactId>
 		</dependency>
 	</dependencies>
 	<build>

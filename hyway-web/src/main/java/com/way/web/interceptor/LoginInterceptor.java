@@ -4,17 +4,25 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.way.api.sso.SsoApi;
+import com.way.common.constant.CodeConstants;
+import com.way.common.stdo.RequestWrapper;
+import com.way.common.utils.CookieUtils;
+
 public class LoginInterceptor  implements HandlerInterceptor{  
 	  
-    private static final Logger log = LoggerFactory.getLogger(LoginInterceptor.class);  
+     private static final Logger log = LoggerFactory.getLogger(LoginInterceptor.class);  
+     
+     @Autowired
+     private SsoApi ssoApi;
   
     /** 
      * 进入controller层之前拦截请求 
@@ -28,9 +36,13 @@ public class LoginInterceptor  implements HandlerInterceptor{
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {  
   
         log.info("---------------------开始进入请求地址拦截----------------------------");  
-        HttpSession session = httpServletRequest.getSession();  
-        if(!StringUtils.isEmpty(session.getAttribute("userName"))){  
-            return true;  
+        String hy_token = CookieUtils.getCookieValue(httpServletRequest, CodeConstants.REDIS_USER_KEY);
+        log.info("CookieInterceptor>>>preHandle>>mw_token:"+hy_token);
+		
+        if(!StringUtils.isEmpty(hy_token)){  
+        	RequestWrapper requestWrapper = new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB,hy_token);
+        	ssoApi.resetUserCache(requestWrapper.toString());
+			return true;
         }  
         else{  
             PrintWriter printWriter = httpServletResponse.getWriter();  
