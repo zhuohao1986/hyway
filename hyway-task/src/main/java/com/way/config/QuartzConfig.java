@@ -28,7 +28,7 @@ public class QuartzConfig {
 		schedulerFactoryBean.setDataSource(dataSourceConfig.dataSource());
 		schedulerFactoryBean.setQuartzProperties(quartzProperties());
 		// 延迟10s启动quartz
-	    //schedulerFactoryBean.setStartupDelay(10);
+	    schedulerFactoryBean.setStartupDelay(10);
 		return schedulerFactoryBean;
 	}
 
