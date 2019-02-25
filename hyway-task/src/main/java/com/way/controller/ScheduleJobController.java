@@ -5,9 +5,11 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.quartz.CronExpression;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,10 +50,10 @@ public class ScheduleJobController {
 	 */
 	@RequestMapping("json")
 	@ResponseBody
-	public Map<String, Object> getAllJobs(Model model){
+	public Map<String, Object> getAllJobs(Model model,Integer page,Integer limit,HttpServletResponse servletResponse,HttpServletRequest servletRequest){
 		List<ScheduleJob> scheduleJobs = scheduleJobService.getAllScheduleJob();
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("rows", scheduleJobs);
+		map.put("records", scheduleJobs);
 		map.put("total", scheduleJobs.size());
 		return map;
 	}
@@ -74,17 +76,17 @@ public class ScheduleJobController {
 	 * 添加跳转
 	 * @param model
 	 */
-	@RequestMapping(value = "add", method = RequestMethod.GET)
-	public String createForm() {
-		return "system/scheduleJobForm";
-	}
+	/*
+	 * @RequestMapping(value = "add", method = RequestMethod.GET) public String
+	 * createForm() { return "system/scheduleJobForm"; }
+	 */
 
 	/**
 	 * 添加
 	 * @param user
 	 * @param model
 	 */
-	@RequestMapping(value = "add", method = RequestMethod.POST)
+	@RequestMapping(value = "add", method = RequestMethod.GET)
 	@ResponseBody
 	public String create(/*@Valid*/ ScheduleJob scheduleJob) {
 		scheduleJob.setClassName("com.way.task.SimpleExampleStatusTask");
