@@ -11,7 +11,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.way.common.pojos.system.SysDict;
 import com.way.dao.SysDictMapper;
-import com.way.system.api.SysDictService;
+import com.way.system.service.SysDictService;
 
 /**
  * <p>
@@ -35,12 +35,12 @@ public class SysDictServiceImpl  implements SysDictService {
 
 	@Override
 	public PageInfo<SysDict> selectPage(Map<String, Object> paramMap) {
-		Integer pageNum=Integer.parseInt(String.valueOf(paramMap.get("pageNum")));
-    	Integer pageSize=Integer.parseInt(String.valueOf(paramMap.get("pageSize")));
-    	PageHelper.startPage(pageNum, pageSize);
+		Integer page=Integer.parseInt(String.valueOf(paramMap.get("page")));
+    	Integer limit=Integer.parseInt(String.valueOf(paramMap.get("limit")));
+    	PageHelper.startPage(page, limit);
     	List<SysDict> selectRolePage = sysDictMapper.selectList(paramMap);
-    	PageInfo<SysDict> page=new PageInfo<SysDict>(selectRolePage);
-		return page;
+    	PageInfo<SysDict> pages=new PageInfo<SysDict>(selectRolePage);
+		return pages;
 	}
 
 	@Override

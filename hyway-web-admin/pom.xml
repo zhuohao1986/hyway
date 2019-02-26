@@ -7,6 +7,19 @@
   </parent>
   <artifactId>hyway-web-admin</artifactId>
 <dependencies>
+
+        <dependency>
+			<groupId>com.way</groupId>
+			<artifactId>hyway-common</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.way</groupId>
+			<artifactId>hyway-service-system-api</artifactId>
+		</dependency>
+		<dependency>
+		   <groupId>com.way</groupId>
+		   <artifactId>hyway-swagger</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -25,10 +38,6 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-		    <groupId>org.apache.commons</groupId>
-		    <artifactId>commons-lang3</artifactId>
-		</dependency>
-		<dependency>
 		    <groupId>com.alibaba</groupId>
 		    <artifactId>fastjson</artifactId>
 		</dependency>
@@ -40,14 +49,6 @@
 		<dependency>
 		   <groupId>org.slf4j</groupId>
 		   <artifactId>slf4j-log4j12</artifactId>
-		</dependency>
-		<dependency>
-				<groupId>com.way</groupId>
-				<artifactId>hyway-common</artifactId>
-		</dependency>
-		<dependency>
-				<groupId>com.way</groupId>
-				<artifactId>hyway-service-system-api</artifactId>
 		</dependency>
 	</dependencies>
 	<build>

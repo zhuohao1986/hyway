@@ -6,44 +6,48 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alibaba.fastjson.JSONObject;
+import com.way.api.system.SysDictApi;
 import com.way.common.constant.CodeConstants;
-import com.way.common.pojos.system.SysDict;
+import com.way.common.constant.CommonConstant;
+import com.way.common.context.BaseController;
 import com.way.common.stdo.Result;
-import com.way.system.api.SysDictService;
 
 import tk.mybatis.spring.annotation.MapperScan;
-
-@EnableEurekaClient
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class})
 @RestController
+@EnableEurekaClient
+@EnableFeignClients
 @MapperScan(basePackages = "com.way.dao")
 @ComponentScan(basePackages = {"com.way"})
-public class SystemServiceSpringApplication {
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class})
+public class SystemServiceSpringApplication extends BaseController {
 	
 	public static void main(String[] args) {
 		SpringApplication.run(SystemServiceSpringApplication.class, args);
 	}
-	
 	@Autowired
-    private SysDictService sysDictService;
+	private SysDictApi sysDictApi;
 	
-	 /**
-     * 通过ID查询字典信息
-     *
-     * @param id ID
-     * @return 字典信息
-     */
-    @GetMapping("/dict/{id}")
-    public String dict(@PathVariable Integer id) {
-    	Result result=new Result(CodeConstants.RESULT_SUCCESS);
-    	SysDict sysDict = sysDictService.selectById(id);
-    	result.setValue(JSONObject.toJSON(sysDict));
-        return result.toJSONString();
-    }
+	@GetMapping("/dictPage")
+	public String dictPage() {
+		initParams();
+		Result result = new Result(CodeConstants.RESULT_SUCCESS);
+		jsonData.put(CommonConstant.DEL_FLAG, CommonConstant.STATUS_NORMAL);
+		String sysDictPageStr = sysDictApi.selectSysDictPage(jsonData.toString());
+		result.setValue(sysDictPageStr);
+		return result.toString();
+	}
+	@GetMapping("/info")
+	public String info() {
+		initParams();
+ 		Result result = new Result(CodeConstants.RESULT_SUCCESS);
+		jsonData.put(CommonConstant.DEL_FLAG, CommonConstant.STATUS_NORMAL);
+ 		String sysDictPageStr = sysDictApi.sysDict();
+		result.setValue(sysDictPageStr);
+		return result.toString();
+	}
 }

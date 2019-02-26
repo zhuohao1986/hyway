@@ -16,7 +16,7 @@ import com.way.common.pojos.system.SysRoleDept;
 import com.way.common.pojos.system.dto.RoleDTO;
 import com.way.dao.SysRoleDeptMapper;
 import com.way.dao.SysRoleMapper;
-import com.way.system.api.SysRoleService;
+import com.way.system.service.SysRoleService;
 
 import tk.mybatis.mapper.entity.Example;
 

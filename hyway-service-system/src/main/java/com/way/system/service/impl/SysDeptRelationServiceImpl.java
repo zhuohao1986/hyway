@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.way.common.pojos.system.SysDeptRelation;
 import com.way.dao.SysDeptRelationMapper;
-import com.way.system.api.SysDeptRelationService;
+import com.way.system.service.SysDeptRelationService;
 
 import tk.mybatis.mapper.entity.Example;
 

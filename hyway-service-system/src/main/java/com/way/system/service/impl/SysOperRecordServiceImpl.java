@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.way.common.constant.CommonConstant;
 import com.way.common.pojos.system.SysOperRecord;
 import com.way.dao.SysOperRecordMapper;
-import com.way.system.api.SysOperRecordService;
+import com.way.system.service.SysOperRecordService;
 
 /**
  * <p>

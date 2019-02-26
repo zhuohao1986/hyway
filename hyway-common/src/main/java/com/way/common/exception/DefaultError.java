@@ -5,7 +5,7 @@ package com.way.common.exception;
 /**
  * 说明：默认异常
  *
- * @author zhangwei
+ * @author 
  * @date 2017年11月18日23:45:26
  */
 public enum DefaultError implements IError {

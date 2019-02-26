@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.way.common.pojos.system.SysRoleResources;
 import com.way.dao.SysRoleMenuMapper;
-import com.way.system.api.SysRoleMenuService;
+import com.way.system.service.SysRoleMenuService;
 
 import tk.mybatis.mapper.entity.Example;
 

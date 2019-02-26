@@ -2,7 +2,7 @@ package com.way.system.service.impl;
 
 import org.springframework.stereotype.Service;
 
-import com.way.system.api.SysOauthClientDetailsService;
+import com.way.system.service.SysOauthClientDetailsService;
 
 /**
  * <p>

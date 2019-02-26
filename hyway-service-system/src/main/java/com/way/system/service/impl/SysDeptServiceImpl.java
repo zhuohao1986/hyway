@@ -16,7 +16,7 @@ import com.way.common.pojos.system.dto.DeptTree;
 import com.way.common.utils.TreeUtil;
 import com.way.dao.SysDeptMapper;
 import com.way.dao.SysDeptRelationMapper;
-import com.way.system.api.SysDeptService;
+import com.way.system.service.SysDeptService;
 
 import tk.mybatis.mapper.entity.Example;
 

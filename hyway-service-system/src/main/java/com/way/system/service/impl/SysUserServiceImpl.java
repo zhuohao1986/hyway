@@ -40,10 +40,10 @@ import com.way.common.vo.MenuVO;
 import com.way.common.vo.SysRole;
 import com.way.common.vo.UserVO;
 import com.way.dao.SysUserMapper;
-import com.way.system.api.SysDeptRelationService;
-import com.way.system.api.SysResourcesService;
-import com.way.system.api.SysUserRoleService;
-import com.way.system.api.SysUserService;
+import com.way.system.service.SysDeptRelationService;
+import com.way.system.service.SysResourcesService;
+import com.way.system.service.SysUserRoleService;
+import com.way.system.service.SysUserService;
 
 import tk.mybatis.mapper.entity.Example;
 

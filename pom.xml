@@ -22,6 +22,7 @@
 	    <module>hyway-common</module>
 	    <module>hyway-test</module>
 	    <module>hyway-tools</module>
+	    <module>hyway-cache</module>
 	    <!-- server -->
 	    <module>hyway-eureka-server</module>
 	    <module>hyway-eureka-server-cluster</module>
@@ -46,8 +47,11 @@
 	    <!-- ui -->
 	    <!-- <module>hyway-app</module>
 	    <module>hyway-vue-web</module> -->
-    <module>hyway-service-open</module>
-  </modules>
+        <!-- openApi -->
+    	<module>hyway-service-open</module>
+    	<module>hyway-swagger</module>
+    	<module>hyway-service-test</module>
+	</modules>
 	  <properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -78,6 +82,9 @@
 		<httpclient.version>4.5.1</httpclient.version>
 		<httpasyncclient.version>4.1.1</httpasyncclient.version>
 		<mail.version>1.4</mail.version>
+		<netflix-hystrix.version>2.1.0.RELEASE</netflix-hystrix.version>
+		<netflix-ribbon.version>2.1.0.RELEASE</netflix-ribbon.version>
+		<springfox.version>2.2.2</springfox.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -90,8 +97,14 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-feign</artifactId>
+			<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+			<version>${netflix-hystrix.version}</version>
 		</dependency>
+		<!-- <dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+			<version>${netflix-ribbon.version}</version>
+		</dependency> -->
 		<dependency>
 			<groupId>de.codecentric</groupId>
 			<artifactId>spring-boot-admin-server</artifactId>
@@ -103,28 +116,38 @@
 			<version>${admin-server.version}</version>
 		</dependency>
 		<dependency>
-				<groupId>com.way</groupId>
-				<artifactId>hyway-common</artifactId>
-				<version>${hyway.version}</version>
+			<groupId>com.way</groupId>
+			<artifactId>hyway-common</artifactId>
+			<version>${hyway.version}</version>
 	    </dependency>
 	    <dependency>
-				<groupId>com.way</groupId>
-				<artifactId>hyway-service-user-api</artifactId>
-				<version>${hyway.version}</version>
+			<groupId>com.way</groupId>
+			<artifactId>hyway-cache</artifactId>
+			<version>${hyway.version}</version>
 	    </dependency>
 	    <dependency>
-				<groupId>com.way</groupId>
-				<artifactId>hyway-service-system-api</artifactId>
-				<version>${hyway.version}</version>
+			<groupId>com.way</groupId>
+			<artifactId>hyway-service-user-api</artifactId>
+			<version>${hyway.version}</version>
 	    </dependency>
 	    <dependency>
-				<groupId>com.way</groupId>
-				<artifactId>hyway-service-sso-api</artifactId>
-				<version>${hyway.version}</version>
+			<groupId>com.way</groupId>
+			<artifactId>hyway-service-system-api</artifactId>
+			<version>${hyway.version}</version>
+	    </dependency>
+	    <dependency>
+			<groupId>com.way</groupId>
+			<artifactId>hyway-service-sso-api</artifactId>
+			<version>${hyway.version}</version>
 	    </dependency>
 	    <dependency>
 		   <groupId>com.way</groupId>
 		   <artifactId>hyway-tools</artifactId>
+		   <version>${hyway.version}</version>
+		</dependency>
+		<dependency>
+		   <groupId>com.way</groupId>
+		   <artifactId>hyway-swagger</artifactId>
 		   <version>${hyway.version}</version>
 		</dependency>
 	    <!-- 添加Druid依赖 -->
@@ -238,37 +261,47 @@
 		    <version>${quartz.version}</version>
 		</dependency>
 		<dependency>
-				<groupId>dom4j</groupId>
-				<artifactId>dom4j</artifactId>
-				<version>${dom4j.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.alipay.sdk</groupId>
-		  		<artifactId>alipay-sdk-java</artifactId>
-				<version>${alipay.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>commons-codec</groupId>
-				<artifactId>commons-codec</artifactId>
-				<version>${commons-codec.version}</version>
-			</dependency>
-			<!-- httpclient -->
-			<dependency>
-				<groupId>org.apache.httpcomponents</groupId>
-				<artifactId>httpclient</artifactId>
-				<version>${httpclient.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.httpcomponents</groupId>
-				<artifactId>httpasyncclient</artifactId>
-				<version>${httpasyncclient.version}</version>
-			</dependency>
-			<!-- 邮件类 -->
-			<dependency>
-				<groupId>javax.mail</groupId>
-				<artifactId>mail</artifactId>
-				<version>${mail.version}</version>
-			</dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>${dom4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alipay.sdk</groupId>
+	  		<artifactId>alipay-sdk-java</artifactId>
+			<version>${alipay.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>${commons-codec.version}</version>
+		</dependency>
+		<!-- httpclient -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>${httpclient.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpasyncclient</artifactId>
+			<version>${httpasyncclient.version}</version>
+		</dependency>
+		<!-- 邮件类 -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>${mail.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>io.springfox</groupId>
+		    <artifactId>springfox-swagger2</artifactId>
+		    <version>${springfox.version}</version>
+	   </dependency>
+		<dependency>
+		    <groupId>io.springfox</groupId>
+		    <artifactId>springfox-swagger-ui</artifactId>
+		    <version>${springfox.version}</version>
+		</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<profiles>

@@ -2,7 +2,7 @@ package com.way.system.service.impl;
 
 import org.springframework.stereotype.Service;
 
-import com.way.system.api.SysRoleDeptService;
+import com.way.system.service.SysRoleDeptService;
 
 /**
  * <p>

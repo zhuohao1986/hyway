@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.way.common.pojos.system.SysUserRole;
 import com.way.dao.SysUserRoleMapper;
-import com.way.system.api.SysUserRoleService;
+import com.way.system.service.SysUserRoleService;
 
 /**
  * <p>

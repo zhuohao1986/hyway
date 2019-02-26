@@ -6,7 +6,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.serializer.ValueFilter;
 import com.way.common.constant.CodeConstants;
-import com.way.common.exception.DefaultError;
 import com.way.common.exception.IError;
 
 

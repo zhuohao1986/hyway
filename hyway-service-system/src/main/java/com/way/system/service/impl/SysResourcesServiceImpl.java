@@ -9,7 +9,7 @@ import com.way.common.constant.CommonConstant;
 import com.way.common.pojos.system.SysResources;
 import com.way.common.vo.MenuVO;
 import com.way.dao.SysResourcesMapper;
-import com.way.system.api.SysResourcesService;
+import com.way.system.service.SysResourcesService;
 
 import tk.mybatis.mapper.entity.Example;
 
