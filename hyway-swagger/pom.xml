@@ -10,6 +10,7 @@
   <artifactId>hyway-swagger</artifactId>
   <name>hyway-swagger</name>
   <url>http://maven.apache.org</url>
+  <description>webApi文档</description>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>

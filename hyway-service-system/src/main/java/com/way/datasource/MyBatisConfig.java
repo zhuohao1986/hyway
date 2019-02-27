@@ -20,8 +20,6 @@ import org.springframework.transaction.annotation.TransactionManagementConfigure
 
 import com.github.pagehelper.PageHelper;
 
-import tk.mybatis.spring.annotation.MapperScan;
-
 /**
  * MyBatis基础配置
  * @author wangw
