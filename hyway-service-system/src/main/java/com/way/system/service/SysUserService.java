@@ -4,8 +4,6 @@ import java.util.Map;
 
 import javax.persistence.Query;
 
-import org.apache.coyote.Response;
-
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import com.way.common.pojos.system.SysUser;

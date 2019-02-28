@@ -3,12 +3,10 @@ package com.way.system.service.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 import javax.persistence.Query;
 
@@ -16,7 +14,6 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -25,6 +22,7 @@ import org.springframework.util.CollectionUtils;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.way.common.cache.JedisClient;
 import com.way.common.constant.CodeConstants;
 import com.way.common.constant.SecurityConstants;
 import com.way.common.pojos.system.SysDeptRelation;
@@ -60,7 +58,7 @@ public class SysUserServiceImpl  implements SysUserService {
     @Autowired
     private SysResourcesService sysMenuService;
     @Autowired
-    private RedisTemplate redisTemplate;
+    private JedisClient jedisClient;
     @Autowired
     private SysUserMapper sysUserMapper;
     @Autowired
@@ -169,7 +167,7 @@ public class SysUserServiceImpl  implements SysUserService {
      */
     @Override
     public void saveImageCode(String randomStr, String imageCode) {
-        redisTemplate.opsForValue().set(SecurityConstants.DEFAULT_CODE_KEY + randomStr, imageCode, SecurityConstants.DEFAULT_IMAGE_EXPIRE, TimeUnit.SECONDS);
+    	jedisClient.setex(SecurityConstants.DEFAULT_CODE_KEY + randomStr, imageCode,SecurityConstants.DEFAULT_IMAGE_EXPIRE);
     }
 
     /**
@@ -183,11 +181,10 @@ public class SysUserServiceImpl  implements SysUserService {
      * @param mobile 手机号
      * @return true、false
      */
-    @SuppressWarnings("unchecked")
-	@Override
+    @Override
     public Result sendSmsCode(String mobile) {
     	Result result=new Result(CodeConstants.RESULT_SUCCESS);
-        Object tempCode = redisTemplate.opsForValue().get(SecurityConstants.DEFAULT_CODE_KEY + mobile);
+    	Object tempCode=jedisClient.get(SecurityConstants.DEFAULT_CODE_KEY + mobile);
         if (tempCode != null) {
         	
         	LogUtils.error(logger, "用户:{}验证码未失效{}", mobile, tempCode);
@@ -209,7 +206,7 @@ public class SysUserServiceImpl  implements SysUserService {
         }
         String code = RandomUtil.generateDigitalString(4);
         LogUtils.info(logger,"短信发送请求消息中心 -> 手机号:{} -> 验证码：{}", mobile, code);
-        redisTemplate.opsForValue().set(SecurityConstants.DEFAULT_CODE_KEY + mobile, code, SecurityConstants.DEFAULT_IMAGE_EXPIRE, TimeUnit.SECONDS);
+        jedisClient.setex(SecurityConstants.DEFAULT_CODE_KEY + mobile, code,SecurityConstants.DEFAULT_IMAGE_EXPIRE);
         return result;
     }
 
@@ -279,7 +276,6 @@ public class SysUserServiceImpl  implements SysUserService {
     private List<Integer> getChildDepts(UserVO userVO) {
         UserVO userVo = findUserByUsername(userVO.getUsername());
         Integer deptId = userVo.getDeptId();
-
         //获取当前部门的子部门
         SysDeptRelation deptRelation = new SysDeptRelation();
         deptRelation.setAncestor(deptId);

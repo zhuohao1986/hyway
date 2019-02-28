@@ -7,7 +7,7 @@
   </parent>
   <artifactId>hyway-service-system</artifactId>
   <packaging>jar</packaging>
-  <description> hyway-service-sso</description>
+  <description>hyway-service-system</description>
   <properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -19,10 +19,10 @@
 				<groupId>com.way</groupId>
 				<artifactId>hyway-common</artifactId>
 		</dependency>
-		<!-- <dependency>
+		<dependency>
 				<groupId>com.way</groupId>
 				<artifactId>hyway-cache</artifactId>
-	    </dependency> -->
+	    </dependency>
   		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-config-client</artifactId>

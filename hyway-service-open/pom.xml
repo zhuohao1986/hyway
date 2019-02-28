@@ -14,7 +14,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <dependencies>
-    <dependency>
+    	<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-config-client</artifactId>
 		</dependency>
@@ -28,24 +28,20 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-openfeign</artifactId>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<!-- 与数据库操作相关的依赖 -->
-        <dependency>
+        <!-- <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
@@ -72,24 +68,28 @@
 		<dependency>
 				<groupId>commons-codec</groupId>
 				<artifactId>commons-codec</artifactId>
-		</dependency>
+		</dependency> -->
 		<dependency>
 				<groupId>com.way</groupId>
 				<artifactId>hyway-common</artifactId>
 		</dependency>
 		<dependency>
+				<groupId>com.way</groupId>
+				<artifactId>hyway-service-open-api</artifactId>
+		</dependency>
+		<!-- <dependency>
 		  <groupId>com.alipay.sdk</groupId>
 		  <artifactId>alipay-sdk-java</artifactId>
-		</dependency>
+		</dependency> -->
 		<!-- httpclient -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpasyncclient</artifactId>
-		</dependency>
+		</dependency> -->
   </dependencies>
   <build>
 		<finalName>hyway-service-open</finalName>
