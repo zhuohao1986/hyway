@@ -23,12 +23,12 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
+import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
+
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import redis.clients.jedis.JedisPool;
-import redis.clients.jedis.JedisPoolConfig;
 
 @Configuration
 public class RedisConfig extends CachingConfigurerSupport{
@@ -144,10 +144,10 @@ public class RedisConfig extends CachingConfigurerSupport{
 	@Bean
 	public RedisConnectionFactory connectionFactory() {
 	    JedisPoolConfig poolConfig = new JedisPoolConfig();
-	    poolConfig.setMaxTotal(8);
-	    poolConfig.setMaxIdle(8);
-	    poolConfig.setMaxWaitMillis(1);
-	    poolConfig.setMinIdle(0);
+	    poolConfig.setMaxTotal(maxActive);
+	    poolConfig.setMaxIdle(maxIdle);
+	    poolConfig.setMaxWaitMillis(maxWaitMillis);
+	    poolConfig.setMinIdle(minIdle);
 	    poolConfig.setTestOnBorrow(true);
 	    poolConfig.setTestOnReturn(false);
 	    poolConfig.setTestWhileIdle(true);
@@ -160,10 +160,12 @@ public class RedisConfig extends CachingConfigurerSupport{
 	    // RedisSentinelConfiguration redisConfig = new RedisSentinelConfiguration();
 	    // 集群redis
 	    // RedisClusterConfiguration redisConfig = new RedisClusterConfiguration();
-	    redisConfig.setHostName("62.234.110.157");
-	    redisConfig.setPassword(RedisPassword.of("hyway@123#"));
-	    redisConfig.setPort(6379);
-	    redisConfig.setDatabase(0);
+	    // RedisNode node=new RedisNode(host, port);
+	    //redisConfig.addClusterNode(node);
+	    redisConfig.setHostName(host);
+	    redisConfig.setPassword(RedisPassword.of(password));
+	    redisConfig.setPort(port);
+	    redisConfig.setDatabase(database);
 
 	    return new JedisConnectionFactory(redisConfig,clientConfig);
 	}

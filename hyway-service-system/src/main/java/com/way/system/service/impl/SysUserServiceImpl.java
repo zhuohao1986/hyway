@@ -1,6 +1,7 @@
 package com.way.system.service.impl;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -180,9 +181,10 @@ public class SysUserServiceImpl  implements SysUserService {
      *
      * @param mobile 手机号
      * @return true、false
+     * @throws IOException 
      */
     @Override
-    public Result sendSmsCode(String mobile) {
+    public Result sendSmsCode(String mobile) throws IOException {
     	Result result=new Result(CodeConstants.RESULT_SUCCESS);
     	Object tempCode=jedisClient.get(SecurityConstants.DEFAULT_CODE_KEY + mobile);
         if (tempCode != null) {

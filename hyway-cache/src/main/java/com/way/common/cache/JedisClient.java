@@ -1,17 +1,12 @@
 package com.way.common.cache;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
-import redis.clients.jedis.SortingParams;
 import redis.clients.jedis.BinaryClient.LIST_POSITION;
+import redis.clients.jedis.SortingParams;
 
 public interface JedisClient {
 
@@ -132,16 +127,6 @@ public interface JedisClient {
 	 */
 
 	public boolean exists(String key);
-
-	/**
-	 * <p>
-	  * 清空当前数据库中的所有 key,此命令从不失败。
-	 * </p>
-	 *
-	 * @return 总是返回 OK
-	 */
-
-	public String flushDB();
 
 	/**
 	 * <p>
@@ -1148,54 +1133,7 @@ public interface JedisClient {
 
 	public String type(String key);
 
-	/**
-	 * 序列化对象
-	 * 
-	 * @param obj
-	 * @return 对象需实现Serializable接口
-	 */
-
-	public static byte[] ObjTOSerialize(Object obj) {
-		ObjectOutputStream oos = null;
-		ByteArrayOutputStream byteOut = null;
-		try {
-			byteOut = new ByteArrayOutputStream();
-			oos = new ObjectOutputStream(byteOut);
-			oos.writeObject(obj);
-			byte[] bytes = byteOut.toByteArray();
-			return bytes;
-		} catch (Exception e) {
-		}
-		return null;
-	}
-
-	/**
-	 * 反序列化对象
-	 * 
-	 * @param bytes
-	 * @return 对象需实现Serializable接口
-	 */
-
-	public static Object unserialize(byte[] bytes) {
-		ByteArrayInputStream bais = null;
-		try { // 反序列化
-			bais = new ByteArrayInputStream(bytes);
-			ObjectInputStream ois = new ObjectInputStream(bais);
-			return ois.readObject();
-		} catch (Exception e) {
-		}
-		return null;
-	}
-
-	/**
-	 * 返还到连接池
-	 *
-	 * @param jedisPool
-	 * @param jedis
-	 */
-	public void returnResource(JedisPool jedisPool, Jedis jedis);
-
-	public String get(String key);
+	public String get(String key) throws IOException;
 
 	public String set(String key, String value);
 
@@ -1207,5 +1145,4 @@ public interface JedisClient {
 
 	public long hdel(String hkey, String key);
 
-	public Set<String> getAllKeys();
 }

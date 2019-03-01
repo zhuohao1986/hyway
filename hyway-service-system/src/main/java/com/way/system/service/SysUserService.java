@@ -1,5 +1,6 @@
 package com.way.system.service;
 
+import java.io.IOException;
 import java.util.Map;
 
 import javax.persistence.Query;
@@ -82,8 +83,9 @@ public interface SysUserService {
      * 发送验证码
      * @param mobile 手机号
      * @return R
+     * @throws IOException 
      */
-    Result sendSmsCode(String mobile);
+    Result sendSmsCode(String mobile) throws IOException;
 
     /**
      * 通过openId查询用户

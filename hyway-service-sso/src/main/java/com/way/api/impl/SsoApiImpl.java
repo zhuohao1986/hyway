@@ -1,5 +1,6 @@
 package com.way.api.impl;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -83,7 +84,7 @@ public class SsoApiImpl implements SsoApi {
 	
 	
 	@Override
-	public String getUserByToken(String param) {
+	public String getUserByToken(String param) throws IOException {
 		RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
 		String mw_token = rw.getValue();
 		JSONObject josn = JSONObject.parseObject(mw_token);

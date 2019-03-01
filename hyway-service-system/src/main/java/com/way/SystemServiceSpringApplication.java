@@ -4,24 +4,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import tk.mybatis.spring.annotation.MapperScan;
 
-import com.alibaba.fastjson.JSONObject;
-import com.netflix.discovery.EurekaClient;
-import com.netflix.discovery.shared.Applications;
 import com.way.api.system.SysDictApi;
 import com.way.common.constant.CodeConstants;
 import com.way.common.constant.CommonConstant;
 import com.way.common.context.BaseController;
 import com.way.common.stdo.Result;
-import com.way.system.service.SysDictService;
 
 @EnableDiscoveryClient
-//@EnableFeignClients
+@EnableFeignClients
 @MapperScan("com.way.dao")
 @SpringBootApplication
 @RestController
@@ -34,12 +30,6 @@ public class SystemServiceSpringApplication extends BaseController {
 	@Autowired
 	private SysDictApi sysDictApi;
 	
-	@Autowired
-	private SysDictService sysDictService;
-
-	@Autowired
-	EurekaClient eurekaClient;
-
 	@GetMapping("/dictPage")
 	public String dictPage() {
 		initParams();
@@ -50,7 +40,7 @@ public class SystemServiceSpringApplication extends BaseController {
 		return result.toString();
 	}
 
-	@GetMapping("/info")
+	@GetMapping("/")
 	public String info() {
 		initParams();
 		Result result = new Result(CodeConstants.RESULT_SUCCESS);
@@ -59,16 +49,4 @@ public class SystemServiceSpringApplication extends BaseController {
 		result.setValue(sysDictPageStr);
 		return result.toString();
 	}
-
-	@RequestMapping(value = "/info2", produces = "application/json")
-	public String info2() {
-		initParams();
-		Result result = new Result(CodeConstants.RESULT_SUCCESS);
-		jsonData.put(CommonConstant.DEL_FLAG, CommonConstant.STATUS_NORMAL);
-		Applications applications = eurekaClient.getApplications("SYSTEM-SERVICE");
-		String sysDictPageStr = JSONObject.toJSONString(applications);
-		result.setValue(sysDictPageStr);
-		return result.toJSONString();
-	}
-
 }

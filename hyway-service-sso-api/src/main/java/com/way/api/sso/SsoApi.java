@@ -1,5 +1,7 @@
 package com.way.api.sso;
 
+import java.io.IOException;
+
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,7 +21,7 @@ public interface SsoApi {
 	public String userLogin(@RequestParam("userName") String userName, @RequestParam("userPwd") String userPwd/* ,String param */) throws Exception;
 	
 	@RequestMapping( value = "/getUser",method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
-	public String getUserByToken(@RequestBody(required=false) String param);
+	public String getUserByToken(@RequestBody(required=false) String param) throws IOException;
 
     // 重新设置用户信息缓存有效时间
     @RequestMapping( value = "/resetUserCache",method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)

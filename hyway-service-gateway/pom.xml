@@ -29,21 +29,21 @@
          <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
       </dependency>
       <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+      <dependency>
 			<groupId>org.isomorphism</groupId>
 			<artifactId>token-bucket</artifactId>
 			<version>1.7</version>
 		</dependency>
-		<dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-        </dependency>
         <dependency>
 		    <groupId>com.alibaba</groupId>
 		    <artifactId>fastjson</artifactId>
+		</dependency>
+		<dependency>
+		  <groupId>com.way</groupId>
+		  <artifactId>hyway-swagger</artifactId>
 		</dependency>
   </dependencies>
   <build>

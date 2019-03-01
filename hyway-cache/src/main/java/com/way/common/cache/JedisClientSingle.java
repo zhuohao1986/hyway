@@ -271,7 +271,6 @@ public class JedisClientSingle implements JedisClient{
 	 *
 	 * @return 总是返回 OK
 	 */
-	@Override
 	public String flushDB() {
 		Jedis jedis = null;
 		try {
@@ -2345,7 +2344,6 @@ public class JedisClientSingle implements JedisClient{
 	 * @param jedisPool
 	 * @param jedis
 	 */
-	@Override
 	public  void returnResource(JedisPool jedisPool, Jedis jedis) {
 		if (jedis != null) {
 			jedisPool.isClosed();
@@ -2394,7 +2392,6 @@ public class JedisClientSingle implements JedisClient{
 		return result;
 	}
 
-	@Override
 	public Set<String> getAllKeys() {
 		Jedis jedis = jedisPool.getResource();
 		Set<String> s = jedis.keys("*");
