@@ -27,8 +27,11 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping("/dict")
 public class DictController extends BaseController {
 
+	//@Autowired
+	//private SysDictApi sysDictApi;
+	
 	@Autowired
-	private SysDictApi sysDictApi;
+	private  SystemApi  systemDictApi;
 
 	/* *//**
 			 * 通过ID查询字典信息
@@ -126,7 +129,7 @@ public class DictController extends BaseController {
 		initParams();
 		Result result = new Result(CodeConstants.RESULT_SUCCESS);
 		jsonData.put(CommonConstant.DEL_FLAG, CommonConstant.STATUS_NORMAL);
-		String sysDictPageStr = sysDictApi.selectSysDictPage(jsonData.toString());
+		String sysDictPageStr = systemDictApi.hello();
 		result.setValue(sysDictPageStr);
 		return result.toString();
 	}
