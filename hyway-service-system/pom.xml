@@ -16,16 +16,16 @@
   <dependencies>
     	<!-- 公共模块 -->
         <dependency>
-				<groupId>com.way</groupId>
-				<artifactId>hyway-common</artifactId>
+			<groupId>com.way</groupId>
+			<artifactId>hyway-common</artifactId>
 		</dependency>
 		<dependency>
-				<groupId>com.way</groupId>
-				<artifactId>hyway-cache</artifactId>
+			<groupId>com.way</groupId>
+			<artifactId>hyway-cache</artifactId>
 	    </dependency>
 	    <dependency>
-				 <groupId>de.codecentric</groupId>
-				 <artifactId>spring-boot-admin-starter-client</artifactId>
+			 <groupId>de.codecentric</groupId>
+			 <artifactId>spring-boot-admin-starter-client</artifactId>
  		</dependency>
   		<dependency>
 			<groupId>org.springframework.cloud</groupId>

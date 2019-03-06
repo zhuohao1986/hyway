@@ -12,6 +12,10 @@
 			<groupId>com.way</groupId>
 			<artifactId>hyway-common</artifactId>
 		</dependency>
+		<!-- <dependency>
+			<groupId>com.way</groupId>
+			<artifactId>hyway-log</artifactId>
+		</dependency> -->
 		<dependency>
 			<groupId>com.way</groupId>
 			<artifactId>hyway-service-system-api</artifactId>
@@ -23,6 +27,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<!-- <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions> -->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>

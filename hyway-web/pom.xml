@@ -49,12 +49,12 @@
 		   <artifactId>slf4j-log4j12</artifactId>
 		</dependency>
 		<dependency>
-				<groupId>com.way</groupId>
-				<artifactId>hyway-service-sso-api</artifactId>
+			<groupId>com.way</groupId>
+			<artifactId>hyway-service-sso-api</artifactId>
 		</dependency>
 		<dependency>
-				<groupId>com.way</groupId>
-				<artifactId>hyway-common</artifactId>
+			<groupId>com.way</groupId>
+			<artifactId>hyway-common</artifactId>
 		</dependency>
 	</dependencies>
 	<build>

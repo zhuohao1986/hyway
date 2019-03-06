@@ -23,6 +23,7 @@
 	    <module>hyway-test</module>
 	    <module>hyway-tools</module>
 	    <module>hyway-cache</module>
+	    <module>hyway-log</module>
 	    <!-- job -->
 	    <module>hyway-task</module>
 	    <!-- server -->
@@ -50,6 +51,8 @@
 	    <!-- ui -->
 	    <!-- <module>hyway-app</module>
 	    <module>hyway-vue-web</module> -->
+	    <module>hyway-service-im</module>
+    <module>hyway-service-im-client</module>
   </modules>
 	  <properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -114,6 +117,11 @@
 		<dependency>
 			<groupId>com.way</groupId>
 			<artifactId>hyway-common</artifactId>
+			<version>${hyway.version}</version>
+	    </dependency>
+	    <dependency>
+			<groupId>com.way</groupId>
+			<artifactId>hyway-log</artifactId>
 			<version>${hyway.version}</version>
 	    </dependency>
 	    <dependency>
@@ -207,18 +215,7 @@
 		    <artifactId>commons-lang3</artifactId>
 		    <version>${common-lang3.version}</version>
 		</dependency>
-		<!-- log4j日志 -->
-		<dependency>
-		   <groupId>org.slf4j</groupId>
-		   <artifactId>slf4j-api</artifactId>
-		   <version>${slf4j.version}</version>
-		 </dependency>
-		<dependency>
-		   <groupId>org.slf4j</groupId>
-		   <artifactId>slf4j-log4j12</artifactId>
-		   <version>${slf4j.version}</version>
-		</dependency>
-		<dependency>
+ 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
 		    <artifactId>jackson-databind</artifactId>
 		    <version>${jackson.version}</version>
@@ -240,7 +237,7 @@
 		    <artifactId>jedis</artifactId>
 		    <version>${redis.version}</version>
 		</dependency>
-		<!-- 邮件类 -->
+		<!-- 邮件 -->
 		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
@@ -328,12 +325,6 @@
 			<artifactId>httpasyncclient</artifactId>
 			<version>${httpasyncclient.version}</version>
 		</dependency>
-		<!-- 邮件类 -->
-		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>mail</artifactId>
-			<version>${mail.version}</version>
-		</dependency>
 		<dependency>
 		    <groupId>io.springfox</groupId>
 		    <artifactId>springfox-swagger2</artifactId>
@@ -344,10 +335,19 @@
 		    <artifactId>springfox-swagger-ui</artifactId>
 		    <version>${springfox.version}</version>
 		</dependency>
+		<dependency>
+			<!-- logback condition -->
+			<groupId>org.codehaus.janino</groupId>
+			<artifactId>janino</artifactId>
+		</dependency>
 	</dependencies>
 	</dependencyManagement>
 	<!-- 全局依赖 -->
 	<dependencies>
+	    <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
 		<!-- eureka-client -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -366,6 +366,11 @@
              <groupId>de.codecentric</groupId>
              <artifactId>spring-boot-admin-starter-client</artifactId>
          </dependency>
+          <!-- cloud config -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
 	</dependencies>
 	<repositories>
         <!-- <repository>
@@ -403,10 +408,6 @@
 			<properties>
 				<profiles.active>dev</profiles.active>
 			</properties>
-			<!-- 默认激活本环境 -->
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
 		</profile>
 		<profile>
 			<!-- 测试环境 -->
@@ -414,6 +415,10 @@
 			<properties>
 				<profiles.active>test</profiles.active>
 			</properties>
+			<!-- 默认激活本环境 -->
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
 		</profile>
 		<profile>
 			<!-- 生产环境 -->
