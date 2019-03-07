@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: order
+  cloud:
+    config:
+      #discovery:
+        #enabled: true
+                # 对应注册到Eureka中的配置中心应用名
+        #service-id: SERVICE-CONFIG
+      profile: dev
+      uri: http://127.0.0.1:3001
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:2000/eureka/
+server:
+  port: 8091
