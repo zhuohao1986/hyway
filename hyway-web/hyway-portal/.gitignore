@@ -1,1 +1,26 @@
+﻿#忽略targer和bin文件夹下的文件
 /target/
+/bin/
+
+#忽略 jar  war nar zip等等打包文件
+*.jar   
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+#virtual machine 崩溃
+hs_err_pid*
+
+#Eclipse IDE Files
+.project
+.classpath
+.settings
+
+#忽略 .class文件 这样不会再追踪class文件 不至于每次都把编译后的字节码文件上传
+*.class     
+
+#忽略日志文件
+*.log  

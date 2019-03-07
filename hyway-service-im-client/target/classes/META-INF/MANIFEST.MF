@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Implementation-Title: hyway-service-im-client
-Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: way
-Implementation-Vendor-Id: com.way
-Build-Jdk: 1.8.0_201
-Implementation-URL: http://www.example.com
-Created-By: Maven Integration for Eclipse
-
