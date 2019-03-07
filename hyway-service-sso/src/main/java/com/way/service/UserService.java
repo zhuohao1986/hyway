@@ -2,7 +2,7 @@ package com.way.service;
 
 import java.util.Map;
 
-import com.way.common.pojos.User;
+import com.way.common.pojos.sso.User;
 
 public interface UserService {
 

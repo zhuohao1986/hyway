@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+       <artifactId>hyway</artifactId>
+       <groupId>com.way</groupId>
+       <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>hyway-core</artifactId>
+  <name>hyway-core</name>
+  <packaging>pom</packaging>
+	<modules>
+	 		<!-- conmmon -->
+	    <module>hyway-common</module>
+	    <module>hyway-cache</module>
+	    <module>hyway-log</module>
+	    <module>hyway-swagger</module>
+	    <module>hyway-test</module>
+	    <module>hyway-tools</module>
+	   </modules>
+</project>

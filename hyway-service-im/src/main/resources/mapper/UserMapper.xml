@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.way.dao.UserMapper">
-  <resultMap id="BaseResultMap" type="com.way.im.net.bean.User">
+  <resultMap id="BaseResultMap" type="com.way.common.pojos.im.User">
     <!--
       WARNING - @mbg.generated
     -->
@@ -24,7 +24,7 @@
   <select id="selectFriendByMix" resultMap="BaseResultMap" parameterType="map">
   select * 	from user 
 				where ((YEAR(CURDATE())-YEAR(birthday))-(RIGHT(CURDATE(),5)<![CDATA[<]]>RIGHT(birthday,5)))
-				between #{} and #{} 
+				between #{start} and #{end} 
   </select>
   <select id="getUser" resultMap="BaseResultMap" parameterType="int">
   select u.* from friendlist as f left outer join user as u

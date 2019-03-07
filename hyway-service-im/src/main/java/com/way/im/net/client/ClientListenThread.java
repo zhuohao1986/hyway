@@ -33,6 +33,7 @@ public class ClientListenThread implements Runnable {
 	private void readMsg() {
 		SocketAddress s = client.getmClient().getRemoteSocketAddress();
 		try {
+			
 			TranObject tran = (TranObject) read.readObject();
 			TranObjectType type = tran.getTranType();
 			switch (type) {

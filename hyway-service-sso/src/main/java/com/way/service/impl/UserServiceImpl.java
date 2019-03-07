@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.way.common.pojos.User;
+import com.way.common.pojos.sso.User;
 import com.way.dao.UserMapper;
 import com.way.service.UserService;
 @Service

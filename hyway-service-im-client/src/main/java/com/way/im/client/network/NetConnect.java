@@ -13,7 +13,7 @@ public class NetConnect {
 	private Logger logger=LoggerFactory.getLogger(NetConnect.class);
 
 	private Socket mClientSocket = null;
-	private static final String SERVER_IP = "62.234.110.157";
+	private static final String SERVER_IP = "127.0.0.1";
 	private static final int SERVER_PORT = 8399;
 	private boolean mIsConnected = false;
 
@@ -23,8 +23,7 @@ public class NetConnect {
 	public void startConnect() {
 		try {
 			mClientSocket = new Socket();
-			mClientSocket.connect(
-					new InetSocketAddress(SERVER_IP, SERVER_PORT), 3000);
+			mClientSocket.connect(new InetSocketAddress(SERVER_IP, SERVER_PORT), 3000);
 			logger.debug("Network", "服务器连接成功");
 			if (mClientSocket.isConnected()) {
 				mIsConnected = true;

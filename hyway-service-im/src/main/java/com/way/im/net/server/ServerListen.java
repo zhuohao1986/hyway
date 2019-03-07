@@ -4,17 +4,28 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
+
 import com.way.im.net.client.ClientActivity;
 
 /**
  * 客户端使用 Scoket(ip,port);参数是服务器的ip和端口号，因为没有指定
  * 客户端套接字的准确ip和端口，所以服务器发往一台机器上的任一客户端的消息，其他 客户端都能收到。所以创建套接字时，最好指定套接字端口
  */
-public class ServerListen {
+@Component
+@Order(2)
+public class ServerListen implements CommandLineRunner{
+	
 	private final int PORT = 8399;
+	
 	private ServerSocket server;
-	public static void main(String args[]){
-	   new ServerListen().begin();
+	
+	@Override
+	public void run(String... args) throws Exception {
+		new ServerListen().begin();
+		
 	}
 	public void begin(){
 		try {

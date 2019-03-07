@@ -5,19 +5,15 @@ import java.io.ObjectInputStream;
 import java.io.StreamCorruptedException;
 import java.net.Socket;
 
-import ch.qos.logback.core.Context;
-
 import com.way.im.client.bean.TranObject;
 
 public class ClientListenThread extends Thread {
 	private Socket mSocket = null;
-	private Context mContext = null;
 	private ObjectInputStream mOis;
 
 	private boolean isStart = true;
 
-	public ClientListenThread(Context context, Socket socket) {
-		this.mContext = context;
+	public ClientListenThread(Socket socket) {
 		this.mSocket = socket;
 		try {
 			mOis = new ObjectInputStream(mSocket.getInputStream());
@@ -40,7 +36,7 @@ public class ClientListenThread extends Thread {
 			isStart = true;
 			while (isStart) {
 				TranObject mReceived = null;
-				//System.out.println("开始接受服务器");
+				System.out.println("开始接受服务器");
 				mReceived = (TranObject) mOis.readObject();
 				System.out.println("接受成功");
 				System.out.println(mReceived.getTranType());

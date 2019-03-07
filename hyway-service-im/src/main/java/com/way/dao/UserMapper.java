@@ -10,7 +10,7 @@ public interface UserMapper extends IBaseMapper<User> {
 
 	int selectMaxId();
 	
-	List<User> selectFriendByMix();
+	List<User> selectFriendByMix(Map<String, Object> map);
 	
 	List<User> selectFriendByAccountOrID(Object condition);
 

@@ -76,6 +76,10 @@ public class UserServiceImpl implements UserService {
     @Override
 	public  List<User> selectFriendByMix(String[] mix) {
 		List<User> list = new ArrayList<User>();
+		Map<String,Object> map=new HashMap<String, Object>();
+		map.put("start", 18);
+		map.put("end",20);
+		userMapper.selectFriendByMix(map);
 		return list;
 	}
 

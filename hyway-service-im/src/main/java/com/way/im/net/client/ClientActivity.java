@@ -8,7 +8,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import com.way.im.net.bean.TranObject;
 import com.way.im.net.bean.TranObjectType;
@@ -22,7 +21,6 @@ import com.way.im.service.UserService;
 /**
  * @author Administrator 客户端线程
  */
-@Component
 public class ClientActivity {
 	
 	@Autowired

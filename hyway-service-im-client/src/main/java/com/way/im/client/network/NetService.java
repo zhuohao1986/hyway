@@ -3,8 +3,6 @@ package com.way.im.client.network;
 import java.io.IOException;
 import java.net.Socket;
 
-import ch.qos.logback.core.Context;
-
 import com.way.im.client.bean.TranObject;
 
 public class NetService {
@@ -16,14 +14,12 @@ public class NetService {
 	private NetConnect mConnect = null;
 	private Socket mClientSocket = null;
 	private boolean mIsConnected = false;
-	private Context mContext = null;
 
 	private NetService() {
 
 	}
 
-	public void onInit(Context context) {
-		this.mContext = context;
+	public void onInit() {
 	}
 
 	public static NetService getInstance() {
@@ -51,7 +47,7 @@ public class NetService {
 
 	public void startListen(Socket socket) {
 		mClientSendThread = new ClientSendThread(socket);
-		mClientListenThread = new ClientListenThread(mContext, socket);
+		mClientListenThread = new ClientListenThread(socket);
 		mClientListenThread.start();
 	}
 

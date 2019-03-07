@@ -16,7 +16,7 @@ import com.way.api.sso.SsoApi;
 import com.way.common.cache.JedisClient;
 import com.way.common.constant.CodeConstants;
 import com.way.common.constant.ResultConstant;
-import com.way.common.pojos.User;
+import com.way.common.pojos.sso.User;
 import com.way.common.stdo.RequestWrapper;
 import com.way.common.stdo.Result;
 import com.way.common.utils.AESUtil;

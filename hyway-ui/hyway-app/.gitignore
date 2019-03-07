@@ -1,0 +1,66 @@
+.DS_Store
+node_modules
+/dist
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw*
+/.classpath
+/.project
+/dist.zip
+/dist.tar.gz
+/target/
+/.settings/
+
+# Compiled class file
+*.class     #忽略 .class文件 这样不会再追踪class文件 不至于每次都把编译后的字节码文件上传
+
+# Log file
+*.log  #忽略日志文件
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar   #忽略 jar  war nar zip等等打包文件
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+# Eclipse IDE Files
+.project
+.classpath
+.settings
+
+#IDEA IDE Files
+.idea
+*.iws
+*.iml
+*.ipr
+
+target/   #忽略targer和bin文件夹下的文件
+bin/
+
+.factorypath
+
+# *
+#!.gitignore
+#.gitkeep
