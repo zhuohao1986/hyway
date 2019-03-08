@@ -14,8 +14,7 @@
 	    <module>hyway-common</module>
 	    <module>hyway-cache</module>
 	    <module>hyway-log</module>
-	    <module>hyway-swagger</module>
-	    <module>hyway-test</module>
 	    <module>hyway-tools</module>
+	    <module>hyway-swagger</module>
 	   </modules>
 </project>

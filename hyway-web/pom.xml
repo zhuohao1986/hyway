@@ -11,10 +11,10 @@
   <name>hyway-web</name>
   <modules>
     	<!-- web -->
-	    <module>hyway-portal</module>
+	    <module>hyway-web-portal</module>
 	    <module>hyway-web-admin</module>
 	    <!-- job -->
-	    <module>hyway-task-web</module>
+	    <module>hyway-web-task</module>
   </modules>
   <dependencies>
   </dependencies>

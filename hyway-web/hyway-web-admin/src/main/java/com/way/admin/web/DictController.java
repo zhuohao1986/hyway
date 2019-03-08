@@ -5,10 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.way.admin.BaseController;
-import com.way.api.system.SysDictApi;
 import com.way.common.constant.CodeConstants;
 import com.way.common.constant.CommonConstant;
+import com.way.common.context.BaseController;
 import com.way.common.stdo.Result;
 
 import io.swagger.annotations.ApiImplicitParam;

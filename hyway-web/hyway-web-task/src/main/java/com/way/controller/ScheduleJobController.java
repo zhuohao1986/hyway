@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.quartz.CronExpression;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.way.common.context.BaseController;
 import com.way.service.ScheduleJob;
 import com.way.service.ScheduleJobService;
 
@@ -30,7 +30,7 @@ import com.way.service.ScheduleJobService;
  */
 @Controller
 @RequestMapping("system/scheduleJob")
-public class ScheduleJobController {
+public class ScheduleJobController extends BaseController{
 	
 	@Autowired
 	private ScheduleJobService scheduleJobService;

@@ -7,8 +7,8 @@
     <artifactId>hyway-web</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>hyway-task-web</artifactId>
-  <name>hyway-task-web</name>
+  <artifactId>hyway-web-task</artifactId>
+  <name>hyway-web-task</name>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
@@ -64,7 +64,7 @@
 		</dependency>
   </dependencies>
   <build>
-		<finalName>hyway-task-web</finalName>
+		<finalName>hyway-web-task</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

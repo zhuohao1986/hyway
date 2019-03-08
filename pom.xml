@@ -36,6 +36,7 @@
     	<module>hyway-cloud</module>
     	<!-- ui -->
     	<module>hyway-ui</module>
+    	<module>hyway-web</module>
 	</modules>
 	<build/>
 	  <properties>

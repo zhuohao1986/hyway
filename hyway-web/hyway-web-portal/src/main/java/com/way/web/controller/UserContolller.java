@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.way.api.sso.SsoApi;
 import com.way.common.constant.CodeConstants;
+import com.way.common.context.BaseController;
 import com.way.common.stdo.RequestWrapper;
 import com.way.common.utils.CookieUtils;
 

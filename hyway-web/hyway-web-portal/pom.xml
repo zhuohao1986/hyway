@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>hyway-portal</artifactId>
 	<parent>
 		<groupId>com.way</groupId>
 		<artifactId>hyway-web</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<packaging>pom</packaging>
-  	<name>hyway-portal</name>
+	<artifactId>hyway-web-portal</artifactId>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -41,10 +39,6 @@
 		   <artifactId>slf4j-api</artifactId>
 		   </dependency>
 		<dependency>
-		   <groupId>org.slf4j</groupId>
-		   <artifactId>slf4j-log4j12</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>com.way</groupId>
 			<artifactId>hyway-service-sso-api</artifactId>
 		</dependency>
@@ -52,15 +46,19 @@
 			<groupId>com.way</groupId>
 			<artifactId>hyway-common</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.way</groupId>
+			<artifactId>hyway-log</artifactId>
+		</dependency>
 	</dependencies>
 	<build>
-		<finalName>hyway-portal</finalName>
+		<finalName>hyway-web-portal</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			<configuration>
-                    <mainClass>com.way.spring.SpringEurekaServerApplication</mainClass>
+                    <mainClass>com.way.SpringWebApplication</mainClass>
                 </configuration>
 			</plugin>
 			<!-- ... -->
@@ -74,7 +72,4 @@
             </plugin>
          </plugins>
 	</build>
-  <modules>
-    <module>hyway-portal</module>
-  </modules>
 </project>
