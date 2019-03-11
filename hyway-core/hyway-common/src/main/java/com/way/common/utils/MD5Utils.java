@@ -64,11 +64,4 @@ public class MD5Utils
 	{
 		return MD5( password);
 	}
-	
-	public static void main(String argus[])
-	{
-	
-		System.out.println(MD5("111311"));
-	}
-
 }

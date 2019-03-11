@@ -17,6 +17,9 @@ public class CodeConstants {
 	//全局COOKIE TOKEN
 	public final static String REDIS_USER_KEY = "HY_TOKEN";
 	
+	//全局字典缓存
+	public final static String REDIS_SYS_DICT_KEY = "REDIS_SYS_DICT_KEY";
+	
 	
 
 }

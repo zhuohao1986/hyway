@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.way</groupId>
-    <artifactId>hyway</artifactId>
+    <artifactId>hyway-cloud</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>hyway-config-server-cluster</artifactId>

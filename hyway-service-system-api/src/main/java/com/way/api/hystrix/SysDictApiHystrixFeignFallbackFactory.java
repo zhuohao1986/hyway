@@ -4,7 +4,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.way.api.system.SysDictApi;
+import com.way.api.feign.SysDictFeignApi;
+import com.way.common.constant.CodeConstants;
+import com.way.common.exception.DefaultError;
+import com.way.common.stdo.Result;
 
 import feign.hystrix.FallbackFactory;
 /**
@@ -14,13 +17,51 @@ import feign.hystrix.FallbackFactory;
  *
  */
 @Component
-public class SysDictApiHystrixFeignFallbackFactory implements FallbackFactory<SysDictApi> {
+public class SysDictApiHystrixFeignFallbackFactory implements FallbackFactory<SysDictFeignApi> {
 
-private static final Logger LOGGER = LoggerFactory.getLogger(SysDictApiHystrixFeignFallbackFactory.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(SysDictApiHystrixFeignFallbackFactory.class);
 
 	@Override
-	public SysDictApi create(Throwable cause) {
+	public SysDictFeignApi create(Throwable cause) {
+		Result result=new Result(CodeConstants.RESULT_FAIL, DefaultError.SERVER_EXCEPTION);
 		SysDictApiHystrixFeignFallbackFactory.LOGGER.info("服务异常-fallback; reason was: {}", cause.getMessage());
-		return null;
+		return new SysDictFeignApi()
+        {
+			@Override
+			public String selectSysDictPage(String param) {
+				return result.toString();
+			}
+
+			@Override
+			public String sysDict(String param) {
+				return result.toString();
+			}
+
+			@Override
+			public String selectList(String param) {
+				return result.toString();
+			}
+
+			@Override
+			public String insert(String param) {
+				return result.toString();
+			}
+
+			@Override
+			public String deleteById(String param) {
+				return result.toString();
+			}
+
+			@Override
+			public String updateSysDict(String param) {
+				return result.toString();
+			}
+
+			@Override
+			public String refreshSysDict(String param) {
+				return result.toString();
+			}
+           
+        };
 	}
 }

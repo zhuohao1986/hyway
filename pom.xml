@@ -17,6 +17,10 @@
         </developer>
     </developers>
 	<modules>
+        <!-- core -->
+		<module>hyway-core</module>
+		<!-- springcloud-service -->
+    	<module>hyway-cloud</module>
 	    <!-- service-api -->
     	<module>hyway-service-sso-api</module>
 	    <module>hyway-service-user-api</module>
@@ -30,12 +34,7 @@
 	    <!-- net-im -->
 	    <module>hyway-service-im</module>
     	<module>hyway-service-im-client</module>
-        <!-- core -->
-		<module>hyway-core</module>
-		<!-- springcloud-service -->
-    	<module>hyway-cloud</module>
     	<!-- ui -->
-    	<module>hyway-ui</module>
     	<module>hyway-web</module>
 	</modules>
 	<build/>

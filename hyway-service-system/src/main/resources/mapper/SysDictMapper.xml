@@ -15,7 +15,9 @@
   </resultMap>
   <select id="selectList" resultMap="BaseResultMap" parameterType="map">
  	 SELECT *FROM t_sys_dict where 1=1 
- 	  <if test="dictType!=null"> AND dict_type=#{dictType} </if>
+ 	  <if test="dictType!=null"> 
+ 	  	AND dict_type=#{dictType} 
+ 	   </if>
  	   ORDER BY  dict_id DESC
   </select>
 </mapper>

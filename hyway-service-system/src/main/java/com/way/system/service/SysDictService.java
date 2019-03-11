@@ -20,10 +20,10 @@ public interface SysDictService{
 
 	List<SysDict> selectList(Map<String, Object> paramMap);
 
-	int insert(Map<String, Object> paramMap);
+	int insert(SysDict sysDict);
 
 	int deleteById(Integer id);
 
-	int updateSysDict(Map<String, Object> paramMap);
+	int updateSysDict(SysDict sysDict);
 
 }

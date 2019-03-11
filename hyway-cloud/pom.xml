@@ -7,8 +7,8 @@
        <version>0.0.1-SNAPSHOT</version>
   </parent>
   <packaging>pom</packaging>
-  <artifactId>hyway-springcloud</artifactId>
-  <name>hyway-springcloud</name>
+  <artifactId>hyway-cloud</artifactId>
+  <name>hyway-cloud</name>
   <modules>
     	<!-- server -->
 	    <module>hyway-eureka-server</module>

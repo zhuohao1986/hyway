@@ -6,7 +6,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.way.common.pojos.system.SysDict;
@@ -29,7 +28,6 @@ public class SysDictServiceImpl  implements SysDictService {
 
 	@Override
 	public SysDict selectById(Integer id) {
-		// TODO Auto-generated method stub
 		return sysDictMapper.selectByPrimaryKey(id);
 	}
 
@@ -50,20 +48,17 @@ public class SysDictServiceImpl  implements SysDictService {
 	}
 
 	@Override
-	public int insert(Map<String, Object> paramMap) {
-		SysDict sysDict=JSONObject.parseObject(JSONObject.toJSONString(paramMap), SysDict.class);
+	public int insert(SysDict sysDict) {
 		return sysDictMapper.insert(sysDict);
 	}
 
 	@Override
 	public int deleteById(Integer id) {
-		// TODO Auto-generated method stub
 		return sysDictMapper.deleteByPrimaryKey(id);
 	}
 
 	@Override
-	public int updateSysDict(Map<String, Object> paramMap) {
-		SysDict sysDict=JSONObject.parseObject(JSONObject.toJSONString(paramMap), SysDict.class);
+	public int updateSysDict(SysDict sysDict) {
 		return sysDictMapper.updateByPrimaryKeySelective(sysDict);
 	}
 

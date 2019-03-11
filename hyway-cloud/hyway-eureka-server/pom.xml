@@ -5,7 +5,7 @@
   <artifactId>hyway-eureka-server</artifactId>
   <parent>
     <groupId>com.way</groupId>
-    <artifactId>hyway-springcloud</artifactId>
+    <artifactId>hyway-cloud</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <packaging>jar</packaging>

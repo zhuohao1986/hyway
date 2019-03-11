@@ -1,10 +1,7 @@
 package com.way.api.system;
 
-import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
-import com.way.api.hystrix.SysDictApiHystrixFeignFallbackFactory;
+import com.way.common.exception.BusinessException;
+import com.way.common.exception.ClientToolsException;
 
 /**
  * <p>
@@ -12,14 +9,48 @@ import com.way.api.hystrix.SysDictApiHystrixFeignFallbackFactory;
  * </p>
  * 
  */
-//@FeignClient(name=ServiceConstants.SYSTEM_SERVICE,fallbackFactory=SysDictApiHystrixFeignFallbackFactory.class)
-@FeignClient(name="aa",fallbackFactory=SysDictApiHystrixFeignFallbackFactory.class)
 public interface SysDictApi{
-	
-	//@RequestMapping(method=RequestMethod.GET,value="/sysDictPage")//,consumes=MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	//public String selectSysDictPage(@RequestParam String param);
-	
-	@RequestMapping(method=RequestMethod.GET,value="/sysDict")//, produces = MediaType.APPLICATION_JSON_VALUE)
-	public String sysDict();
+	/**
+	 * 分页查询字典
+	 * @param param limit  page
+	 * @return
+	 */
+	public String selectSysDictPage(String param) throws BusinessException;
+	/**
+	 * 字典Id查询
+	 * @param param dictId
+	 * @return
+	 */
+	public String sysDict(String param)  throws BusinessException;
+	/**
+	 * 查询字典List
+	 * @param param dictType
+	 * @return
+	 */
+	public String selectList(String param)  throws BusinessException;
+    /**
+     * 查询字典
+     * @param param
+     * @return
+     */
+	public String insert(String param)  throws BusinessException;
+    /**
+     * 删除字典
+     * @param param
+     * @return
+     */
+	public String deleteById(String param) throws BusinessException;
+    /**
+     * 更新字典
+     * @param param
+     * @return
+     */
+	public String updateSysDict(String param) throws BusinessException;
+	 /**
+	  * 刷新字典緩存
+     * @param param
+     * @return
+     */
+	public String refresh(String string) throws ClientToolsException;
 
 }

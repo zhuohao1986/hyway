@@ -170,10 +170,4 @@ public class DEncryptionUtils {
 		}
 		return null;
 	}
-
-	public static void main(String[] args) {
-		//System.out.println(aesEncoder(""));
-		System.out.println(aesDecoder("72e1cc3d7eb745d0ddfde4da8749302545ce1f5d5d4e774a01d444adbf0dda635b99cb9ed048e2a9f0e300c84ee690d78d1b23be8a99690119db4f163bfc95e5dbc308b26f5493e4dbfb8ebe1e71fe3dd3f735ba2367d4f2dc4b48aa61a237ed5cbf5285d3d14818af1b5668efb9e521"));
-	}
-
 }
