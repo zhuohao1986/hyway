@@ -21,22 +21,14 @@
 		<module>hyway-core</module>
 		<!-- springcloud-service -->
     	<module>hyway-cloud</module>
-	    <!-- service-api -->
-    	<module>hyway-service-sso-api</module>
-	    <module>hyway-service-user-api</module>
-	    <module>hyway-service-system-api</module>
-    	<module>hyway-service-open-api</module>
-	    <!-- service -->
-	    <module>hyway-service-user</module>
-	    <module>hyway-service-system</module>
-	    <module>hyway-service-sso</module>
-		<module>hyway-service-open</module>    	
-	    <!-- net-im -->
+    	<!-- service -->
+    	<module>hyway-service</module>
+    	 <!-- net-im -->
 	    <module>hyway-service-im</module>
     	<module>hyway-service-im-client</module>
     	<!-- ui -->
     	<module>hyway-web</module>
-	</modules>
+  </modules>
 	<build/>
 	  <properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -143,6 +135,11 @@
 	    <dependency>
 			<groupId>com.way</groupId>
 			<artifactId>hyway-service-open-api</artifactId>
+			<version>${hyway.version}</version>
+	    </dependency>
+	    <dependency>
+			<groupId>com.way</groupId>
+			<artifactId>hyway-service-task-api</artifactId>
 			<version>${hyway.version}</version>
 	    </dependency>
 	    <!-- 添加Druid依赖 -->
@@ -330,16 +327,16 @@
 	</dependencyManagement>
 	<!-- 全局依赖 -->
 	<dependencies>
-	    <dependency>
+	  <!--  <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
-        </dependency>
+        </dependency> -->
 		<!-- eureka-client -->
-        <dependency>
+       <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
-	    <dependency>
+	  <dependency>
 	        <groupId>org.springframework.cloud</groupId>
 	        <artifactId>spring-cloud-starter-openfeign</artifactId>
 	    </dependency>
@@ -348,32 +345,27 @@
 		    <artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 		<!-- spring-boot-admin client-->
-         <dependency>
+        <dependency>
              <groupId>de.codecentric</groupId>
              <artifactId>spring-boot-admin-starter-client</artifactId>
          </dependency>
           <!-- cloud config -->
-        <dependency>
+       <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-config</artifactId>
         </dependency>
-	</dependencies>
+        <dependency>
+        	<groupId>org.springframework.boot</groupId>
+        	<artifactId>spring-boot-configuration-processor</artifactId>
+        	<optional>true</optional>
+        	</dependency>
+		</dependencies>
 	<repositories>
 		<repository>
             <id>aliyun</id>
             <name>aliyun</name>
             <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
         </repository>
-        <!-- <repository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>https://repo.spring.io/libs-milestone</url>
-        </repository>
-        <repository>
-            <id>oss</id>
-            <name>oss</name>
-            <url>https://oss.sonatype.org/content/groups/public</url>
-        </repository> -->
     </repositories>
 	<reporting>
         <plugins>

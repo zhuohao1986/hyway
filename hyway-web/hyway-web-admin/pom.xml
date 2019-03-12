@@ -20,6 +20,10 @@
 			<artifactId>hyway-service-system-api</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>com.way</groupId>
+			<artifactId>hyway-service-task-api</artifactId>
+		</dependency>
+		<dependency>
 		   <groupId>com.way</groupId>
 		   <artifactId>hyway-swagger</artifactId>
 		</dependency>

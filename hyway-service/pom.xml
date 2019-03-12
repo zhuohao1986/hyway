@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.way</groupId>
+    <artifactId>hyway</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>hyway-service</artifactId>
+  <packaging>pom</packaging>
+  <name>hyway-service</name>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <modules>
+	    <!-- service-api -->
+    	<module>hyway-service-sso-api</module>
+	    <module>hyway-service-user-api</module>
+	    <module>hyway-service-system-api</module>
+    	<module>hyway-service-open-api</module>
+    	<module>hyway-service-task-api</module>
+	    <!-- service -->
+	    <module>hyway-service-user</module>
+	    <module>hyway-service-system</module>
+	    <module>hyway-service-sso</module>
+		<module>hyway-service-open</module>
+		<module>hyway-service-task</module> 
+  </modules>
+  <dependencies>
+  </dependencies>
+</project>

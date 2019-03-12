@@ -55,11 +55,6 @@
 			<artifactId>pagehelper</artifactId>
 		</dependency>
         <dependency>
-        	<groupId>org.springframework.boot</groupId>
-        	<artifactId>spring-boot-configuration-processor</artifactId>
-        	<optional>true</optional>
-        </dependency>
-        <dependency>
 			<groupId>com.google.zxing</groupId>
 			<artifactId>core</artifactId>
 			</dependency>
@@ -83,18 +78,16 @@
 	</dependencies>
 	<build>
 	  <finalName>hyway-common</finalName>
-		<!-- <plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<executions>
-			        <execution>
-			            <goals>
-			                <goal>repackage</goal>
-			            </goals>
-			        </execution>
-    			</executions>
-			</plugin>
-		</plugins> -->
+		<plugins>
+			<!-- ... -->
+            <!-- maven打包的时候告诉maven不需要web.xml,否刚会报找不到web.xml错误 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+		</plugins>
 	</build>
 </project>

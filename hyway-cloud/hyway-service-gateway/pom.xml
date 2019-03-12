@@ -22,6 +22,10 @@
       </dependency>
       <dependency>
          <groupId>org.springframework.cloud</groupId>
+         <artifactId>spring-cloud-gateway-webflux</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework.cloud</groupId>
          <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
       </dependency>
       <dependency>
@@ -42,8 +46,8 @@
 		    <artifactId>fastjson</artifactId>
 		</dependency>
 		<dependency>
-		  <groupId>com.way</groupId>
-		  <artifactId>hyway-swagger</artifactId>
+		    <groupId>com.way</groupId>
+		    <artifactId>hyway-cache</artifactId>
 		</dependency>
   </dependencies>
   <build>

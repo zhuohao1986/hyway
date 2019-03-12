@@ -14,7 +14,6 @@ import com.way.api.feign.SysDictFeignApi;
 import com.way.common.constant.CodeConstants;
 import com.way.common.constant.CommonConstant;
 import com.way.common.context.BaseController;
-import com.way.common.pojos.system.SysDict;
 import com.way.common.stdo.RequestWrapper;
 import com.way.common.stdo.Result;
 
@@ -31,7 +30,7 @@ import io.swagger.annotations.ApiOperation;
  * @since 2017-11-19
  */
 @RestController
-@RequestMapping("/dict")
+@RequestMapping("system/dict")
 public class DictController extends BaseController {
 
 	@Autowired
@@ -159,7 +158,7 @@ public class DictController extends BaseController {
 	 * @param sysDict 字典信息
 	 * @return success/false
 	 */
-	@ApiOperation(value = "删除字典", notes = "删除字典")
+	@ApiOperation(value = "修改字典", notes = "修改字典")
 	@ApiImplicitParams({ @ApiImplicitParam(name = "dictType", value = "dictType", dataType = "String", paramType = "query"),
 			@ApiImplicitParam(name = "dictCode", value = "dictCode", dataType = "String", paramType = "query"),
 			@ApiImplicitParam(name = "dictType", value = "dictType", dataType = "String", paramType = "query"),
@@ -168,7 +167,7 @@ public class DictController extends BaseController {
 			@ApiImplicitParam(name = "dictLang", value = "dictLang", dataType = "String", paramType = "query"),
 			@ApiImplicitParam(name = "dictsort", value = "dictsort", dataType = "String", paramType = "query"),})
 	@PutMapping
-	public String editDict(SysDict sysDict) {
+	public String editDict() {
 		Result result = null;
 		try {
 			initParams();

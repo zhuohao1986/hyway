@@ -33,7 +33,7 @@ import com.way.system.api.SysUserService;
  *//*
 @RestController
 @RequestMapping("/user")
-public class UserController extends BaseController {
+public class UserController extends com.way.common.context.BaseController {
     private static final PasswordEncoder ENCODER = new BCryptPasswordEncoder();
     @Autowired
     private SysUserService userService;

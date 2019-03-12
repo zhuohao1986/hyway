@@ -1,11 +1,5 @@
 package com.way.common.exception;
 
-/**
- * 说明：
- *
- * @author zhangwei
- * @version 2017/11/21 15:57.
- */
 public class BusinessException extends BaseException {
 
     private static final long serialVersionUID = 3076984003548588117L;

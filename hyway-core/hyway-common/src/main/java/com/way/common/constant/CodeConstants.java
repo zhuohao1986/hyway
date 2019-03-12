@@ -20,6 +20,8 @@ public class CodeConstants {
 	//全局字典缓存
 	public final static String REDIS_SYS_DICT_KEY = "REDIS_SYS_DICT_KEY";
 	
+	public final static String GATEWAY_ROUTES="geteway_routes";
+	
 	
 
 }

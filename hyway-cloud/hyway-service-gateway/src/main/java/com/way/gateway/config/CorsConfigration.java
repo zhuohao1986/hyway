@@ -9,9 +9,8 @@ import org.springframework.web.filter.CorsFilter;
 
 /**
  * 跨域配置
+ * @author way
  *
- * @author 
- * @date 2018/8/9 15:59
  */
 @Configuration
 public class CorsConfigration {
@@ -31,8 +30,8 @@ public class CorsConfigration {
     /**
      * 配置过滤器
      */
-    @Bean
-    public FilterRegistrationBean someFilterRegistration() {
+	@Bean
+    public FilterRegistrationBean<CorsFilter> someFilterRegistration() {
         FilterRegistrationBean<CorsFilter> registration = new FilterRegistrationBean<>();
         registration.setFilter(corsFilter());
         registration.addUrlPatterns("/*");
