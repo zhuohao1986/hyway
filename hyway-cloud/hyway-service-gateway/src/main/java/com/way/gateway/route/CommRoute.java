@@ -11,6 +11,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.way.gateway.filter.RequestTimeFilter;
+
 public class CommRoute {
 	
 	@RequestMapping("/hystrixfallback")
@@ -22,6 +24,13 @@ public class CommRoute {
 	public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
 		//@formatter:off
 		return builder.routes()
+				.route(r -> r.path("/customer/**")
+                        .filters(f -> f.filter(new RequestTimeFilter())
+                                .addResponseHeader("X-Response-Default-Foo", "Default-Bar"))
+                        .uri("http://httpbin.org:80/get")
+                        .order(0)
+                        .id("customer_filter_router")
+                )
 				.route("path_route", r -> r.path("/get")
 						.uri("http://httpbin.org"))
 				.route("host_route", r -> r.host("*.myhost.org")
