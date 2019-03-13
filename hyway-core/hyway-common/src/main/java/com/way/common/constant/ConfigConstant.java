@@ -9,6 +9,6 @@ public class ConfigConstant {
 	//全局字典缓存
 	public final static String REDIS_SYS_DICT_KEY = "REDIS_SYS_DICT_KEY";
 	//路由
-	public final static String GATEWAY_ROUTES="GATEWAY_ROUTES";
+	public final static String GATEWAY_ROUTES="GATEWAY_ROUTES:";
 
 }

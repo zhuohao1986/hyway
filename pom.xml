@@ -58,7 +58,6 @@
 	    <quartz.version>2.3.0</quartz.version>
 	    <dom4j.version>1.6.1</dom4j.version>
 		<alipay.version>3.6.0.ALL</alipay.version>
-		<commons-codec.version>1.7</commons-codec.version>
 		<httpclient.version>4.5.1</httpclient.version>
 		<httpasyncclient.version>4.1.1</httpasyncclient.version>
 		<mail.version>1.4</mail.version>
@@ -67,6 +66,7 @@
 		<mapper.starter.version>1.2.3</mapper.starter.version>
 		<pagehelper.starter.version>1.2.5</pagehelper.starter.version>
 		<logback.version>1.2.3</logback.version>
+		<commons-codec.version>1.12</commons-codec.version>
 	</properties>
 	<dependencyManagement>
 	    <dependencies>
@@ -285,11 +285,6 @@
 	  		<artifactId>alipay-sdk-java</artifactId>
 			<version>${alipay.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>commons-codec</groupId>
-			<artifactId>commons-codec</artifactId>
-			<version>${commons-codec.version}</version>
-		</dependency>
 		<!-- httpclient -->
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
@@ -323,6 +318,11 @@
 		   <artifactId>slf4j-api</artifactId>
 		   <version>${slf4j.version}</version>
 		</dependency>
+		<dependency>
+		    <groupId>commons-codec</groupId>
+		    <artifactId>commons-codec</artifactId>
+    		<version>${commons-codec.version}</version>
+		</dependency>
 	</dependencies>
 	</dependencyManagement>
 	<!-- 全局依赖 -->
@@ -332,10 +332,14 @@
             <artifactId>spring-boot-starter</artifactId>
         </dependency> -->
 		<!-- eureka-client -->
-       <!-- <dependency>
+       <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency> -->
+        </dependency>
+        <dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+		</dependency>
 	    <dependency>
 	        <groupId>org.springframework.cloud</groupId>
 	        <artifactId>spring-cloud-starter-openfeign</artifactId>
@@ -350,10 +354,10 @@
              <artifactId>spring-boot-admin-starter-client</artifactId>
          </dependency> -->
           <!-- cloud config -->
-	<!-- <dependency>
-		<groupId>org.springframework.cloud</groupId>
-		<artifactId>spring-cloud-starter-config</artifactId>
-	</dependency> -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
         <!-- <dependency>
         	<groupId>org.springframework.boot</groupId>
         	<artifactId>spring-boot-configuration-processor</artifactId>

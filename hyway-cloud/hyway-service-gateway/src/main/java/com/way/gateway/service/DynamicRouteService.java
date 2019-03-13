@@ -1,5 +1,7 @@
 package com.way.gateway.service;
 
+import java.util.List;
+
 import org.springframework.cloud.gateway.route.RouteDefinition;
 
 import reactor.core.publisher.Flux;
@@ -12,6 +14,6 @@ public interface DynamicRouteService {
 	
 	String delete(String param);
 
-	Flux<RouteDefinition> getRouteDefinitions();
+	List<RouteDefinition> getRouteDefinitions();
 
 }

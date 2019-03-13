@@ -1,17 +1,15 @@
 package com.way.common.utils;
 
 import java.security.SecureRandom;
-import java.util.UUID;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.spec.SecretKeySpec;
 
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
+import org.apache.commons.codec.binary.Base64;
 
 /**
- * Create by zhuenbang on 2018/12/3 11:27
+ * 
  */
 public class AESUtil {
 
@@ -92,9 +90,7 @@ public class AESUtil {
 	 */
 
 	private static String base64Encode(byte[] bytes) {
-
-		return new BASE64Encoder().encode(bytes);
-
+		return Base64.encodeBase64String(bytes);
 	}
 
 	/**
@@ -153,8 +149,8 @@ public class AESUtil {
 	 */
 
 	private static byte[] base64Decode(String base64Code) throws Exception {
-
-		return StringUtils.isNotEmpty(base64Code) ? null : new BASE64Decoder().decodeBuffer(base64Code);
+      
+		return StringUtils.isNotEmpty(base64Code) ? null : Base64.decodeBase64(base64Code);
 	}
 
 }

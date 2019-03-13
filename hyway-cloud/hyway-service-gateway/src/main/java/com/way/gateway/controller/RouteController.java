@@ -1,5 +1,7 @@
 package com.way.gateway.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.route.RouteDefinition;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -7,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONObject;
-import com.way.common.cache.JedisClient;
 import com.way.common.constant.CodeConstants;
 import com.way.common.context.BaseController;
 import com.way.common.pojos.system.dto.GatewayRouteDefinition;
@@ -15,16 +16,12 @@ import com.way.common.stdo.RequestWrapper;
 import com.way.common.stdo.Result;
 import com.way.gateway.service.DynamicRouteService;
 
-import reactor.core.publisher.Flux;
-
 @RestController
 @RequestMapping("/route")
 public class RouteController extends BaseController {
 
 	@Autowired
 	private DynamicRouteService dynamicRouteService;
-	
-	private JedisClient jedisClient;
 
 	Result result;
 
@@ -78,7 +75,7 @@ public class RouteController extends BaseController {
 
 	// 获取网关所有的路由信息
 	@RequestMapping("/routes")
-	public Flux<RouteDefinition> getRouteDefinitions() {
+	public List<RouteDefinition> getRouteDefinitions() {
 		return dynamicRouteService.getRouteDefinitions();
 	}
 }

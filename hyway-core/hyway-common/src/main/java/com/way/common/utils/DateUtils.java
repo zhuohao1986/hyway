@@ -41,16 +41,6 @@ public class DateUtils extends DateFormatUtils {
 	private final static SimpleDateFormat FM_YYYYMMDDHHMMSSSSS = new SimpleDateFormat("yyyyMMddHHmmssSSS");
 
 	/**
-	 * 根据字符串获取时间格式器 add by:jackyshang
-	 * 
-	 * @param pattern
-	 * @return
-	 */
-	private static SimpleDateFormat getDateParser(String pattern) {
-		return new SimpleDateFormat(pattern);
-	}
-
-	/**
 	 * 获取当前日期 add by:jackyshang
 	 * 
 	 * @return
@@ -897,7 +887,6 @@ public class DateUtils extends DateFormatUtils {
 	 * @throws ParseException
 	 */
 	public static Date addMonth(Date dt, int monthNum) throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat(DATE_TIME_FORMAT_19);
 		Calendar rightNow = Calendar.getInstance();
 		rightNow.setTime(dt);
 		rightNow.add(Calendar.MONTH, monthNum);
@@ -915,7 +904,6 @@ public class DateUtils extends DateFormatUtils {
 	 * @return @throws
 	 */
 	public static int getSubMonthNum(Date startDate, Date endDate) throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar startCalendar = Calendar.getInstance();
 		Calendar endCalendar = Calendar.getInstance();
 		startCalendar.setTime(startDate);

@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.alibaba.fastjson.JSONObject;
-import com.way.common.cache.JedisClient;
 import com.way.common.constant.CodeConstants;
 import com.way.common.constant.ConfigConstant;
 import com.way.common.pojos.system.dto.GatewayFilterDefinition;
@@ -25,6 +24,8 @@ import com.way.common.pojos.system.dto.GatewayPredicateDefinition;
 import com.way.common.pojos.system.dto.GatewayRouteDefinition;
 import com.way.common.stdo.RequestWrapper;
 import com.way.common.stdo.Result;
+import com.way.common.utils.LogUtil;
+import com.way.gateway.cache.JedisClient;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -46,8 +47,8 @@ public class DynamicRouteServiceImpl implements DynamicRouteService,ApplicationE
     @Autowired
 	private RouteDefinitionLocator routeDefinitionLocator;
     
-    //@Autowired
-    //private JedisClient jedisClient;
+    @Autowired
+    private JedisClient jedisClient;
     
     Result result;
  
@@ -67,7 +68,7 @@ public class DynamicRouteServiceImpl implements DynamicRouteService,ApplicationE
     	result=new Result(CodeConstants.RESULT_SUCCESS);
         routeDefinitionWriter.save(Mono.just(definition)).subscribe();
         notifyChanged();
-       // jedisClient.hset(ConfigConstant.GATEWAY_ROUTES,"key",JSONObject.toJSONString(definition));
+        jedisClient.hset(ConfigConstant.GATEWAY_ROUTES,definition.getId(),JSONObject.toJSONString(definition));
         return result.toJSONString();
     }
  
@@ -77,25 +78,20 @@ public class DynamicRouteServiceImpl implements DynamicRouteService,ApplicationE
      */
     @Override
     public String update(String param) {
-	    	RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
-	    	GatewayRouteDefinition gwdefinition=JSONObject.parseObject(rw.getValue(), GatewayRouteDefinition.class);
-	    	RouteDefinition definition=assembleRouteDefinition(gwdefinition);
+    	RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
+    	GatewayRouteDefinition gwdefinition=JSONObject.parseObject(rw.getValue(), GatewayRouteDefinition.class);
+    	RouteDefinition definition=assembleRouteDefinition(gwdefinition);
+    	try {
 	        result=new Result(CodeConstants.RESULT_SUCCESS);
-        try {
             this.routeDefinitionWriter.delete(Mono.just(definition.getId()));
-        } catch (Exception e) {
-        	result.setMessage("update fail,not find route  routeId: " + definition.getId());
-        	return result.toJSONString();
-        }
-        try {
             routeDefinitionWriter.save(Mono.just(definition)).subscribe();
             notifyChanged();
             result.setMessage("route  success " + definition.getId());
-            return result.toJSONString();
         } catch (Exception e) {
         	result.setMessage("update fail,not find route  routeId: " + definition.getId());
         	return result.toJSONString();
         }
+    	return result.toJSONString();
     }
  
     /**
@@ -111,6 +107,9 @@ public class DynamicRouteServiceImpl implements DynamicRouteService,ApplicationE
         try {
             this.routeDefinitionWriter.delete(Mono.just(routeId));
             notifyChanged();
+            if (jedisClient.hexists(ConfigConstant.GATEWAY_ROUTES,routeId)) {
+            	jedisClient.hdel(ConfigConstant.GATEWAY_ROUTES,routeId);
+            }
             result.setMessage("delete success" + routeId);
             result.setValue(true);
             return result.toJSONString();
@@ -122,8 +121,21 @@ public class DynamicRouteServiceImpl implements DynamicRouteService,ApplicationE
  
     }
     @Override
-    public Flux<RouteDefinition> getRouteDefinitions() {
-		return routeDefinitionLocator.getRouteDefinitions();
+    public List<RouteDefinition> getRouteDefinitions() {
+    	List<RouteDefinition> routeDefinitions=new ArrayList<>();
+		try {
+			String routeDefinitionStr= jedisClient.get(ConfigConstant.GATEWAY_ROUTES);
+			routeDefinitions=JSONObject.parseArray(routeDefinitionStr, RouteDefinition.class);
+		 } catch (Exception e) {
+        	return routeDefinitions;
+        }
+		Flux<RouteDefinition> routeDefinitionFlux = routeDefinitionLocator.getRouteDefinitions();
+		Mono<List<RouteDefinition>> collectList = routeDefinitionFlux.collectList();
+		List<RouteDefinition> block = collectList.block();
+		for (RouteDefinition routeDefinition : block) {
+			LogUtil.infoLogs("RouteDefinition routeId"+routeDefinition.getId());
+		}
+		return routeDefinitions;
 	}
  
     @Override

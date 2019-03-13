@@ -170,7 +170,7 @@ public class RandomUtil  extends Random {
             size = n;
         }
  
-        Set set = new LinkedHashSet();
+        Set<Integer> set = new LinkedHashSet<Integer>();
  
         for (int i = 0; i < size; i++) {
             while (true) {
@@ -186,7 +186,7 @@ public class RandomUtil  extends Random {
  
         int[] array = new int[set.size()];
  
-        Iterator itr = set.iterator();
+        Iterator<Integer> itr = set.iterator();
  
         for (int i = 0; i < array.length; i++) {
             array[i] = ((Integer)itr.next()).intValue();
@@ -223,7 +223,7 @@ public class RandomUtil  extends Random {
         }
     }
  
-    public void randomize(List list) {
+    public void randomize(List<Object> list) {
         int size = list.size();
  
         for(int i = 0; i <= size; i++) {
