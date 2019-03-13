@@ -12,9 +12,7 @@
   <modules>
     	<!-- server -->
 	    <module>hyway-eureka-server</module>
-	    <module>hyway-eureka-server-cluster</module>
 	    <module>hyway-config-server</module>
-	    <module>hyway-config-server-cluster</module>
 	    <module>hyway-service-gateway</module>
   </modules>
   <dependencies>

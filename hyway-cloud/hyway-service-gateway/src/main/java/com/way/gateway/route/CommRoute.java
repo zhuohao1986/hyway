@@ -1,4 +1,4 @@
-package com.way.gateway.route;
+/*package com.way.gateway.route;
 
 import org.springframework.cloud.gateway.filter.ratelimit.RedisRateLimiter;
 import org.springframework.cloud.gateway.route.RouteLocator;
@@ -78,3 +78,4 @@ public class CommRoute {
 	}
 
 }
+*/

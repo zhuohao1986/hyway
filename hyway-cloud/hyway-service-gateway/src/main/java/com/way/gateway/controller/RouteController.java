@@ -1,108 +1,84 @@
 package com.way.gateway.controller;
 
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.gateway.filter.FilterDefinition;
-import org.springframework.cloud.gateway.handler.predicate.PredicateDefinition;
 import org.springframework.cloud.gateway.route.RouteDefinition;
-import org.springframework.cloud.gateway.route.RouteDefinitionLocator;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
 
-import com.way.gateway.route.DynamicRouteService;
+import com.alibaba.fastjson.JSONObject;
+import com.way.common.cache.JedisClient;
+import com.way.common.constant.CodeConstants;
+import com.way.common.context.BaseController;
+import com.way.common.pojos.system.dto.GatewayRouteDefinition;
+import com.way.common.stdo.RequestWrapper;
+import com.way.common.stdo.Result;
+import com.way.gateway.service.DynamicRouteService;
 
-import reactor.core.publisher.Mono;
+import reactor.core.publisher.Flux;
 
 @RestController
 @RequestMapping("/route")
-public class RouteController {
+public class RouteController extends BaseController {
 
-    @Autowired
-    private DynamicRouteService dynamicRouteService;
+	@Autowired
+	private DynamicRouteService dynamicRouteService;
+	
+	private JedisClient jedisClient;
 
-    //增加路由
-    @PostMapping("/add")
-    public String add(@RequestBody GatewayRouteDefinition gwdefinition) {
-        String flag = "fail";
-        try {
-            RouteDefinition definition = assembleRouteDefinition(gwdefinition);
-            flag = this.dynamicRouteService.add(definition);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return flag;
-    }
-    //删除路由
-    @DeleteMapping("/routes/{id}")
-    public Mono<ResponseEntity<Object>> delete(@PathVariable String id) {
-        try {
-            return this.dynamicRouteService.delete(id);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return null;
-    }
-    //更新路由
-    @PostMapping("/update")
-    public String update(@RequestBody GatewayRouteDefinition gwdefinition) {
-        RouteDefinition definition = assembleRouteDefinition(gwdefinition);
-        return this.dynamicRouteService.update(definition);
-    }
+	Result result;
 
-    //把传递进来的参数转换成路由对象
-    private RouteDefinition assembleRouteDefinition(GatewayRouteDefinition gwdefinition) {
-        RouteDefinition definition = new RouteDefinition();
-        definition.setId(gwdefinition.getId());
-        definition.setOrder(gwdefinition.getOrder());
+	// 增加路由
+	@RequestMapping("/addRoute")
+	public String add() {
+		result = new Result(CodeConstants.RESULT_FAIL);
+		try {
+			initParams();
+			RequestWrapper rw = new RequestWrapper();
+			String addStr = this.dynamicRouteService.add(rw.toString());
+			result = JSONObject.parseObject(addStr, Result.class);
+			result.setCode(CodeConstants.RESULT_SUCCESS);
+		} catch (Exception e) {
+			result.toJSONString();
+		}
+		return result.toJSONString();
+	}
 
-        //设置断言
-        List<PredicateDefinition> pdList=new ArrayList<>();
-        List<GatewayPredicateDefinition> gatewayPredicateDefinitionList=gwdefinition.getPredicates();
-        for (GatewayPredicateDefinition gpDefinition: gatewayPredicateDefinitionList) {
-            PredicateDefinition predicate = new PredicateDefinition();
-            predicate.setArgs(gpDefinition.getArgs());
-            predicate.setName(gpDefinition.getName());
-            pdList.add(predicate);
-        }
-        definition.setPredicates(pdList);
+	// 删除路由
+	@RequestMapping("/routes/delete")
+	public String delete() {
+		result = new Result(CodeConstants.RESULT_FAIL);
+		try {
+			initParams();
+			RequestWrapper rw = new RequestWrapper();
+			String addStr = this.dynamicRouteService.delete(rw.toString());
+			result = JSONObject.parseObject(addStr, Result.class);
+			result.setCode(CodeConstants.RESULT_SUCCESS);
+		} catch (Exception e) {
+			result.toJSONString();
+		}
+		return result.toJSONString();
+	}
 
-        //设置过滤器
-        List<FilterDefinition> filters = new ArrayList();
-        List<GatewayFilterDefinition> gatewayFilters = gwdefinition.getFilters();
-        for(GatewayFilterDefinition filterDefinition : gatewayFilters){
-            FilterDefinition filter = new FilterDefinition();
-            filter.setName(filterDefinition.getName());
-            filter.setArgs(filterDefinition.getArgs());
-            filters.add(filter);
-        }
-        definition.setFilters(filters);
+	// 更新路由
+	@RequestMapping("/update")
+	public String update(@RequestBody GatewayRouteDefinition gwdefinition) {
+		result = new Result(CodeConstants.RESULT_FAIL);
+		try {
+			initParams();
+			RequestWrapper rw = new RequestWrapper();
+			String addStr = this.dynamicRouteService.update(rw.toString());
+			result = JSONObject.parseObject(addStr, Result.class);
+			result.setCode(CodeConstants.RESULT_SUCCESS);
+		} catch (Exception e) {
+			result.toJSONString();
+		}
+		return result.toJSONString();
+	}
 
-        URI uri = null;
-        if(gwdefinition.getUri().startsWith("http")){
-            uri = UriComponentsBuilder.fromHttpUrl(gwdefinition.getUri()).build().toUri();
-        }else{
-            // uri为 lb://consumer-service 时使用下面的方法
-            uri = URI.create(gwdefinition.getUri());
-        }
-        definition.setUri(uri);
-        return definition;
-    }
-    @Autowired 
-    private RouteDefinitionLocator routeDefinitionLocator;
-
-    //获取网关所有的路由信息
-    @RequestMapping("/routes")
-    public Flux<RouteDefinition> getRouteDefinitions(){
-        return routeDefinitionLocator.getRouteDefinitions();
-    }
-}
+	// 获取网关所有的路由信息
+	@RequestMapping("/routes")
+	public Flux<RouteDefinition> getRouteDefinitions() {
+		return dynamicRouteService.getRouteDefinitions();
+	}
 }

@@ -1,4 +1,4 @@
-package com.way.gateway.config;
+/*package com.way.gateway.config;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -7,11 +7,11 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-/**
+*//**
  * 跨域配置
  * @author way
  *
- */
+ *//*
 @Configuration
 public class CorsConfigration {
 
@@ -27,9 +27,9 @@ public class CorsConfigration {
         return new CorsFilter(source);
     }
 
-    /**
+    *//**
      * 配置过滤器
-     */
+     *//*
 	@Bean
     public FilterRegistrationBean<CorsFilter> someFilterRegistration() {
         FilterRegistrationBean<CorsFilter> registration = new FilterRegistrationBean<>();
@@ -40,3 +40,4 @@ public class CorsConfigration {
         return registration;
     }
 }
+*/

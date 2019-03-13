@@ -17,6 +17,10 @@
 			<groupId>com.way</groupId>
 			<artifactId>hyway-common</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>tk.mybatis</groupId>
+			<artifactId>mapper</artifactId>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>hyway-tools</finalName>

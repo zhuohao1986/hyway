@@ -9,7 +9,6 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
 
 import com.way.service.ScheduleJob;
 
@@ -17,7 +16,6 @@ import com.way.service.ScheduleJob;
  * 定时任务工作类
  *
  */
-@Controller
 @DisallowConcurrentExecution
 public class SimpleExampleStatusTask implements Job {
 	private static final Logger logger = LoggerFactory.getLogger(SimpleExampleStatusTask.class);

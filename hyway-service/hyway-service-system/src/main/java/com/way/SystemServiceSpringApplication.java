@@ -5,15 +5,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
-import com.way.common.context.BaseController;
-
 import tk.mybatis.spring.annotation.MapperScan;
 
 @EnableDiscoveryClient
 @EnableFeignClients
 @MapperScan("com.way.dao")
 @SpringBootApplication
-public class SystemServiceSpringApplication extends BaseController {
+public class SystemServiceSpringApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SystemServiceSpringApplication.class, args);

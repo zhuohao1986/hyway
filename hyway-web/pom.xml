@@ -13,8 +13,6 @@
     	<!-- web -->
 	    <module>hyway-web-portal</module>
 	    <module>hyway-web-admin</module>
-	    <!-- job -->
-	    <module>hyway-web-task</module>
   </modules>
   <dependencies>
   </dependencies>

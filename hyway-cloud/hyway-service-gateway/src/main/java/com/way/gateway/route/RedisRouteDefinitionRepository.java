@@ -1,4 +1,4 @@
-package com.way.gateway.route;
+/*package com.way.gateway.route;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.route.RouteDefinition;
 import org.springframework.cloud.gateway.route.RouteDefinitionRepository;
 import org.springframework.cloud.gateway.support.NotFoundException;
-import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSONObject;
 import com.way.common.cache.JedisClient;
@@ -16,7 +15,8 @@ import com.way.common.cache.JedisClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-@Component
+//@Configuration
+//@Component
 public class RedisRouteDefinitionRepository implements RouteDefinitionRepository {
  
     public static final String GATEWAY_ROUTES = "geteway_routes";
@@ -57,4 +57,4 @@ public class RedisRouteDefinitionRepository implements RouteDefinitionRepository
         });
     }
  
-}
+}*/

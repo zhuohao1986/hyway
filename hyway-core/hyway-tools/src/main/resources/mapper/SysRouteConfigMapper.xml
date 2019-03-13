@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.way.dao.SysRouteConfigMapper">
+  <resultMap id="BaseResultMap" type="com.way.common.pojos.SysRouteConfig">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="route_id" jdbcType="VARCHAR" property="routeId" />
+    <result column="forward_uri" jdbcType="VARCHAR" property="forwardUri" />
+    <result column="route_order" jdbcType="INTEGER" property="routeOrder" />
+    <result column="route_predicates" jdbcType="VARCHAR" property="routePredicates" />
+    <result column="route_filter" jdbcType="VARCHAR" property="routeFilter" />
+    <result column="route_enable" jdbcType="TINYINT" property="routeEnable" />
+    <result column="delete_state" jdbcType="TINYINT" property="deleteState" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+  </resultMap>
+</mapper>

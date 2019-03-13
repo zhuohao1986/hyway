@@ -117,7 +117,7 @@
 				selectByExampleQueryId="false">
 				<property name="useActualColumnNames" value="false" />
 			</table> -->
-			<table tableName="friendlist" domainObjectName="Friendlist"
+			<!-- <table tableName="friendlist" domainObjectName="Friendlist"
 				enableCountByExample="false" enableUpdateByExample="false"
 				enableDeleteByExample="false" enableSelectByExample="false"
 				selectByExampleQueryId="false">
@@ -130,6 +130,12 @@
 				<property name="useActualColumnNames" value="false" />
 			</table>
 			<table tableName="user" domainObjectName="User"
+				enableCountByExample="false" enableUpdateByExample="false"
+				enableDeleteByExample="false" enableSelectByExample="false"
+				selectByExampleQueryId="false">
+				<property name="useActualColumnNames" value="false" />
+			</table> -->
+			<table tableName="t_sys_route_config" domainObjectName="SysRouteConfig"
 				enableCountByExample="false" enableUpdateByExample="false"
 				enableDeleteByExample="false" enableSelectByExample="false"
 				selectByExampleQueryId="false">
