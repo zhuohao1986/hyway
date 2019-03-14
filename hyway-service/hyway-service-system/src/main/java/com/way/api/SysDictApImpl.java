@@ -13,7 +13,7 @@ import com.github.pagehelper.PageInfo;
 import com.way.api.system.SysDictApi;
 import com.way.common.cache.JedisClient;
 import com.way.common.constant.CodeConstants;
-import com.way.common.constant.ConfigConstant;
+import com.way.common.constant.ConfigKeyConstant;
 import com.way.common.exception.BusinessException;
 import com.way.common.exception.ClientToolsException;
 import com.way.common.pojos.system.SysDict;
@@ -110,7 +110,7 @@ public class SysDictApImpl implements SysDictApi {
 		Map<String, Object> paramMap = JSONObject.parseObject(rw.getValue(),new TypeReference<HashMap<String, Object>>() {});
 		List<SysDict> sysDictList=sysDictService.selectList(paramMap);
 		Map<String, Map<String, String>> dictMap = convertListToMap(sysDictList);
-		jedisClient.set(ConfigConstant.REDIS_SYS_DICT_KEY, JSONObject.toJSONString(dictMap));
+		jedisClient.set(ConfigKeyConstant.REDIS_SYS_DICT_KEY, JSONObject.toJSONString(dictMap));
 		result.setCode(CodeConstants.RESULT_SUCCESS);
 		return result.toJSONString();
 	}

@@ -17,13 +17,13 @@ import com.way.common.constant.ServiceConstants;
 public interface SysRouteGateWayFeignApi {
 	
 	@RequestMapping(method=RequestMethod.GET,value="/insertSysRouteConfig", consumes=MediaType.APPLICATION_JSON_UTF8_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
-	public String insert(String param);
+	public String insertSysRouteConfig(String param);
 	
 	@RequestMapping(method=RequestMethod.GET,value="/deleteSysRouteConfig", consumes=MediaType.APPLICATION_JSON_UTF8_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
-	public String deleteById(String param);
+	public String deleteSysRouteConfigById(String param);
 	
 	@RequestMapping(method=RequestMethod.GET,value="/updateSysRouteConfig", consumes=MediaType.APPLICATION_JSON_UTF8_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
-	public String updateSysDict(String param);
+	public String updateSysRouteConfig(String param);
 	
 
 }

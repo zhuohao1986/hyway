@@ -35,13 +35,13 @@ public class SysRouteConfigApiHystrixFeignFallbackFactory implements FallbackFac
 			}
 
 			@Override
-			public String delete(String param) {
+			public String deleteRoute(String param) {
 				// TODO Auto-generated method stub
 				return result.toJSONString();
 			}
 
 			@Override
-			public String update(String param) {
+			public String updateRoute(String param) {
 				// TODO Auto-generated method stub
 				return result.toJSONString();
 			}
@@ -51,6 +51,19 @@ public class SysRouteConfigApiHystrixFeignFallbackFactory implements FallbackFac
 				// TODO Auto-generated method stub
 				return result.toJSONString();
 			}
+
+			@Override
+			public String refreshRoute() {
+				// TODO Auto-generated method stub
+				return result.toJSONString();
+			}
+
+			@Override
+			public String getRoute(String param) {
+				// TODO Auto-generated method stub
+				return result.toJSONString();
+			}
+
         };
 	}
 }

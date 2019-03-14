@@ -29,22 +29,23 @@ public class SysRouteGateWayApiHystrixFeignFallbackFactory implements FallbackFa
         {
 
 			@Override
-			public String insert(String param) {
+			public String insertSysRouteConfig(String param) {
 				// TODO Auto-generated method stub
 				return result.toJSONString();
 			}
 
 			@Override
-			public String deleteById(String param) {
+			public String deleteSysRouteConfigById(String param) {
 				// TODO Auto-generated method stub
 				return result.toJSONString();
 			}
 
 			@Override
-			public String updateSysDict(String param) {
+			public String updateSysRouteConfig(String param) {
 				// TODO Auto-generated method stub
 				return result.toJSONString();
 			}
+
            
         };
 	}

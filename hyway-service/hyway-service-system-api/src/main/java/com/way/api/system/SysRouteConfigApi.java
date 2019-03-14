@@ -18,18 +18,12 @@ public interface SysRouteConfigApi{
 	public String selectSysRouteConfigPage(String param) throws BusinessException;
 	/**
 	 * 路由Id查询
-	 * @param param dictId
+	 * @param param id
 	 * @return
 	 */
 	public String SysRouteConfig(String param)  throws BusinessException;
-	/**
-	 * 查询路由List
-	 * @param param dictType
-	 * @return
-	 */
-	public String selectList(String param)  throws BusinessException;
     /**
-     * 查询路由
+          * 查询路由
      * @param param
      * @return
      */

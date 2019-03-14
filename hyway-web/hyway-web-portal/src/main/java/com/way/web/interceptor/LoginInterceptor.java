@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.way.api.sso.SsoApi;
 import com.way.common.constant.CodeConstants;
+import com.way.common.constant.ConfigKeyConstant;
 import com.way.common.stdo.RequestWrapper;
 import com.way.common.utils.CookieUtils;
 
@@ -36,7 +37,7 @@ public class LoginInterceptor  implements HandlerInterceptor{
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {  
   
         log.info("---------------------开始进入请求地址拦截----------------------------");  
-        String hy_token = CookieUtils.getCookieValue(httpServletRequest, CodeConstants.REDIS_USER_KEY);
+        String hy_token = CookieUtils.getCookieValue(httpServletRequest, ConfigKeyConstant.REDIS_USER_KEY);
         log.info("CookieInterceptor>>>preHandle>>mw_token:"+hy_token);
 		
         if(!StringUtils.isEmpty(hy_token)){  

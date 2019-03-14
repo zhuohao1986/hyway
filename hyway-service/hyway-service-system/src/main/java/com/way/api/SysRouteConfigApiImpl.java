@@ -1,6 +1,8 @@
 package com.way.api;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,7 +10,10 @@ import org.springframework.util.StringUtils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.TypeReference;
+import com.github.pagehelper.PageInfo;
 import com.way.api.feign.SysRouteConfigFeignApi;
+import com.way.api.feign.SysRouteGateWayFeignApi;
 import com.way.api.system.SysRouteConfigApi;
 import com.way.common.constant.CodeConstants;
 import com.way.common.exception.BusinessException;
@@ -29,36 +34,66 @@ public class SysRouteConfigApiImpl implements SysRouteConfigApi{
 	@Autowired
 	private SysRouteConfigFeignApi sysRouteConfigFeignApi;
 	
+	@Autowired
+	private SysRouteGateWayFeignApi sysRouteGateWayFeignApi;
+	
 	Result result;
 
 	@Override
 	public String selectSysRouteConfigPage(String param) throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
+		RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
+		Map<String, Object> paramMap = JSONObject.parseObject(rw.getValue(),
+				new TypeReference<HashMap<String, Object>>() {
+				});
+		PageInfo<SysRouteConfig> sysDictpage = sysRouteConfigService.selectSysRouteConfigPage(paramMap);
+		result.setCode(CodeConstants.RESULT_SUCCESS);
+		result.setValue(sysDictpage);
+		return result.toJSONString();
 	}
 
 	@Override
 	public String SysRouteConfig(String param) throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String selectList(String param) throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
+		result=new Result(CodeConstants.RESULT_SUCCESS);
+		RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
+		JSONObject obj=JSONObject.parseObject(rw.getValue());
+		Integer id = obj.getInteger("id");
+		SysRouteConfig sysRouteConfig = sysRouteConfigService.getSysRouteConfig(id);
+		result.setValue(sysRouteConfig);
+		return result.toJSONString();
 	}
 
 	@Override
 	public String insert(String param) throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
+		result=new Result(CodeConstants.RESULT_SUCCESS);
+		RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
+		SysRouteConfig sysRouteConfig=JSONObject.parseObject(rw.getValue(), SysRouteConfig.class);
+		sysRouteConfig.setModifyTime(DateUtils.getCurrentDate());
+		sysRouteConfigService.update(sysRouteConfig);
+		if (CodeConstants.RESULT_SUCCESS.equals(result.getCode())) {
+			String remoteSysRouteConfigStr=sysRouteGateWayFeignApi.insertSysRouteConfig(rw.toString());
+			Result remoteResult=JSONObject.parseObject(remoteSysRouteConfigStr, Result.class);
+			if (CodeConstants.RESULT_SUCCESS.equals(remoteResult.getCode())) {
+				return result.toString();
+			}
+		}
+		return result.toString();
 	}
 
 	@Override
 	public String deleteById(String param) throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
+		result=new Result(CodeConstants.RESULT_SUCCESS);
+		RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
+		SysRouteConfig sysRouteConfig=JSONObject.parseObject(rw.getValue(), SysRouteConfig.class);
+		sysRouteConfig.setModifyTime(DateUtils.getCurrentDate());
+		sysRouteConfigService.update(sysRouteConfig);
+		if (CodeConstants.RESULT_SUCCESS.equals(result.getCode())) {
+			String remoteSysRouteConfigStr=sysRouteGateWayFeignApi.deleteSysRouteConfigById(rw.toString());
+			Result remoteResult=JSONObject.parseObject(remoteSysRouteConfigStr, Result.class);
+			if (CodeConstants.RESULT_SUCCESS.equals(remoteResult.getCode())) {
+				return result.toString();
+			}
+		}
+		return result.toString();
 	}
 
 	@Override
@@ -68,6 +103,13 @@ public class SysRouteConfigApiImpl implements SysRouteConfigApi{
 		SysRouteConfig sysRouteConfig=JSONObject.parseObject(rw.getValue(), SysRouteConfig.class);
 		sysRouteConfig.setModifyTime(DateUtils.getCurrentDate());
 		sysRouteConfigService.update(sysRouteConfig);
+		if (CodeConstants.RESULT_SUCCESS.equals(result.getCode())) {
+			String remoteSysRouteConfigStr=sysRouteGateWayFeignApi.updateSysRouteConfig(rw.toString());
+			Result remoteResult=JSONObject.parseObject(remoteSysRouteConfigStr, Result.class);
+			if (CodeConstants.RESULT_SUCCESS.equals(remoteResult.getCode())) {
+				return result.toString();
+			}
+		}
 		return result.toJSONString();
 	}
 	@Override
@@ -99,7 +141,7 @@ public class SysRouteConfigApiImpl implements SysRouteConfigApi{
                         //更新路由
                     	RequestWrapper requestWrapper =new RequestWrapper();
                     	requestWrapper.setValue(JSONObject.toJSONString(definition));
-                    		sysRouteConfigFeignApi.update(requestWrapper.toString());
+                    		sysRouteConfigFeignApi.updateRoute(requestWrapper.toString());
                        }
                     versionId = resultVersionId;
                 }

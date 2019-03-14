@@ -67,6 +67,7 @@
 		<pagehelper.starter.version>1.2.5</pagehelper.starter.version>
 		<logback.version>1.2.3</logback.version>
 		<commons-codec.version>1.12</commons-codec.version>
+		<zipkin.version>2.10.1</zipkin.version>
 	</properties>
 	<dependencyManagement>
 	    <dependencies>
@@ -91,6 +92,14 @@
 			<type>pom</type>
 			<scope>import</scope>
     	</dependency>
+    	<dependency>
+		    <groupId>org.springframework.cloud</groupId>
+		    <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.cloud</groupId>
+		    <artifactId>spring-cloud-starter-netflix-hystrix-dashboard</artifactId>
+		</dependency>
 		<!-- 公共基础类版本 -->
 		<dependency>
 			<groupId>com.way</groupId>
@@ -142,6 +151,11 @@
 			<artifactId>hyway-service-task-api</artifactId>
 			<version>${hyway.version}</version>
 	    </dependency>
+	    <dependency>
+			<groupId>com.way</groupId>
+			<artifactId>hyway-service-gateway-api</artifactId>
+			<version>${hyway.version}</version>
+		</dependency>
 	    <!-- 添加Druid依赖 -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
@@ -323,6 +337,17 @@
 		    <artifactId>commons-codec</artifactId>
     		<version>${commons-codec.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>io.zipkin.java</groupId>
+			<artifactId>zipkin-autoconfigure-ui</artifactId>
+			<scope>runtime</scope>
+			<version>${zipkin.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.zipkin.java</groupId>
+			<artifactId>zipkin-server</artifactId>
+			<version>${zipkin.version}</version>
+		</dependency>
 	</dependencies>
 	</dependencyManagement>
 	<!-- 全局依赖 -->
@@ -336,10 +361,6 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
-        <dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
-		</dependency>
 	    <dependency>
 	        <groupId>org.springframework.cloud</groupId>
 	        <artifactId>spring-cloud-starter-openfeign</artifactId>

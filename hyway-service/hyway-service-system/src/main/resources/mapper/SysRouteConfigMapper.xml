@@ -21,4 +21,7 @@
   <select id="selectLastestVersion" parameterType="long" resultType="long">
   		select max(id) from t_sys_route_version
   </select>
+ <select id="selectList" parameterType="map" resultMap="BaseResultMap">
+  		select * from t_sys_route_config
+  </select>
 </mapper>

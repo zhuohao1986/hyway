@@ -21,13 +21,19 @@ public interface SysRouteConfigFeignApi {
 	public String addRoute(@RequestParam String param);
 	
 	@RequestMapping(method=RequestMethod.GET,value="/route/routes/delete", consumes=MediaType.APPLICATION_JSON_UTF8_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
-	public String delete(String param);
+	public String deleteRoute(String param);
 	
 	@RequestMapping(method=RequestMethod.GET,value="/route/update", consumes=MediaType.APPLICATION_JSON_UTF8_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
-	public String update(String param);
+	public String updateRoute(String param);
 	
 	@RequestMapping(method=RequestMethod.GET,value="/route/routes", consumes=MediaType.APPLICATION_JSON_UTF8_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
 	public String routes();
+	
+	@RequestMapping(method=RequestMethod.GET,value="/route/refresh", consumes=MediaType.APPLICATION_JSON_UTF8_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+	public String refreshRoute();
+
+	@RequestMapping(method=RequestMethod.GET,value="/route/getRoute", consumes=MediaType.APPLICATION_JSON_UTF8_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+	public String getRoute(String param);
 
 
 }

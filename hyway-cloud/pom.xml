@@ -14,6 +14,8 @@
 	    <module>hyway-eureka-server</module>
 	    <module>hyway-config-server</module>
 	    <module>hyway-service-gateway</module>
+   		<module>hyway-service-zipkin</module>
+   		<module>hyway-service-monitor</module>
   </modules>
   <dependencies>
   </dependencies>

@@ -18,7 +18,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.alibaba.fastjson.JSONObject;
 import com.way.common.constant.CodeConstants;
-import com.way.common.constant.ConfigConstant;
+import com.way.common.constant.ConfigKeyConstant;
 import com.way.common.pojos.system.dto.GatewayFilterDefinition;
 import com.way.common.pojos.system.dto.GatewayPredicateDefinition;
 import com.way.common.pojos.system.dto.GatewayRouteDefinition;
@@ -68,7 +68,7 @@ public class DynamicRouteServiceImpl implements DynamicRouteService,ApplicationE
     	result=new Result(CodeConstants.RESULT_SUCCESS);
         routeDefinitionWriter.save(Mono.just(definition)).subscribe();
         notifyChanged();
-        jedisClient.hset(ConfigConstant.GATEWAY_ROUTES,definition.getId(),JSONObject.toJSONString(definition));
+        jedisClient.hset(ConfigKeyConstant.GATEWAY_ROUTES,definition.getId(),JSONObject.toJSONString(definition));
         return result.toJSONString();
     }
  
@@ -107,8 +107,8 @@ public class DynamicRouteServiceImpl implements DynamicRouteService,ApplicationE
         try {
             this.routeDefinitionWriter.delete(Mono.just(routeId));
             notifyChanged();
-            if (jedisClient.hexists(ConfigConstant.GATEWAY_ROUTES,routeId)) {
-            	jedisClient.hdel(ConfigConstant.GATEWAY_ROUTES,routeId);
+            if (jedisClient.hexists(ConfigKeyConstant.GATEWAY_ROUTES,routeId)) {
+            	jedisClient.hdel(ConfigKeyConstant.GATEWAY_ROUTES,routeId);
             }
             result.setMessage("delete success" + routeId);
             result.setValue(true);
@@ -124,7 +124,7 @@ public class DynamicRouteServiceImpl implements DynamicRouteService,ApplicationE
     public List<RouteDefinition> getRouteDefinitions() {
     	List<RouteDefinition> routeDefinitions=new ArrayList<>();
 		try {
-			String routeDefinitionStr= jedisClient.get(ConfigConstant.GATEWAY_ROUTES);
+			String routeDefinitionStr= jedisClient.get(ConfigKeyConstant.GATEWAY_ROUTES);
 			routeDefinitions=JSONObject.parseArray(routeDefinitionStr, RouteDefinition.class);
 		 } catch (Exception e) {
         	return routeDefinitions;
