@@ -19,7 +19,7 @@
 	    <module>hyway-service-system-api</module>
     	<module>hyway-service-open-api</module>
     	<module>hyway-service-task-api</module>
-    	<!-- <module>hyway-service-gateway-api</module> -->
+    	<module>hyway-service-gateway-api</module>
 	    <!-- service -->
 	    <module>hyway-service-user</module>
 	    <module>hyway-service-system</module>
