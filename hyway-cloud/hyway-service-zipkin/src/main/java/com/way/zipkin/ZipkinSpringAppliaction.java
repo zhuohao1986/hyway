@@ -6,6 +6,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 import zipkin.server.internal.EnableZipkinServer;
 
+
 @EnableDiscoveryClient
 @SpringBootApplication
 @EnableZipkinServer
