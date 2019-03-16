@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: hyway-service-gateway-api
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: Administrator
+Built-By: way
 Implementation-Vendor-Id: com.way
-Build-Jdk: 1.8.0_191
+Build-Jdk: 1.8.0_92
 Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
  ot-starter-parent/hyway/hyway-cloud/hyway-service-gateway-api
 Created-By: Maven Integration for Eclipse
