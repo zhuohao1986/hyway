@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.way.api.feign.SysRouteGateWayFeignApi;
+import com.way.api.feign.GateWayRouteFeignApi;
 import com.way.common.constant.CodeConstants;
 import com.way.common.exception.DefaultError;
 import com.way.common.stdo.Result;
@@ -17,36 +17,36 @@ import feign.hystrix.FallbackFactory;
  *
  */
 @Component
-public class SysRouteGateWayApiHystrixFeignFallbackFactory implements FallbackFactory<SysRouteGateWayFeignApi> {
+public class GateWayRouteApiHystrixFeignFallbackFactory implements FallbackFactory<GateWayRouteFeignApi> {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(SysRouteGateWayApiHystrixFeignFallbackFactory.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(GateWayRouteApiHystrixFeignFallbackFactory.class);
 
 	@Override
-	public SysRouteGateWayFeignApi create(Throwable cause) {
+	public GateWayRouteFeignApi create(Throwable cause) {
 		Result result=new Result(CodeConstants.RESULT_FAIL, DefaultError.SERVER_EXCEPTION);
-		SysRouteGateWayApiHystrixFeignFallbackFactory.LOGGER.info("服务异常-fallback; reason was: {}", cause.getMessage());
-		return new SysRouteGateWayFeignApi()
+		GateWayRouteApiHystrixFeignFallbackFactory.LOGGER.info("服务异常-fallback; reason was: {}", cause.getMessage());
+		return new GateWayRouteFeignApi()
         {
 
 			@Override
-			public String insertSysRouteConfig(String param) {
-				// TODO Auto-generated method stub
+			public String addRoute(String param) {
 				return result.toJSONString();
 			}
 
 			@Override
-			public String deleteSysRouteConfigById(String param) {
-				// TODO Auto-generated method stub
+			public String deleteRoute(String param) {
 				return result.toJSONString();
 			}
 
 			@Override
-			public String updateSysRouteConfig(String param) {
-				// TODO Auto-generated method stub
+			public String updateRoute(String param) {
 				return result.toJSONString();
 			}
 
-           
+			@Override
+			public String refreshRoute() {
+				return result.toJSONString();
+			}
         };
 	}
 }

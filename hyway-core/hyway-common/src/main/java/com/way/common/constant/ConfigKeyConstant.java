@@ -1,7 +1,11 @@
 package com.way.common.constant;
 
+/**
+ * 缓存KEY
+ * @author Administrator
+ *
+ */
 public class ConfigKeyConstant {
-	
 	// tekon
 	public final static String REDIS_USER_SESSION_KEY = "REDIS_USER_SESSION";
 	//全局COOKIE TOKEN
@@ -10,5 +14,7 @@ public class ConfigKeyConstant {
 	public final static String REDIS_SYS_DICT_KEY = "REDIS_SYS_DICT_KEY";
 	//路由
 	public final static String GATEWAY_ROUTES="GATEWAY_ROUTES:";
+	//发布路由信息的版本号
+	public final static String GATEWAY_ROUTES_VERSION="GATEWAY_ROUTES_VERSION";
 
 }

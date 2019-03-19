@@ -1,14 +1,13 @@
-package com.way.common.pojos.system.dto;
+package com.way.common.route;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+public class GatewayFilterDefinition {
 
-public class GatewayPredicateDefinition {
-
-    //断言对应的Name
+    //Filter Name
     private String name;
-    //配置的断言规则
+    //对应的路由规则
     private Map<String, String> args = new LinkedHashMap<>();
 	public String getName() {
 		return name;
@@ -22,5 +21,7 @@ public class GatewayPredicateDefinition {
 	public void setArgs(Map<String, String> args) {
 		this.args = args;
 	}
-
+    
+    
+    
 }

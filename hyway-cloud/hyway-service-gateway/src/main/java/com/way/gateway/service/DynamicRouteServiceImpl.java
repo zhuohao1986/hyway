@@ -1,31 +1,29 @@
 package com.way.gateway.service;
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.event.RefreshRoutesEvent;
-import org.springframework.cloud.gateway.filter.FilterDefinition;
-import org.springframework.cloud.gateway.handler.predicate.PredicateDefinition;
 import org.springframework.cloud.gateway.route.RouteDefinition;
 import org.springframework.cloud.gateway.route.RouteDefinitionLocator;
 import org.springframework.cloud.gateway.route.RouteDefinitionWriter;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.stereotype.Service;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import com.alibaba.fastjson.JSONObject;
 import com.way.common.constant.CodeConstants;
 import com.way.common.constant.ConfigKeyConstant;
-import com.way.common.pojos.system.dto.GatewayFilterDefinition;
-import com.way.common.pojos.system.dto.GatewayPredicateDefinition;
-import com.way.common.pojos.system.dto.GatewayRouteDefinition;
+import com.way.common.exception.GateWayException;
+import com.way.common.route.GatewayRouteDefinition;
 import com.way.common.stdo.RequestWrapper;
 import com.way.common.stdo.Result;
-import com.way.common.utils.LogUtil;
+import com.way.common.utils.LogUtils;
 import com.way.gateway.cache.JedisClient;
+import com.way.gateway.comm.RouteUils;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -39,6 +37,8 @@ import reactor.core.publisher.Mono;
 @Service
 public class DynamicRouteServiceImpl implements DynamicRouteService,ApplicationEventPublisherAware{
 
+	private static final Logger Logger=LoggerFactory.getLogger(DynamicRouteServiceImpl.class);
+	
 	@Autowired
     private RouteDefinitionWriter routeDefinitionWriter;
  
@@ -56,18 +56,19 @@ public class DynamicRouteServiceImpl implements DynamicRouteService,ApplicationE
         this.publisher.publishEvent(new RefreshRoutesEvent(this));
     }
  
- 
     /**
      * 增加路由
      *
      */
-    public String add(String param) {
+    @Override
+    public String add(String param) throws GateWayException{
     	RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
     	GatewayRouteDefinition gwdefinition=JSONObject.parseObject(rw.getValue(), GatewayRouteDefinition.class);
-    	RouteDefinition definition=assembleRouteDefinition(gwdefinition);
+    	RouteDefinition definition=RouteUils.assembleRouteDefinition(gwdefinition);
     	result=new Result(CodeConstants.RESULT_SUCCESS);
         routeDefinitionWriter.save(Mono.just(definition)).subscribe();
         notifyChanged();
+        result.setMessage("add route  success " + definition.getId());
         jedisClient.hset(ConfigKeyConstant.GATEWAY_ROUTES,definition.getId(),JSONObject.toJSONString(definition));
         return result.toJSONString();
     }
@@ -77,16 +78,16 @@ public class DynamicRouteServiceImpl implements DynamicRouteService,ApplicationE
      * 更新路由
      */
     @Override
-    public String update(String param) {
+    public String update(String param) throws GateWayException{
     	RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
     	GatewayRouteDefinition gwdefinition=JSONObject.parseObject(rw.getValue(), GatewayRouteDefinition.class);
-    	RouteDefinition definition=assembleRouteDefinition(gwdefinition);
+    	RouteDefinition definition=RouteUils.assembleRouteDefinition(gwdefinition);
     	try {
 	        result=new Result(CodeConstants.RESULT_SUCCESS);
-            this.routeDefinitionWriter.delete(Mono.just(definition.getId()));
+            routeDefinitionWriter.delete(Mono.just(definition.getId()));
             routeDefinitionWriter.save(Mono.just(definition)).subscribe();
             notifyChanged();
-            result.setMessage("route  success " + definition.getId());
+            result.setMessage("update route  success " + definition.getId());
         } catch (Exception e) {
         	result.setMessage("update fail,not find route  routeId: " + definition.getId());
         	return result.toJSONString();
@@ -99,7 +100,7 @@ public class DynamicRouteServiceImpl implements DynamicRouteService,ApplicationE
      *
      */
     @Override
-    public String delete(String param) {
+    public String delete(String param) throws GateWayException{
     	RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
     	JSONObject obj=JSONObject.parseObject(rw.getValue());
     	String routeId=obj.getString("id");
@@ -121,21 +122,24 @@ public class DynamicRouteServiceImpl implements DynamicRouteService,ApplicationE
  
     }
     @Override
-    public List<RouteDefinition> getRouteDefinitions() {
+    public String getRouteDefinitions() {
+    	result=new Result(CodeConstants.RESULT_SUCCESS);
     	List<RouteDefinition> routeDefinitions=new ArrayList<>();
 		try {
-			String routeDefinitionStr= jedisClient.get(ConfigKeyConstant.GATEWAY_ROUTES);
-			routeDefinitions=JSONObject.parseArray(routeDefinitionStr, RouteDefinition.class);
+			if(jedisClient.exists(ConfigKeyConstant.GATEWAY_ROUTES)) {
+				String routeDefinitionStr= jedisClient.get(ConfigKeyConstant.GATEWAY_ROUTES);
+				routeDefinitions=JSONObject.parseArray(routeDefinitionStr, RouteDefinition.class);
+				result.setValue(routeDefinitions);
+			}else {
+				Flux<RouteDefinition> routeDefinitionFlux = routeDefinitionLocator.getRouteDefinitions();
+				result.setValue(JSONObject.toJSONString(routeDefinitionFlux));
+			}
+			result.setMessage("get routeDefinitions success");
 		 } catch (Exception e) {
-        	return routeDefinitions;
+			 result.setMessage("get routeDefinitions fail:" + e.getMessage());
+	         result.setValue(true);
         }
-		Flux<RouteDefinition> routeDefinitionFlux = routeDefinitionLocator.getRouteDefinitions();
-		Mono<List<RouteDefinition>> collectList = routeDefinitionFlux.collectList();
-		List<RouteDefinition> block = collectList.block();
-		for (RouteDefinition routeDefinition : block) {
-			LogUtil.infoLogs("RouteDefinition routeId"+routeDefinition.getId());
-		}
-		return routeDefinitions;
+		return result.toJSONString();
 	}
  
     @Override
@@ -172,6 +176,30 @@ public class DynamicRouteServiceImpl implements DynamicRouteService,ApplicationE
     	publisher.publishEvent(new RefreshRoutesEvent(this));*/
         this.publisher = applicationEventPublisher;
     }
+
+	@Override
+	public String refresh() {
+		result=new Result(CodeConstants.RESULT_SUCCESS);
+    	List<RouteDefinition> routeDefinitions=new ArrayList<>();
+		try {
+			if(jedisClient.exists(ConfigKeyConstant.GATEWAY_ROUTES)) {
+				String resultRoutes= jedisClient.get(ConfigKeyConstant.GATEWAY_ROUTES);
+				routeDefinitions=JSONObject.parseArray(resultRoutes, RouteDefinition.class);
+				LogUtils.info(Logger, "路由信息"+routeDefinitions);
+				for (RouteDefinition routeDefinition : routeDefinitions) {
+					 this.routeDefinitionWriter.delete(Mono.just(routeDefinition.getId()));
+					 routeDefinitionWriter.save(Mono.just(routeDefinition)).subscribe();
+				}
+				notifyChanged();
+			}else {
+				result.setMessage("get routeDefinitions fail");
+			}
+		 } catch (Exception e) {
+			 result.setMessage("get routeDefinitions fail:" + e.getMessage());
+	         result.setValue(true);
+        }
+		return result.toJSONString();
+	}
    
     /*@PostConstruct
     public void main() {
@@ -211,43 +239,4 @@ public class DynamicRouteServiceImpl implements DynamicRouteService,ApplicationE
         System.out.println("definition:" + JSON.toJSONString(definition));
        // jedisClient.hset(ConfigConstant.GATEWAY_ROUTES,"key",JSON.toJSONString(definition));
     }*/
-    //把传递进来的参数转换成路由对象
-    private RouteDefinition assembleRouteDefinition(GatewayRouteDefinition gwdefinition) {
-        RouteDefinition definition = new RouteDefinition();
-        definition.setId(gwdefinition.getId());
-        definition.setOrder(gwdefinition.getOrder());
-
-        //设置断言
-        List<PredicateDefinition> pdList=new ArrayList<>();
-        List<GatewayPredicateDefinition> gatewayPredicateDefinitionList=gwdefinition.getPredicates();
-        for (GatewayPredicateDefinition gpDefinition: gatewayPredicateDefinitionList) {
-            PredicateDefinition predicate = new PredicateDefinition();
-            predicate.setArgs(gpDefinition.getArgs());
-            predicate.setName(gpDefinition.getName());
-            pdList.add(predicate);
-        }
-        definition.setPredicates(pdList);
-
-        //设置过滤器
-        List<FilterDefinition> filters = new ArrayList<FilterDefinition>();
-        List<GatewayFilterDefinition> gatewayFilters = gwdefinition.getFilters();
-        for(GatewayFilterDefinition filterDefinition : gatewayFilters){
-            FilterDefinition filter = new FilterDefinition();
-            filter.setName(filterDefinition.getName());
-            filter.setArgs(filterDefinition.getArgs());
-            filters.add(filter);
-        }
-        definition.setFilters(filters);
-
-        URI uri = null;
-        if(gwdefinition.getUri().startsWith("http")){
-            uri = UriComponentsBuilder.fromHttpUrl(gwdefinition.getUri()).build().toUri();
-        }else{
-            // uri为 lb://consumer-service 时使用下面的方法
-            uri = URI.create(gwdefinition.getUri());
-        }
-        definition.setUri(uri);
-        return definition;
-    }
-
 }

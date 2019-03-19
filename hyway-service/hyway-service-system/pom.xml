@@ -1,40 +1,42 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>com.way</groupId>
-    <artifactId>hyway-service</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-  </parent>
-  <artifactId>hyway-service-system</artifactId>
-  <packaging>jar</packaging>
-  <description>hyway-service-system</description>
-  <properties>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.way</groupId>
+		<artifactId>hyway-service</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>hyway-service-system</artifactId>
+	<packaging>jar</packaging>
+	<description>hyway-service-system</description>
+	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
-  </properties>
-  <dependencies>
-    	<!-- 公共模块 -->
-        <dependency>
+	</properties>
+	<dependencies>
+		<!-- 公共模块 -->
+		<dependency>
 			<groupId>com.way</groupId>
 			<artifactId>hyway-common</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.way</groupId>
 			<artifactId>hyway-cache</artifactId>
-	    </dependency>
-	    <dependency>
-			 <groupId>de.codecentric</groupId>
-			 <artifactId>spring-boot-admin-starter-client</artifactId>
- 		</dependency>
-  		<dependency>
+		</dependency>
+		<dependency>
+			<groupId>de.codecentric</groupId>
+			<artifactId>spring-boot-admin-starter-client</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-config-client</artifactId>
 		</dependency>
 		<dependency>
-	        <groupId>org.springframework.cloud</groupId>
-	        <artifactId>spring-cloud-starter-openfeign</artifactId>
-	    </dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -58,28 +60,28 @@
 			<scope>test</scope>
 		</dependency>
 		<!-- 与数据库操作相关的依赖 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jdbc</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 			<exclusions>
-		      <exclusion>
-		         <groupId>org.springframework.boot</groupId>
-		         <artifactId>spring-boot-starter-logging</artifactId>
-		      </exclusion>
-		    </exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
-		    <groupId>com.alibaba</groupId>
-		    <artifactId>fastjson</artifactId>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
 		</dependency>
 		<!-- 添加Druid依赖 -->
 		<dependency>
@@ -95,8 +97,8 @@
 			<artifactId>pagehelper</artifactId>
 		</dependency>
 		<dependency>
-				<groupId>com.way</groupId>
-				<artifactId>hyway-service-system-api</artifactId>
+			<groupId>com.way</groupId>
+			<artifactId>hyway-service-system-api</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.way</groupId>
@@ -109,24 +111,30 @@
 	</dependencies>
 	<build>
 		<finalName>hyway-system-service</finalName>
+		<resources>
+			<resource>
+				<!--配置文件路径 -->
+				<directory>src/resources</directory> <!--这里对应项目存放配置文件的目录 -->
+				<!--开启filtering功能 -->
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-				  <mainClass>com.way.SystemServiceSpringApplication</mainClass>
+					<mainClass>com.way.SystemServiceSpringApplication</mainClass>
 				</configuration>
-				
+				<executions>
+					<execution>
+						<goals>
+							<!--创建一个自动可执行的jar或war文件 -->
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
-			<!-- ... -->
-            <!-- maven打包的时候告诉maven不需要web.xml,否刚会报找不到web.xml错误 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <configuration>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                </configuration>
-            </plugin>
 		</plugins>
 	</build>
 </project>

@@ -1,4 +1,4 @@
-package com.way.common.pojos.system.dto;
+package com.way.common.route;
 
 import java.util.ArrayList;
 import java.util.List;

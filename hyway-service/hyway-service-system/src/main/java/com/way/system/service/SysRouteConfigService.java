@@ -1,5 +1,6 @@
 package com.way.system.service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.github.pagehelper.PageInfo;
@@ -18,5 +19,7 @@ public interface SysRouteConfigService {
 	SysRouteConfig getSysRouteConfig(Integer id);
 
 	PageInfo<SysRouteConfig> selectSysRouteConfigPage(Map<String, Object> paramMap);
+
+	List<SysRouteConfig> selectSysRouteConfigList(Map<String, Object> paramMap);
 
 }

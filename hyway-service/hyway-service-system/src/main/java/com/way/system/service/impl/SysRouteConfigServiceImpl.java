@@ -11,33 +11,44 @@ import com.github.pagehelper.PageInfo;
 import com.way.common.pojos.system.SysRouteConfig;
 import com.way.dao.SysRouteConfigMapper;
 import com.way.system.service.SysRouteConfigService;
+
 @Service
-public class SysRouteConfigServiceImpl implements SysRouteConfigService{
-	
-    @Autowired
+public class SysRouteConfigServiceImpl implements SysRouteConfigService {
+
+	@Autowired
 	SysRouteConfigMapper sysRouteConfigMapper;
+
 	@Override
 	public Long getSysRouteConfigLastVersion() {
-		
+
 		return sysRouteConfigMapper.selectLastestVersion();
 	}
+
 	@Override
 	public int update(SysRouteConfig sysRouteConfig) {
-		
+
 		return sysRouteConfigMapper.updateByPrimaryKey(sysRouteConfig);
 	}
+
 	@Override
 	public SysRouteConfig getSysRouteConfig(Integer id) {
 		return sysRouteConfigMapper.selectByPrimaryKey(id);
 	}
+
 	@Override
 	public PageInfo<SysRouteConfig> selectSysRouteConfigPage(Map<String, Object> paramMap) {
-		Integer page=Integer.parseInt(String.valueOf(paramMap.get("page")));
-    	Integer limit=Integer.parseInt(String.valueOf(paramMap.get("limit")));
-    	PageHelper.startPage(page, limit);
-    	List<SysRouteConfig> sysRouteConfigPage = sysRouteConfigMapper.selectList(paramMap);
-    	PageInfo<SysRouteConfig> pages=new PageInfo<SysRouteConfig>(sysRouteConfigPage);
+		Integer page = Integer.parseInt(String.valueOf(paramMap.get("page")));
+		Integer limit = Integer.parseInt(String.valueOf(paramMap.get("limit")));
+		PageHelper.startPage(page, limit);
+		List<SysRouteConfig> sysRouteConfigPage = sysRouteConfigMapper.selectList(paramMap);
+		PageInfo<SysRouteConfig> pages = new PageInfo<SysRouteConfig>(sysRouteConfigPage);
 		return pages;
+	}
+
+	@Override
+	public List<SysRouteConfig> selectSysRouteConfigList(Map<String, Object> paramMap) {
+		// TODO Auto-generated method stub
+		return sysRouteConfigMapper.selectList(paramMap);
 	}
 
 }

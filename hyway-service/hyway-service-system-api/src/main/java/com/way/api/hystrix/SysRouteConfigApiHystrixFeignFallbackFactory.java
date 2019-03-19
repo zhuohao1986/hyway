@@ -30,40 +30,33 @@ public class SysRouteConfigApiHystrixFeignFallbackFactory implements FallbackFac
 
 			@Override
 			public String addRoute(String param) {
-				// TODO Auto-generated method stub
 				return result.toJSONString();
 			}
 
 			@Override
 			public String deleteRoute(String param) {
-				// TODO Auto-generated method stub
 				return result.toJSONString();
 			}
 
 			@Override
 			public String updateRoute(String param) {
-				// TODO Auto-generated method stub
 				return result.toJSONString();
 			}
 
 			@Override
-			public String routes() {
-				// TODO Auto-generated method stub
+			public String routes(String param) {
 				return result.toJSONString();
 			}
 
 			@Override
 			public String refreshRoute() {
-				// TODO Auto-generated method stub
 				return result.toJSONString();
 			}
 
 			@Override
 			public String getRoute(String param) {
-				// TODO Auto-generated method stub
 				return result.toJSONString();
 			}
-
         };
 	}
 }

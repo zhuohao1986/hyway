@@ -50,6 +50,28 @@
 		<dependency>
 			<groupId>com.way</groupId>
 			<artifactId>hyway-common</artifactId>
+			<exclusions>
+		        <exclusion>
+		            <groupId>org.springframework.boot</groupId>
+    				<artifactId>spring-boot-starter-jdbc</artifactId>
+		        </exclusion>
+		        <exclusion>
+					<groupId>tk.mybatis</groupId>
+					<artifactId>mapper</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.github.pagehelper</groupId>
+					<artifactId>pagehelper</artifactId>
+				</exclusion>
+		        <exclusion>
+					<groupId>com.google.zxing</groupId>
+					<artifactId>core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.google.zxing</groupId>
+					<artifactId>javase</artifactId>
+				</exclusion>
+        	</exclusions>   
 		</dependency>
 		<!-- <dependency>
 			<groupId>com.way</groupId>

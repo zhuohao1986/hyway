@@ -46,24 +46,6 @@ public class QuartzConfig {
 		Properties prop = new Properties();
 		ClassPathResource resource=new ClassPathResource("quartz.properties");
 		prop.load(resource.getInputStream());
-		
-		prop.put("org.quartz.scheduler.instanceName", "timingTasks");
-		prop.put("org.quartz.scheduler.instanceId", "AUTO");
-		prop.put("org.quartz.scheduler.skipUpdateCheck", "true");
-		prop.put("org.quartz.scheduler.jobFactory.class", "org.quartz.simpl.SimpleJobFactory");
-		prop.put("org.quartz.jobStore.class", "org.quartz.impl.jdbcjobstore.JobStoreTX");
-		prop.put("org.quartz.jobStore.driverDelegateClass", "org.quartz.impl.jdbcjobstore.StdJDBCDelegate");
-		prop.put("org.quartz.jobStore.dataSource", "quartzDataSource");
-		prop.put("org.quartz.jobStore.tablePrefix", "QRTZ_");
-		prop.put("org.quartz.jobStore.isClustered", "true");
-		prop.put("org.quartz.threadPool.class", "org.quartz.simpl.SimpleThreadPool");
-		prop.put("org.quartz.threadPool.threadCount", "5");
-
-		prop.put("org.quartz.dataSource.quartzDataSource.driver", prop.get("org.quartz.dataSource.myDS.driver"));
-		prop.put("org.quartz.dataSource.quartzDataSource.URL", prop.get("org.quartz.dataSource.myDS.URL"));
-		prop.put("org.quartz.dataSource.quartzDataSource.user", prop.get("org.quartz.dataSource.myDS.user"));
-		prop.put("org.quartz.dataSource.quartzDataSource.password",prop.get("org.quartz.dataSource.myDS.password"));
-		prop.put("org.quartz.dataSource.quartzDataSource.maxConnections", prop.get("org.quartz.dataSource.myDS.maxConnections"));
 		return prop;
 	}
 

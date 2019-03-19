@@ -1,10 +1,13 @@
 package com.way.common.pojos.system;
 
 import java.util.Date;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Table(name = "t_sys_dept")
-public class SysDept {
+public class SysDept{
     @Id
     @Column(name = "dept_id")
     private Integer deptId;

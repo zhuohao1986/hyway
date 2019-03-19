@@ -1,19 +1,17 @@
 package com.way.gateway.service;
 
-import java.util.List;
-
-import org.springframework.cloud.gateway.route.RouteDefinition;
-
-import reactor.core.publisher.Flux;
+import com.way.common.exception.GateWayException;
 
 public interface DynamicRouteService {
 
-	public String add(String param);
+	public String add(String param) throws GateWayException;
 
-	String update(String param);
+	public String update(String param) throws GateWayException;
 	
-	String delete(String param);
+	public String delete(String param) throws GateWayException;
 
-	List<RouteDefinition> getRouteDefinitions();
+	public String getRouteDefinitions() throws GateWayException;
+
+	public String refresh();
 
 }

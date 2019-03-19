@@ -13,7 +13,7 @@ import java.util.Date;
  * @date  
  * 
  */
-public class Base implements Serializable
+public class BasePoJo implements Serializable
 {
 	/**
 	 * 

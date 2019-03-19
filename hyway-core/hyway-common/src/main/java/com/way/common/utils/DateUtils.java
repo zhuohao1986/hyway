@@ -964,21 +964,6 @@ public class DateUtils extends DateFormatUtils {
 
 	}
 
-	public static void main(String[] args) {
-		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			Date date = sdf.parse("2008-07-04");
-			Date oDate = sdf.parse("2008-07-10");
-//				 Date date2 = sdf.parse( "2008-07-10 19:20:01" );
-//				 long a = date.getTime();
-//				  long b = date2.getTime();
-//				  int c = (int)((a - b) / 1000);
-			int aa = DateUtils.getIntervalDays(date, oDate);
-			System.out.println(aa);
-		} catch (ParseException e) {
-		}
-	}
-
 	/**
 	 * 获得指定日期的后一天
 	 * 

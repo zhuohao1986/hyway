@@ -14,26 +14,27 @@ import com.way.common.constant.ServiceConstants;
  * @author 
  *
  */
-@FeignClient(name=ServiceConstants.GATEWAY_SERVICE,fallbackFactory=SysDictApiHystrixFeignFallbackFactory.class)
+@FeignClient(name=ServiceConstants.SYSTEM_SERVICE,fallbackFactory=SysDictApiHystrixFeignFallbackFactory.class)
 public interface SysRouteConfigFeignApi {
 	
-	@RequestMapping(method=RequestMethod.GET,value="/route/addRoute",consumes=MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(method=RequestMethod.GET,value="/route/add",consumes=MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public String addRoute(@RequestParam String param);
 	
-	@RequestMapping(method=RequestMethod.GET,value="/route/routes/delete", consumes=MediaType.APPLICATION_JSON_UTF8_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(method=RequestMethod.GET,value="/route/delete", consumes=MediaType.APPLICATION_JSON_UTF8_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
 	public String deleteRoute(String param);
 	
 	@RequestMapping(method=RequestMethod.GET,value="/route/update", consumes=MediaType.APPLICATION_JSON_UTF8_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
 	public String updateRoute(String param);
 	
+	@RequestMapping(method=RequestMethod.GET,value="/route/route", consumes=MediaType.APPLICATION_JSON_UTF8_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+	public String getRoute(String param);
+	
 	@RequestMapping(method=RequestMethod.GET,value="/route/routes", consumes=MediaType.APPLICATION_JSON_UTF8_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
-	public String routes();
+	public String routes(String param);
 	
 	@RequestMapping(method=RequestMethod.GET,value="/route/refresh", consumes=MediaType.APPLICATION_JSON_UTF8_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
 	public String refreshRoute();
 
-	@RequestMapping(method=RequestMethod.GET,value="/route/getRoute", consumes=MediaType.APPLICATION_JSON_UTF8_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
-	public String getRoute(String param);
 
 
 }

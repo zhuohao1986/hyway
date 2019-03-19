@@ -2,10 +2,10 @@ package com.way.gateway;
 
 import java.util.concurrent.TimeUnit;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.isomorphism.util.TokenBucket;
 import org.isomorphism.util.TokenBuckets;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.http.HttpStatus;
@@ -18,7 +18,7 @@ import reactor.core.publisher.Mono;
  * See https://github.com/bbeck/token-bucket
  */
 public class ThrottleGatewayFilter implements GatewayFilter {
-	private static final Log log = LogFactory.getLog(ThrottleGatewayFilter.class);
+	private static final Logger log = LoggerFactory.getLogger(ThrottleGatewayFilter.class);
 
     int capacity;
     int refillTokens;

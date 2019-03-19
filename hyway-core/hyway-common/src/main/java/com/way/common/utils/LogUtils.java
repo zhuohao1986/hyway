@@ -13,6 +13,9 @@ import com.alibaba.fastjson.JSON;
  */
 public class LogUtils {
 	
+	
+	
+	
     /**
      * 摘要日志的内容分隔符
      */
