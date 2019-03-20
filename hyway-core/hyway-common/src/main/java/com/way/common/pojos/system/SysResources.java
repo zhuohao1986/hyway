@@ -70,7 +70,7 @@ public class SysResources {
     private String modifyBy;
 
     @Column(name = "del_state")
-    private String delState;
+    private Integer delState;
 
     /**
      * @return resource_id
@@ -321,14 +321,14 @@ public class SysResources {
     /**
      * @return del_state
      */
-    public String getDelState() {
+    public Integer getDelState() {
         return delState;
     }
 
     /**
      * @param delState
      */
-    public void setDelState(String delState) {
-        this.delState = delState == null ? null : delState.trim();
+    public void setDelState(Integer delState) {
+        this.delState = delState;
     }
 }

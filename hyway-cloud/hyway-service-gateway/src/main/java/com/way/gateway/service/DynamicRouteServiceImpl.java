@@ -49,8 +49,6 @@ public class DynamicRouteServiceImpl implements DynamicRouteService,ApplicationE
     
     @Autowired
     private JedisClient jedisClient;
-    
-    Result result;
  
     private void notifyChanged() {
         this.publisher.publishEvent(new RefreshRoutesEvent(this));
@@ -62,10 +60,11 @@ public class DynamicRouteServiceImpl implements DynamicRouteService,ApplicationE
      */
     @Override
     public String add(String param) throws GateWayException{
+    	Result result=new Result(CodeConstants.RESULT_SUCCESS);
     	RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
     	GatewayRouteDefinition gwdefinition=JSONObject.parseObject(rw.getValue(), GatewayRouteDefinition.class);
     	RouteDefinition definition=RouteUils.assembleRouteDefinition(gwdefinition);
-    	result=new Result(CodeConstants.RESULT_SUCCESS);
+    	result=new Result();
         routeDefinitionWriter.save(Mono.just(definition)).subscribe();
         notifyChanged();
         result.setMessage("add route  success " + definition.getId());
@@ -79,6 +78,7 @@ public class DynamicRouteServiceImpl implements DynamicRouteService,ApplicationE
      */
     @Override
     public String update(String param) throws GateWayException{
+    	Result result=new Result(CodeConstants.RESULT_SUCCESS);
     	RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
     	GatewayRouteDefinition gwdefinition=JSONObject.parseObject(rw.getValue(), GatewayRouteDefinition.class);
     	RouteDefinition definition=RouteUils.assembleRouteDefinition(gwdefinition);
@@ -101,6 +101,7 @@ public class DynamicRouteServiceImpl implements DynamicRouteService,ApplicationE
      */
     @Override
     public String delete(String param) throws GateWayException{
+    	Result result=new Result(CodeConstants.RESULT_SUCCESS);
     	RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
     	JSONObject obj=JSONObject.parseObject(rw.getValue());
     	String routeId=obj.getString("id");
@@ -123,6 +124,7 @@ public class DynamicRouteServiceImpl implements DynamicRouteService,ApplicationE
     }
     @Override
     public String getRouteDefinitions() {
+    	Result result=new Result(CodeConstants.RESULT_SUCCESS);
     	result=new Result(CodeConstants.RESULT_SUCCESS);
     	List<RouteDefinition> routeDefinitions=new ArrayList<>();
 		try {
@@ -179,7 +181,7 @@ public class DynamicRouteServiceImpl implements DynamicRouteService,ApplicationE
 
 	@Override
 	public String refresh() {
-		result=new Result(CodeConstants.RESULT_SUCCESS);
+		Result result=new Result(CodeConstants.RESULT_SUCCESS);
     	List<RouteDefinition> routeDefinitions=new ArrayList<>();
 		try {
 			if(jedisClient.exists(ConfigKeyConstant.GATEWAY_ROUTES)) {
@@ -191,12 +193,14 @@ public class DynamicRouteServiceImpl implements DynamicRouteService,ApplicationE
 					 routeDefinitionWriter.save(Mono.just(routeDefinition)).subscribe();
 				}
 				notifyChanged();
+				result.setMessage("refresh routeDefinitions success");
+				result.setValue(true);
 			}else {
-				result.setMessage("get routeDefinitions fail");
+				result.setMessage("refresh routeDefinitions fail");
 			}
 		 } catch (Exception e) {
-			 result.setMessage("get routeDefinitions fail:" + e.getMessage());
-	         result.setValue(true);
+			 result.setMessage("refresh routeDefinitions fail:" + e.getMessage());
+	         result.setValue(false);
         }
 		return result.toJSONString();
 	}

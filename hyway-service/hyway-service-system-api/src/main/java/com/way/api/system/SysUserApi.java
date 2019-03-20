@@ -35,4 +35,10 @@ public interface SysUserApi{
 	
 	public String slectUserByName(String param) throws BusinessException;
 
+	public String selectSysUserPage(String param) throws BusinessException;
+
+	public String sysUser(String param) throws BusinessException;
+
+	public String sysUserList(String param) throws BusinessException;
+
 }

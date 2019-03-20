@@ -5,6 +5,7 @@ import javax.persistence.*;
 
 @Table(name = "t_sys_route_config")
 public class SysRouteConfig {
+	@Id
     private Integer id;
 
     @Column(name = "route_id")

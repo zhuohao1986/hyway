@@ -67,7 +67,7 @@ public class MenuVO implements Serializable {
     /**
      * 0--正常 1--删除
      */
-    private String delFlag;
+    private Integer delFlag;
 
 
     @Override
@@ -194,11 +194,12 @@ public class MenuVO implements Serializable {
 		this.updateTime = updateTime;
 	}
 
-	public String getDelFlag() {
+
+	public Integer getDelFlag() {
 		return delFlag;
 	}
 
-	public void setDelFlag(String delFlag) {
+	public void setDelFlag(Integer delFlag) {
 		this.delFlag = delFlag;
 	}
 

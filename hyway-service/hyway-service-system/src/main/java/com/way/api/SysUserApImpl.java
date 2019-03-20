@@ -104,4 +104,22 @@ public class SysUserApImpl implements SysUserApi {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public String selectSysUserPage(String param) throws BusinessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String sysUser(String param) throws BusinessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String sysUserList(String param) throws BusinessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

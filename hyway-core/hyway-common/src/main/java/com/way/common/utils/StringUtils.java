@@ -25,10 +25,6 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
 		return str == null ? "" : str.trim();
 	}
 
-	public static void main(String[] args) {
-
-	}
-
 	/**
 	 * 字符串（js数组字符串）转 list集合 整数
 	 * 

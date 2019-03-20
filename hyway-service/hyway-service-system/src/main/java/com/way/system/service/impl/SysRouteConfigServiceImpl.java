@@ -51,4 +51,10 @@ public class SysRouteConfigServiceImpl implements SysRouteConfigService {
 		return sysRouteConfigMapper.selectList(paramMap);
 	}
 
+	@Override
+	public int insert(SysRouteConfig sysRouteConfig) {
+		// TODO Auto-generated method stub
+		return sysRouteConfigMapper.insert(sysRouteConfig);
+	}
+
 }

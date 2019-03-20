@@ -66,6 +66,8 @@ public class BaseController {
 	 *  create by:
 	 */
 	public void initParams() {
+		
+		logger.info("path:" + request.getRequestURI());
 		// 初始化返回json对象
 		retJson = new JSONObject();
 		if (null != getRequest()) {

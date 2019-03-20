@@ -22,4 +22,6 @@ public interface SysRouteConfigService {
 
 	List<SysRouteConfig> selectSysRouteConfigList(Map<String, Object> paramMap);
 
+	int insert(SysRouteConfig sysRouteConfig);
+
 }

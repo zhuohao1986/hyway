@@ -1,4 +1,4 @@
-/*package cn.taroco.rbac.admin.controller;
+/*package com.way.admin.web;
 
 import java.util.Map;
 
@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.way.admin.BaseController;
+import com.way.api.feign.SysUserFeignApi;
 import com.way.common.constant.CommonConstant;
 import com.way.common.pojos.system.SysUser;
 import com.way.common.pojos.system.SysUserRole;
@@ -36,7 +37,9 @@ import com.way.system.api.SysUserService;
 public class UserController extends com.way.common.context.BaseController {
     private static final PasswordEncoder ENCODER = new BCryptPasswordEncoder();
     @Autowired
-    private SysUserService userService;
+    private SysUserFeignApi sysUserFeignApi;
+    //@Autowired
+    //private SysUserService userService;
 
     *//**
      * 获取当前用户信息（角色、权限）
@@ -46,7 +49,8 @@ public class UserController extends com.way.common.context.BaseController {
      * @return 用户名
      *//*
     @GetMapping("/info")
-    public Response user(UserVO userVo) {
+    public String user(UserVO userVo) {
+    	sysUserFeignApi.
         UserInfo userInfo = userService.findUserInfo(userVo);
         return Response.success(userInfo);
     }

@@ -3,8 +3,10 @@ package com.way.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONObject;
@@ -33,16 +35,15 @@ public class SysRouteConfigController extends BaseController {
 	@Autowired
 	private SysRouteConfigApi sysRouteConfigApi;
 
-	Result result;
-
 	/**
 	 * 通过ID查询
 	 *
 	 * @param id ID
-	 * @return SysZuulRoute
+	 * @return SysRoute
 	 */
-	@RequestMapping("/route")
+	@RequestMapping(value="/route",produces = MediaType.APPLICATION_JSON_VALUE)
 	public String get() {
+		Result result=null;
 		try {
 			initParams();
 			RequestWrapper rw = new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
@@ -54,8 +55,9 @@ public class SysRouteConfigController extends BaseController {
 		return result.toString();
 	}
 
-	@RequestMapping("/add")
+	@RequestMapping(value="/add",produces = MediaType.APPLICATION_JSON_VALUE,method=RequestMethod.POST)
 	public String add() {
+		Result result=null;
 		try {
 			initParams();
 			RequestWrapper rw = new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
@@ -67,8 +69,9 @@ public class SysRouteConfigController extends BaseController {
 		return result.toString();
 	}
 
-	@RequestMapping("/update")
+	@RequestMapping(value="/update",method=RequestMethod.POST)
 	public String update() {
+		Result result=null;
 		try {
 			initParams();
 			RequestWrapper rw = new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
@@ -82,10 +85,37 @@ public class SysRouteConfigController extends BaseController {
 
 	@RequestMapping("/delete")
 	public String delete() {
+		Result result=null;
 		try {
 			initParams();
 			RequestWrapper rw = new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
 			String sysRouteConfigStr = sysRouteConfigApi.deleteById(rw.toString());
+			result = JSONObject.parseObject(sysRouteConfigStr, Result.class);
+		} catch (Exception e) {
+			LogUtils.error(logger, "动态路由配置表添加错误");
+		}
+		return result.toString();
+	}
+	
+	@RequestMapping("/refresh")
+	public String refresh() {
+		Result result=null;
+		try {
+			initParams();
+			String sysRouteConfigStr = sysRouteConfigApi.refresh();
+			result = JSONObject.parseObject(sysRouteConfigStr, Result.class);
+		} catch (Exception e) {
+			LogUtils.error(logger, "动态路由配置表添加错误");
+		}
+		return result.toString();
+	}
+	
+	@RequestMapping("/refreshGatewayRoutesCache")
+	public String refreshCache() {
+		Result result=null;
+		try {
+			initParams();
+			String sysRouteConfigStr = sysRouteConfigApi.refreshCacheGatewayRoutes();
 			result = JSONObject.parseObject(sysRouteConfigStr, Result.class);
 		} catch (Exception e) {
 			LogUtils.error(logger, "动态路由配置表添加错误");
@@ -101,6 +131,7 @@ public class SysRouteConfigController extends BaseController {
 	 */
 	@GetMapping("/routeConfigPage")
 	public String routeConfigPage() {
+		Result result=null;
 		try {
 			initParams();
 			RequestWrapper rw = new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());

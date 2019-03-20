@@ -30,7 +30,7 @@ public class SysOperRecord {
     private String modifyBy;
 
     @Column(name = "del_state")
-    private String delState;
+    private Integer delState;
 
     /**
      * @return id
@@ -161,14 +161,14 @@ public class SysOperRecord {
     /**
      * @return del_state
      */
-    public String getDelState() {
+    public Integer getDelState() {
         return delState;
     }
 
     /**
      * @param delState
      */
-    public void setDelState(String delState) {
-        this.delState = delState == null ? null : delState.trim();
+    public void setDelState(Integer delState) {
+        this.delState = delState;
     }
 }

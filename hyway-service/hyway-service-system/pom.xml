@@ -26,6 +26,10 @@
 			<artifactId>hyway-cache</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>com.way</groupId>
+			<artifactId>hyway-log</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>de.codecentric</groupId>
 			<artifactId>spring-boot-admin-starter-client</artifactId>
 		</dependency>
@@ -111,14 +115,6 @@
 	</dependencies>
 	<build>
 		<finalName>hyway-system-service</finalName>
-		<resources>
-			<resource>
-				<!--配置文件路径 -->
-				<directory>src/resources</directory> <!--这里对应项目存放配置文件的目录 -->
-				<!--开启filtering功能 -->
-				<filtering>true</filtering>
-			</resource>
-		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -126,14 +122,6 @@
 				<configuration>
 					<mainClass>com.way.SystemServiceSpringApplication</mainClass>
 				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<!--创建一个自动可执行的jar或war文件 -->
-							<goal>repackage</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>

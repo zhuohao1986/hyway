@@ -48,6 +48,10 @@
 		    <scope>provided</scope>
 		</dependency>
 		<dependency>
+		    <groupId>com.way</groupId>
+		    <artifactId>hyway-log</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>com.way</groupId>
 			<artifactId>hyway-common</artifactId>
 			<exclusions>

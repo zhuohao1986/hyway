@@ -13,7 +13,7 @@
     <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
     <result column="create_by" jdbcType="VARCHAR" property="createBy" />
     <result column="modify_by" jdbcType="VARCHAR" property="modifyBy" />
-    <result column="del_state" jdbcType="VARCHAR" property="delState" />
+    <result column="del_state" jdbcType="INTEGER" property="delState" />
   </resultMap>
   <resultMap id="RoleDtoMap" type="com.way.common.pojos.system.dto.RoleDTO">
 		<id column="role_id" property="roleId" />

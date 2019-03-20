@@ -17,25 +17,25 @@ import com.way.common.constant.ServiceConstants;
 @FeignClient(name=ServiceConstants.SYSTEM_SERVICE,fallbackFactory=SysUserApiHystrixFeignFallbackFactory.class)
 public interface SysUserFeignApi {
 	
-	@RequestMapping(method=RequestMethod.GET,value="/sysDictPage",consumes=MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public String selectSysDictPage(@RequestParam String param);
+	@RequestMapping(method=RequestMethod.GET,value="/user/sysUserPage",consumes=MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public String selectSysUserPage(@RequestParam String param);
 	
-	@RequestMapping(method=RequestMethod.GET,value="/sysDict", consumes=MediaType.APPLICATION_JSON_UTF8_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
-	public String sysDict(String param);
+	@RequestMapping(method=RequestMethod.GET,value="/user/user", consumes=MediaType.APPLICATION_JSON_UTF8_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+	public String sysUser(String param);
 	
-	@RequestMapping(method=RequestMethod.GET,value="/sysDictList", consumes=MediaType.APPLICATION_JSON_UTF8_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
-	public String selectList(String param);
+	@RequestMapping(method=RequestMethod.GET,value="/user/userList", consumes=MediaType.APPLICATION_JSON_UTF8_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+	public String selectUserList(String param);
 	
-	@RequestMapping(method=RequestMethod.GET,value="/insertSysDict", consumes=MediaType.APPLICATION_JSON_UTF8_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
-	public String insert(String param);
+	@RequestMapping(method=RequestMethod.GET,value="/user/insertUser", consumes=MediaType.APPLICATION_JSON_UTF8_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+	public String insertUser(String param);
 	
-	@RequestMapping(method=RequestMethod.GET,value="/deleteSysDictById", consumes=MediaType.APPLICATION_JSON_UTF8_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
-	public String deleteById(String param);
+	@RequestMapping(method=RequestMethod.GET,value="/user/deleteSysUserById", consumes=MediaType.APPLICATION_JSON_UTF8_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+	public String deleteSysUserById(String param);
 	
-	@RequestMapping(method=RequestMethod.GET,value="/updateSysDict", consumes=MediaType.APPLICATION_JSON_UTF8_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(method=RequestMethod.GET,value="/user/updateSysDict", consumes=MediaType.APPLICATION_JSON_UTF8_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
 	public String updateSysDict(String param);
 	
-	@RequestMapping(method=RequestMethod.GET,value="/refreshSysDict", consumes=MediaType.APPLICATION_JSON_UTF8_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(method=RequestMethod.GET,value="/user/refreshSysDict", consumes=MediaType.APPLICATION_JSON_UTF8_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
 	public String refreshSysDict(String param);
 
 }

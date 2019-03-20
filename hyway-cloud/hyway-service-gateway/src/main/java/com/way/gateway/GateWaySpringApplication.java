@@ -7,9 +7,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.reactive.config.EnableWebFlux;
 
-import com.way.gateway.filter.CustomeGatewayFilter;
 import com.way.gateway.filter.RequestTimeGatewayFilterFactory;
-import com.way.gateway.filter.TokenFilter;
 
 @EnableDiscoveryClient
 @EnableWebFlux
@@ -25,13 +23,13 @@ public class GateWaySpringApplication {
 		return new RequestTimeGatewayFilterFactory();
 	}
 
-	@Bean
+	/*@Bean
 	public TokenFilter tokenFilter() {
 		return new TokenFilter();
-	}
+	}*/
 	
-	@Bean
+	/*@Bean
 	public CustomeGatewayFilter customeGatewayFilter() {
 		return new CustomeGatewayFilter();
-	}
+	}*/
 }

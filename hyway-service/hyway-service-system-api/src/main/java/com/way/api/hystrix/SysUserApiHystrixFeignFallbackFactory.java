@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.way.api.feign.SysDictFeignApi;
+import com.way.api.feign.SysUserFeignApi;
 import com.way.common.constant.CodeConstants;
 import com.way.common.exception.DefaultError;
 import com.way.common.stdo.Result;
@@ -17,49 +17,57 @@ import feign.hystrix.FallbackFactory;
  *
  */
 @Component
-public class SysUserApiHystrixFeignFallbackFactory implements FallbackFactory<SysDictFeignApi> {
+public class SysUserApiHystrixFeignFallbackFactory implements FallbackFactory<SysUserFeignApi> {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(SysUserApiHystrixFeignFallbackFactory.class);
 
 	@Override
-	public SysDictFeignApi create(Throwable cause) {
+	public SysUserFeignApi create(Throwable cause) {
 		Result result=new Result(CodeConstants.RESULT_FAIL, DefaultError.SERVER_EXCEPTION);
 		SysUserApiHystrixFeignFallbackFactory.LOGGER.info("服务异常-fallback; reason was: {}", cause.getMessage());
-		return new SysDictFeignApi()
+		return new SysUserFeignApi()
         {
+
 			@Override
-			public String selectSysDictPage(String param) {
-				return result.toString();
+			public String selectSysUserPage(String param) {
+				// TODO Auto-generated method stub
+				return null;
 			}
 
 			@Override
-			public String sysDict(String param) {
-				return result.toString();
+			public String sysUser(String param) {
+				// TODO Auto-generated method stub
+				return null;
 			}
 
 			@Override
-			public String selectList(String param) {
-				return result.toString();
+			public String selectUserList(String param) {
+				// TODO Auto-generated method stub
+				return null;
 			}
 
 			@Override
-			public String insert(String param) {
-				return result.toString();
+			public String insertUser(String param) {
+				// TODO Auto-generated method stub
+				return null;
 			}
 
 			@Override
-			public String deleteById(String param) {
-				return result.toString();
+			public String deleteSysUserById(String param) {
+				// TODO Auto-generated method stub
+				return null;
 			}
 
 			@Override
 			public String updateSysDict(String param) {
-				return result.toString();
+				// TODO Auto-generated method stub
+				return null;
 			}
 
 			@Override
 			public String refreshSysDict(String param) {
-				return result.toString();
+				// TODO Auto-generated method stub
+				return null;
 			}
            
         };

@@ -25,12 +25,10 @@ public class RouteController extends BaseController{
 	@Autowired
 	private DynamicRouteService dynamicRouteService;
 
-	Result result;
-
 	// 增加路由
 	@RequestMapping("/add")
 	public String add(ServerHttpRequest request, ServerHttpResponse response) {
-		result = new Result(CodeConstants.RESULT_FAIL);
+		Result result = new Result(CodeConstants.RESULT_FAIL);
 		try {
 			initParams();
 			RequestWrapper rw = new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB,jsonData.toJSONString());
@@ -47,7 +45,7 @@ public class RouteController extends BaseController{
 	// 删除路由
 	@RequestMapping("/delete")
 	public String delete(ServerRequest request) {
-		result = new Result(CodeConstants.RESULT_FAIL);
+		Result result = new Result(CodeConstants.RESULT_FAIL);
 		try {
 			initParams();
 			RequestWrapper rw = new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB,jsonData.toJSONString());
@@ -64,7 +62,7 @@ public class RouteController extends BaseController{
 	// 更新路由
 	@RequestMapping("/update")
 	public String update(ServerRequest request) {
-		result = new Result(CodeConstants.RESULT_FAIL);
+		Result result = new Result(CodeConstants.RESULT_FAIL);
 		try {
 			initParams();
 			RequestWrapper rw = new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB,jsonData.toJSONString());
@@ -84,7 +82,7 @@ public class RouteController extends BaseController{
 	 
     @RequestMapping("/routes")
     public String getRouteDefinitions(){
-		result = new Result(CodeConstants.RESULT_FAIL);
+    	Result result = new Result(CodeConstants.RESULT_FAIL);
 		try {
 			String routeDefinitionsStr = this.dynamicRouteService.getRouteDefinitions();
 			result = JSONObject.parseObject(routeDefinitionsStr, Result.class);
@@ -96,7 +94,7 @@ public class RouteController extends BaseController{
 		return result.toJSONString();
     }
     //获取网关所有的路由信息
-    @RequestMapping("/routes/")
+    @RequestMapping(value="/routes/",produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
     public Flux<RouteDefinition> getRouteDefinitionss(){
     	
 		return routeDefinitionLocator.getRouteDefinitions();
@@ -105,9 +103,9 @@ public class RouteController extends BaseController{
      * 手动刷新路由配置
      * @return
      */
-    @RequestMapping(value="/routes/refresh", consumes=MediaType.APPLICATION_JSON_UTF8_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value="/routes/refresh",produces = MediaType.APPLICATION_JSON_VALUE)
 	public String refreshRoute() {
-    	result = new Result(CodeConstants.RESULT_FAIL);
+    	Result result = new Result(CodeConstants.RESULT_FAIL);
 		try {
 			String routeDefinitionsStr = this.dynamicRouteService.refresh();
 			result = JSONObject.parseObject(routeDefinitionsStr, Result.class);

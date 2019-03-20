@@ -6,85 +6,76 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONObject;
-import com.way.api.system.SysDictApi;
+import com.way.api.system.SysUserApi;
 import com.way.common.constant.CodeConstants;
 import com.way.common.context.BaseController;
 import com.way.common.stdo.RequestWrapper;
 import com.way.common.stdo.Result;
 @RestController
-@RequestMapping(value="/dict",produces=MediaType.APPLICATION_JSON_VALUE)
-public class SysDictController extends BaseController{
+@RequestMapping(value="/user",produces=MediaType.APPLICATION_JSON_VALUE)
+public class SysUserController extends BaseController{
 
 	@Autowired 
-	private SysDictApi sysDictApi;
+	private SysUserApi sysUserApi;
 	 
-	@RequestMapping(value="/dictPage",produces=MediaType.APPLICATION_JSON_VALUE)
-	public String dictPage() {
+	@RequestMapping(value="/sysUserPage")
+	public String sysUserPage() {
 		Result result = new Result(CodeConstants.RESULT_SUCCESS);
 		try {
 			initParams();
 			RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
-			String sysDictPageStr = sysDictApi.selectSysDictPage(rw.toString());
+			String sysDictPageStr = sysUserApi.selectSysUserPage(rw.toString());
 			result = JSONObject.parseObject(sysDictPageStr, Result.class);
 		} catch (Exception e) {
 			
 		}
 		return result.toString();
 	}
-	@RequestMapping(value="/sysDict",produces=MediaType.APPLICATION_JSON_VALUE)
-	public String sysDict() {
+	@RequestMapping(value="/sysUser")
+	public String sysUser() {
 		initParams();
 		Result result = new Result(CodeConstants.RESULT_SUCCESS);
 		RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
-		String sysDictStr = sysDictApi.sysDict(rw.toString());
+		String sysDictStr = sysUserApi.sysUser(rw.toString());
 		result = JSONObject.parseObject(sysDictStr, Result.class);
 		return result.toString();
 	}
 	
-	@RequestMapping(value="/sysDictList",produces=MediaType.APPLICATION_JSON_VALUE)
-	public String sysDictList() {
+	@RequestMapping(value="/sysUserList")
+	public String sysUserList() {
 		initParams();
 		Result result = new Result(CodeConstants.RESULT_SUCCESS);
 		RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
-		String sysDictListStr = sysDictApi.selectSysDictPage(rw.toString());
+		String sysDictListStr = sysUserApi.sysUserList(rw.toString());
 		result = JSONObject.parseObject(sysDictListStr, Result.class);
 		return result.toString();
 	}
-	@RequestMapping(value="/insertSysDict",produces=MediaType.APPLICATION_JSON_VALUE)
-	public String insertSysDict() {
+	@RequestMapping(value="/insertSysUser")
+	public String insertSysUser() {
 		initParams();
 		Result result = new Result(CodeConstants.RESULT_SUCCESS);
 		RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
-		String insertSysDictStr = sysDictApi.sysDict(rw.toString());
+		String insertSysDictStr = sysUserApi.userInsert(rw.toString());
 		result = JSONObject.parseObject(insertSysDictStr, Result.class);
 		return result.toString();
 	}
-	@RequestMapping(value="/deleteSysDictById",produces=MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="/deleteSysDictById")
 	public String deleteSysDictById() {
 		initParams();
 		Result result = new Result(CodeConstants.RESULT_SUCCESS);
 		RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
-		String deleteSysDictByIdStr = sysDictApi.selectSysDictPage(rw.toString());
+		String deleteSysDictByIdStr = sysUserApi.userDelete(rw.toString());
 		result = JSONObject.parseObject(deleteSysDictByIdStr, Result.class);
 		return result.toString();
 	}
 	
-	@RequestMapping(value="/updateSysDict",produces=MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="/updateSysDict")
 	public String updateSysDict() {
 		initParams();
 		Result result = new Result(CodeConstants.RESULT_SUCCESS);
 		RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
-		String updateSysDictStr = sysDictApi.sysDict(rw.toString());
+		String updateSysDictStr = sysUserApi.userInsert(rw.toString());
 		result = JSONObject.parseObject(updateSysDictStr, Result.class);
-		return result.toString();
-	}
-	@RequestMapping(value="/refresh",produces=MediaType.APPLICATION_JSON_VALUE)
-	public String refresh() {
-		initParams();
-		Result result = new Result(CodeConstants.RESULT_SUCCESS);
-		RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
-		String refreshStr = sysDictApi.refresh(rw.toString());
-		result = JSONObject.parseObject(refreshStr, Result.class);
 		return result.toString();
 	}
 }

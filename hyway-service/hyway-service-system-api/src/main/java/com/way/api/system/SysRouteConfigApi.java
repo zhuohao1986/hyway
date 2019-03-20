@@ -67,7 +67,7 @@ public interface SysRouteConfigApi {
 	public String getSysRouteConfigLastVersion() throws BusinessException;
 
 	/**
-	 * 刷新路由緩存
+	 * 刷新路由緩存并通知网关更新
 	 * 
 	 * @param param
 	 * @return
@@ -75,5 +75,13 @@ public interface SysRouteConfigApi {
 	 * @throws NumberFormatException 
 	 */
 	public String refresh() throws ClientToolsException, NumberFormatException, IOException;
+    /**
+     * 刷新路由緩存
+     * @return
+     * @throws ClientToolsException
+     * @throws NumberFormatException
+     * @throws IOException
+     */
+	public String refreshCacheGatewayRoutes() throws ClientToolsException, NumberFormatException, IOException;
 
 }
