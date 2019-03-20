@@ -11,25 +11,21 @@ import com.way.gateway.filter.RequestTimeGatewayFilterFactory;
 
 @EnableDiscoveryClient
 @EnableWebFlux
-@SpringBootApplication(exclude=DataSourceAutoConfiguration.class)
+@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 public class GateWaySpringApplication {
-	
+
 	public static void main(String[] args) {
-		
+
 		SpringApplication.run(GateWaySpringApplication.class, args);
 	}
+
 	@Bean
 	public RequestTimeGatewayFilterFactory elapsedGatewayFilterFactory() {
 		return new RequestTimeGatewayFilterFactory();
 	}
+	@Bean
+	public ThrottleGatewayFilter throttleGatewayFilter() {
+		return new ThrottleGatewayFilter();
+	}
 
-	/*@Bean
-	public TokenFilter tokenFilter() {
-		return new TokenFilter();
-	}*/
-	
-	/*@Bean
-	public CustomeGatewayFilter customeGatewayFilter() {
-		return new CustomeGatewayFilter();
-	}*/
 }
