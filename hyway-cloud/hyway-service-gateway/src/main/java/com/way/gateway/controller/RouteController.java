@@ -24,7 +24,7 @@ public class RouteController extends BaseController{
 
 	@Autowired
 	private DynamicRouteService dynamicRouteService;
-
+	
 	// 增加路由
 	@RequestMapping("/add")
 	public String add(ServerHttpRequest request, ServerHttpResponse response) {
