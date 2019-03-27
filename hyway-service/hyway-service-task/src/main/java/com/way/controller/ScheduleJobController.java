@@ -28,13 +28,12 @@ public class ScheduleJobController extends BaseController {
 	@Autowired
 	private ScheduleJobApi scheduleJobApi;
 
-	Result result = new Result(CodeConstants.RESULT_SUCCESS);
-
 	/**
 	 * 获取定时任务 json
 	 */
 	@RequestMapping("json")
 	public String getAllJobs(Integer page,Integer limit){
+		Result result = new Result(CodeConstants.RESULT_FAIL);
 		try {
 			initParams();
 			RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB,jsonData.toString());
@@ -51,6 +50,7 @@ public class ScheduleJobController extends BaseController {
 	 */
 	@RequestMapping("running/json")
 	public String getAllJobsRun(){
+		Result result = new Result(CodeConstants.RESULT_FAIL);
 		try {
 			initParams();
 			RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB,jsonData.toString());
@@ -67,8 +67,9 @@ public class ScheduleJobController extends BaseController {
 	 * @param user
 	 * @param model
 	 */
-	@RequestMapping(value = "add", method = RequestMethod.GET)
+	@RequestMapping(value = "add", method = RequestMethod.POST)
 	public String create() {
+		Result result = new Result(CodeConstants.RESULT_FAIL);
 		try {
 			initParams();
 			RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB,jsonData.toString());
@@ -86,6 +87,7 @@ public class ScheduleJobController extends BaseController {
 	 */
 	@RequestMapping("/stop")
 	public String stop() {
+		Result result = new Result(CodeConstants.RESULT_FAIL);
 		try {
 			initParams();
 			RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB,jsonData.toString());
@@ -103,6 +105,7 @@ public class ScheduleJobController extends BaseController {
 	 */
 	@RequestMapping("/delete")
 	public String delete() {
+		Result result = new Result(CodeConstants.RESULT_FAIL);
 		try {
 			initParams();
 			RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB,jsonData.toString());
@@ -120,6 +123,7 @@ public class ScheduleJobController extends BaseController {
 	 */
 	@RequestMapping("/update")
 	public String update() {
+		Result result = new Result(CodeConstants.RESULT_FAIL);
 		try {
 			initParams();
 			RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB,jsonData.toString());
@@ -137,6 +141,7 @@ public class ScheduleJobController extends BaseController {
 	 */
 	@RequestMapping("/startNow")
 	public String stratNow() {
+		Result result = new Result(CodeConstants.RESULT_FAIL);
 		try {
 			initParams();
 			RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB,jsonData.toString());
@@ -154,6 +159,7 @@ public class ScheduleJobController extends BaseController {
 	 */
 	@RequestMapping("/resume")
 	public String resume() {
+		Result result = new Result(CodeConstants.RESULT_FAIL);
 		try {
 			initParams();
 			RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB,jsonData.toString());

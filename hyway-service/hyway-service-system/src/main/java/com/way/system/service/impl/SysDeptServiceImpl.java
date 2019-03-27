@@ -9,6 +9,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.way.common.constant.CommonConstant;
 import com.way.common.pojos.system.SysDept;
 import com.way.common.pojos.system.SysDeptRelation;
@@ -150,7 +152,17 @@ public class SysDeptServiceImpl  implements SysDeptService {
 
 	@Override
 	public SysDept selectById(Integer id) {
-		// TODO Auto-generated method stub
+		
 		return sysDeptMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public PageInfo<SysDept> selectPage(Map<String, Object> paramMap) {
+		Integer page=Integer.parseInt(String.valueOf(paramMap.get("page")));
+    	Integer limit=Integer.parseInt(String.valueOf(paramMap.get("limit")));
+    	PageHelper.startPage(page, limit);
+    	List<SysDept> selectRolePage = sysDeptMapper.selectList(paramMap);
+    	PageInfo<SysDept> pages=new PageInfo<SysDept>(selectRolePage);
+		return pages;
 	}
 }

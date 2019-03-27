@@ -82,11 +82,10 @@ public class RouteController extends BaseController{
 	 
     @RequestMapping("/routes")
     public String getRouteDefinitions(){
-    	Result result = new Result(CodeConstants.RESULT_FAIL);
+    	Result result=null;
 		try {
 			String routeDefinitionsStr = this.dynamicRouteService.getRouteDefinitions();
 			result = JSONObject.parseObject(routeDefinitionsStr, Result.class);
-			result.setCode(CodeConstants.RESULT_SUCCESS);
 		} catch (Exception e) {
 			result.setMessage(e.getMessage());
 			result.toJSONString();

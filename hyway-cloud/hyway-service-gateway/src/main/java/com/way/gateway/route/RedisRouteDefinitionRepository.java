@@ -1,4 +1,4 @@
-package com.way.gateway.route;
+/*package com.way.gateway.route;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -59,4 +59,4 @@ public class RedisRouteDefinitionRepository implements RouteDefinitionRepository
         });
     }
  
-}
+}*/

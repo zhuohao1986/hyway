@@ -9,6 +9,7 @@ import com.way.common.constant.CodeConstants;
 import com.way.common.stdo.Result;
 
 @RestController
+@RequestMapping("/default")
 public class CommController {
 
 	// 增加路由

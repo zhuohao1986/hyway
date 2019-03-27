@@ -5,12 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.reactive.config.EnableWebFlux;
 
-import com.way.gateway.filter.RequestTimeGatewayFilterFactory;
+import com.way.gateway.filter.RequestGlobalFilter;
 
 @EnableDiscoveryClient
-@EnableWebFlux
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 public class GateWaySpringApplication {
 
@@ -20,12 +18,13 @@ public class GateWaySpringApplication {
 	}
 
 	@Bean
-	public RequestTimeGatewayFilterFactory elapsedGatewayFilterFactory() {
-		return new RequestTimeGatewayFilterFactory();
-	}
-	@Bean
 	public ThrottleGatewayFilter throttleGatewayFilter() {
 		return new ThrottleGatewayFilter();
+	}
+	
+	@Bean
+	public RequestGlobalFilter requestGlobalFilter() {
+		return new RequestGlobalFilter();
 	}
 
 }

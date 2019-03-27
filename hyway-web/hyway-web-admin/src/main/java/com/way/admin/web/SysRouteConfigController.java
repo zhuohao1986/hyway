@@ -35,8 +35,6 @@ public class SysRouteConfigController extends BaseController {
 	@Autowired
 	private SysRouteConfigFeignApi sysRouteConfigFeignApi;
 
-	Result result;
-
 	/**
 	 * 通过ID查询
 	 *
@@ -45,6 +43,7 @@ public class SysRouteConfigController extends BaseController {
 	 */
 	@RequestMapping("/{id}")
 	public String get(@PathVariable Integer id) {
+		Result result = null;
 		try {
 			initParams();
 			jsonData.put("id", id);
@@ -59,6 +58,7 @@ public class SysRouteConfigController extends BaseController {
 
 	@RequestMapping("/add")
 	public String add() {
+		Result result = null;
 		try {
 			initParams();
 			RequestWrapper rw = new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
@@ -72,6 +72,7 @@ public class SysRouteConfigController extends BaseController {
 
 	@RequestMapping("/update")
 	public String update() {
+		Result result = null;
 		try {
 			initParams();
 			RequestWrapper rw = new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
@@ -85,6 +86,7 @@ public class SysRouteConfigController extends BaseController {
 
 	@RequestMapping("/{id}/delete")
 	public String delete(@PathVariable Integer id) {
+		Result result = null;
 		try {
 			initParams();
 			jsonData.put("id", id);
@@ -105,6 +107,7 @@ public class SysRouteConfigController extends BaseController {
 	 */
 	@GetMapping("/routeConfigPage")
 	public String routeConfigPage() {
+		Result result = null;
 		try {
 			initParams();
 			jsonData.put(CommonConstant.DEL_FLAG, CommonConstant.STATUS_NORMAL);

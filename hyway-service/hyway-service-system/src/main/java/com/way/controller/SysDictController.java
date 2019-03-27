@@ -46,7 +46,7 @@ public class SysDictController extends BaseController{
 		initParams();
 		Result result = new Result(CodeConstants.RESULT_SUCCESS);
 		RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
-		String sysDictListStr = sysDictApi.selectSysDictPage(rw.toString());
+		String sysDictListStr = sysDictApi.selectList(rw.toString());
 		result = JSONObject.parseObject(sysDictListStr, Result.class);
 		return result.toString();
 	}
@@ -55,7 +55,7 @@ public class SysDictController extends BaseController{
 		initParams();
 		Result result = new Result(CodeConstants.RESULT_SUCCESS);
 		RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
-		String insertSysDictStr = sysDictApi.sysDict(rw.toString());
+		String insertSysDictStr = sysDictApi.insert(rw.toString());
 		result = JSONObject.parseObject(insertSysDictStr, Result.class);
 		return result.toString();
 	}
@@ -64,7 +64,7 @@ public class SysDictController extends BaseController{
 		initParams();
 		Result result = new Result(CodeConstants.RESULT_SUCCESS);
 		RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
-		String deleteSysDictByIdStr = sysDictApi.selectSysDictPage(rw.toString());
+		String deleteSysDictByIdStr = sysDictApi.deleteById(rw.toString());
 		result = JSONObject.parseObject(deleteSysDictByIdStr, Result.class);
 		return result.toString();
 	}
@@ -74,7 +74,7 @@ public class SysDictController extends BaseController{
 		initParams();
 		Result result = new Result(CodeConstants.RESULT_SUCCESS);
 		RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
-		String updateSysDictStr = sysDictApi.sysDict(rw.toString());
+		String updateSysDictStr = sysDictApi.updateSysDict(rw.toString());
 		result = JSONObject.parseObject(updateSysDictStr, Result.class);
 		return result.toString();
 	}

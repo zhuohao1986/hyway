@@ -12,8 +12,6 @@ import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 
-import com.way.common.utils.StringUtils;
-
 import reactor.core.publisher.Mono;
 
 /**
@@ -22,7 +20,6 @@ import reactor.core.publisher.Mono;
 @Component
 public class TokenAuthenticationFilter extends AbstractGatewayFilterFactory<Object> {
 
-    private static final String Bearer_ = "hyway-admin-token: ";
 
     @Override
     public GatewayFilter apply(Object config) {
@@ -34,7 +31,8 @@ public class TokenAuthenticationFilter extends AbstractGatewayFilterFactory<Obje
                 //获取header中的Authorization
                 String header = request.getHeaders().getFirst("Authorization");
                 System.out.println("header Authorization : " + header);
-                if (header == null || !header.startsWith(Bearer_)) {
+                /*
+                 if (header == null || !header.startsWith(ConfigKeyConstant.REDIS_ADMIN_USER_SESSION_KEY)) {
                     throw new RuntimeException("请求头中Authorization信息为空");
                 }
                 //截取Authorization Bearer
@@ -49,7 +47,7 @@ public class TokenAuthenticationFilter extends AbstractGatewayFilterFactory<Obje
                     System.out.println("token无效");
                     DataBuffer bodyDataBuffer = responseErrorInfo(response , HttpStatus.UNAUTHORIZED.toString() ,"无效的请求");
                     return response.writeWith(Mono.just(bodyDataBuffer));
-                }
+                }*/
             }catch (Exception e){
                 //没有token
                 DataBuffer bodyDataBuffer = responseErrorInfo(response , HttpStatus.UNAUTHORIZED.toString() ,e.getMessage());

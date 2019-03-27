@@ -44,8 +44,14 @@ public interface SysRoleService{
 
     /**
      * 通过部门ID查询角色列表
-     * @param deptId 部门ID
+     * @param paramMap 部门ID
      * @return 角色列表
      */
-    List<SysRole> selectListByDeptId(Integer deptId);
+    List<SysRole> selectListByDeptId(Map<String, Object> paramMap);
+
+	SysRole selectById(Integer roleId);
+
+	int deleteRoleById(Integer roleId);
+
+	List<SysRole> selectListByDeptId(Integer deptId);
 }

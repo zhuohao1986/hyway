@@ -3,6 +3,7 @@ package com.way.system.service;
 import java.util.List;
 import java.util.Map;
 
+import com.github.pagehelper.PageInfo;
 import com.way.common.pojos.system.SysDept;
 import com.way.common.pojos.system.dto.DeptTree;
 
@@ -47,4 +48,6 @@ public interface SysDeptService  {
 	List<SysDept> selectList(Map<String, Object> paramMap);
 
 	SysDept selectById(Integer id);
+
+	PageInfo<SysDept> selectPage(Map<String, Object> paramMap);
 }

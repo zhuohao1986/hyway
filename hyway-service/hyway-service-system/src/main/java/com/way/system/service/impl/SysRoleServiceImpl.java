@@ -106,4 +106,22 @@ public class SysRoleServiceImpl  implements SysRoleService {
     public List<SysRole> selectListByDeptId(Integer deptId) {
         return sysRoleMapper.selectListByDeptId(deptId);
     }
+
+	@Override
+	public List<SysRole> selectListByDeptId(Map<String, Object> paramMap) {
+		Integer deptId=Integer.valueOf(String.valueOf(paramMap.get("deptId")));
+		return sysRoleMapper.selectListByDeptId(deptId);
+	}
+
+	@Override
+	public SysRole selectById(Integer roleId) {
+		// TODO Auto-generated method stub
+		return sysRoleMapper.selectByPrimaryKey(roleId);
+	}
+
+	@Override
+	public int deleteRoleById(Integer roleId) {
+		// TODO Auto-generated method stub
+		return sysRoleMapper.deleteByPrimaryKey(roleId);
+	}
 }

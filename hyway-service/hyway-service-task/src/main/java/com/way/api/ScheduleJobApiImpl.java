@@ -31,11 +31,10 @@ public class ScheduleJobApiImpl implements ScheduleJobApi {
 
 	@Autowired
 	private ScheduleJobService scheduleJobService;
-
-	Result result = new Result(CodeConstants.RESULT_FAIL);
-
+	
 	@Override
 	public String allJson(String param) throws ScheduleJobExecption{
+		Result result = new Result(CodeConstants.RESULT_FAIL);
 		RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
 		Map<String, Integer> paramMap = JSONObject.parseObject(rw.getValue(),new TypeReference<HashMap<String, Integer>>() {});
 		Integer page = paramMap.get("page");
@@ -50,6 +49,7 @@ public class ScheduleJobApiImpl implements ScheduleJobApi {
 
 	@Override
 	public String running(String param) throws ScheduleJobExecption{
+		Result result = new Result(CodeConstants.RESULT_FAIL);
 		RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
 		Map<String, Integer> paramMap = JSONObject.parseObject(rw.getValue(),new TypeReference<HashMap<String, Integer>>() {});
 		Integer page = paramMap.get("page");
@@ -64,6 +64,7 @@ public class ScheduleJobApiImpl implements ScheduleJobApi {
 
 	@Override
 	public String add(String param) throws ScheduleJobExecption{
+		Result result = new Result(CodeConstants.RESULT_FAIL);
 		RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
 		ScheduleJob scheduleJob = JSONObject.parseObject(rw.getValue(), ScheduleJob.class);
 		//验证cron表达式
@@ -79,6 +80,7 @@ public class ScheduleJobApiImpl implements ScheduleJobApi {
 
 	@Override
 	public String stop(String param) throws ScheduleJobExecption{
+		Result result = new Result(CodeConstants.RESULT_FAIL);
 		RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
 		JSONObject obj = JSONObject.parseObject(rw.getValue());
 		String name = obj.getString("name");
@@ -90,6 +92,7 @@ public class ScheduleJobApiImpl implements ScheduleJobApi {
 
 	@Override
 	public String delete(String param) throws ScheduleJobExecption{
+		Result result = new Result(CodeConstants.RESULT_FAIL);
 		RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
 		JSONObject obj = JSONObject.parseObject(rw.getValue());
 		String name = obj.getString("name");
@@ -101,6 +104,7 @@ public class ScheduleJobApiImpl implements ScheduleJobApi {
 
 	@Override
 	public String updateCron(String param) throws ScheduleJobExecption{
+		Result result = new Result(CodeConstants.RESULT_FAIL);
 		RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
 		JSONObject obj = JSONObject.parseObject(rw.getValue());
 		String name = obj.getString("name");
@@ -119,6 +123,7 @@ public class ScheduleJobApiImpl implements ScheduleJobApi {
 
 	@Override
 	public String startNow(String param) throws ScheduleJobExecption{
+		Result result = new Result(CodeConstants.RESULT_FAIL);
 		RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
 		JSONObject obj = JSONObject.parseObject(rw.getValue());
 		String name = obj.getString("name");
@@ -130,6 +135,7 @@ public class ScheduleJobApiImpl implements ScheduleJobApi {
 
 	@Override
 	public String restartJob(String param) throws ScheduleJobExecption{
+		Result result = new Result(CodeConstants.RESULT_FAIL);
 		RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
 		JSONObject obj = JSONObject.parseObject(rw.getValue());
 		String name = obj.getString("name");
@@ -144,10 +150,10 @@ public class ScheduleJobApiImpl implements ScheduleJobApi {
 	 */
 	@Override
 	public String getTriggers() throws ScheduleJobExecption{
+		Result result = new Result(CodeConstants.RESULT_FAIL);
 		List<ScheduleJob> scheduleJobs = scheduleJobService.getTriggersInfo();
 		result.setCode(CodeConstants.RESULT_SUCCESS);
 		result.setValue(scheduleJobs);
 		return result.toJSONString();
 	}
-
 }
