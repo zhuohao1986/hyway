@@ -129,7 +129,7 @@ public class SysRouteConfigController extends BaseController {
 	 * @param params 分页对象
 	 * @return 分页对象
 	 */
-	@GetMapping("/routeConfigPage")
+	@GetMapping("/routePage")
 	public String routeConfigPage() {
 		Result result=null;
 		try {

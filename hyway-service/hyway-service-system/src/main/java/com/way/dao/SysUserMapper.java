@@ -63,4 +63,6 @@ public interface SysUserMapper extends IBaseMapper<SysUser> {
     UserVO selectUserVoById(Integer id);
 
 	List<UserVO> selectWithRolePage(Map<String, Object> paramMap);
+
+	List<SysUser> selectList(Map<String, Object> paramMap);
 }

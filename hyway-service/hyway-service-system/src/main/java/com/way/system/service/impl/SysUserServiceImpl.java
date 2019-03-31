@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.persistence.Query;
-
 import org.slf4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +17,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.way.common.cache.JedisClient;
@@ -134,21 +131,6 @@ public class SysUserServiceImpl  implements SysUserService {
     public UserVO findUserByOpenId(String openId) {
         return sysUserMapper.selectUserVoByOpenId(openId);
     }
-
-    @Override
-    public PageInfo<UserVO> selectWithRolePage( Map<String,Object> paramMap, UserVO userVO) {
-        /*DataScope dataScope = new DataScope();
-        dataScope.setScopeName("deptId");
-        dataScope.setIsOnly(true);
-        dataScope.setDeptIds(getChildDepts(userVO));*/
-    	Integer pageNum=Integer.valueOf(String.valueOf(paramMap.get("pageNum")));
-    	Integer pageSize=Integer.valueOf(String.valueOf(paramMap.get("pageSize")));
-    	PageHelper.startPage(pageNum, pageSize);
-        List<UserVO> userList=sysUserMapper.selectWithRolePage(paramMap);
-        PageInfo<UserVO> page=new PageInfo<>(userList);
-        return page;
-    }
-
     /**
      * 通过ID查询用户信息
      *
@@ -292,8 +274,13 @@ public class SysUserServiceImpl  implements SysUserService {
     }
 
 	@Override
-	public Page selectWithRolePage(Query query, UserVO userVO) {
-		return null;
+	public PageInfo<UserVO> selectWithRolePage(Map<String, Object> paramMap) {
+		Integer page=Integer.parseInt(String.valueOf(paramMap.get("page")));
+    	Integer limit=Integer.parseInt(String.valueOf(paramMap.get("limit")));
+    	PageHelper.startPage(page, limit);
+		List<UserVO> list=sysUserMapper.selectWithRolePage(paramMap);
+		PageInfo<UserVO> info=new PageInfo<UserVO>(list);
+		return info;
 	}
 
 	@Override
@@ -304,5 +291,15 @@ public class SysUserServiceImpl  implements SysUserService {
 	@Override
 	public int insertSysUser(SysUser ysUser) {
 		return sysUserMapper.insert(ysUser);
+	}
+
+	@Override
+	public PageInfo<SysUser> selectPage(Map<String, Object> paramMap) {
+		Integer page=Integer.parseInt(String.valueOf(paramMap.get("page")));
+    	Integer limit=Integer.parseInt(String.valueOf(paramMap.get("limit")));
+    	PageHelper.startPage(page, limit);
+    	List<SysUser> selectUserPage = sysUserMapper.selectList(paramMap);
+    	PageInfo<SysUser> pages=new PageInfo<SysUser>(selectUserPage);
+		return pages;
 	}
 }
