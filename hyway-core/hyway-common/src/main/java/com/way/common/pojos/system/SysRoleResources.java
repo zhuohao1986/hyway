@@ -1,6 +1,7 @@
 package com.way.common.pojos.system;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Table;
 
 @Table(name = "t_sys_role_resources")
 public class SysRoleResources {

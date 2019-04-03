@@ -3,9 +3,6 @@ package com.way.system.service;
 import java.io.IOException;
 import java.util.Map;
 
-import javax.persistence.Query;
-
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import com.way.common.pojos.system.SysUser;
 import com.way.common.pojos.system.dto.UserDTO;

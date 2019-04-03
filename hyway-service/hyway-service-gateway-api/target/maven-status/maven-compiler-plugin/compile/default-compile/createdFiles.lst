@@ -1,3 +1,0 @@
-com\way\api\feign\GateWayRouteFeignApi.class
-com\way\api\hystrix\GateWayRouteApiHystrixFeignFallbackFactory$1.class
-com\way\api\hystrix\GateWayRouteApiHystrixFeignFallbackFactory.class

@@ -1,7 +1,5 @@
 package com.way.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,15 +9,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.way.api.system.SysResourcesApi;
 import com.way.common.constant.CodeConstants;
 import com.way.common.context.BaseController;
-import com.way.common.exception.BusinessException;
 import com.way.common.stdo.RequestWrapper;
 import com.way.common.stdo.Result;
 @RestController
 @RequestMapping(value="/res",produces=MediaType.APPLICATION_JSON_VALUE)
 public class SysResourcesController extends BaseController{
-	
-	private static final Logger log = LoggerFactory.getLogger(SysResourcesController.class);
-
 
 	@Autowired 
 	private SysResourcesApi sysResourcesApi;
@@ -46,7 +40,7 @@ public class SysResourcesController extends BaseController{
 			String sysResourcesPageStr = sysResourcesApi.selectSysResourcesPage(rw.toString());
 			result = JSONObject.parseObject(sysResourcesPageStr, Result.class);
 		} catch (Exception e) {
-			log.error("菜单获取异常", e.getMessage());
+			
 		}
 		return result.toString();
 	}

@@ -13,25 +13,46 @@
 	<packaging>jar</packaging>
 	<name>hywayUserService</name>
 	<dependencies>
+		<!-- 公共模块 -->
+		<dependency>
+			<groupId>com.way</groupId>
+			<artifactId>hyway-common</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.way</groupId>
+			<artifactId>hyway-cache</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.way</groupId>
+			<artifactId>hyway-log</artifactId>
+		</dependency>
+		<dependency>
+				<groupId>com.way</groupId>
+				<artifactId>hyway-service-user-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>de.codecentric</groupId>
+			<artifactId>spring-boot-admin-starter-client</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-config-client</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		<!-- <dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-sleuth</artifactId>
+		</dependency> -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-openfeign</artifactId>
+			<artifactId>spring-cloud-sleuth-zipkin</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -44,32 +65,24 @@
 			<scope>test</scope>
 		</dependency>
 		<!-- 与数据库操作相关的依赖 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jdbc</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 			<exclusions>
-		      <exclusion>
-		         <groupId>org.springframework.boot</groupId>
-		         <artifactId>spring-boot-starter-logging</artifactId>
-		      </exclusion>
-		    </exclusions>
-		</dependency>
-		<dependency>
-				<groupId>com.way</groupId>
-				<artifactId>hyway-common</artifactId>
-		</dependency>
-		<dependency>
-				<groupId>com.way</groupId>
-				<artifactId>hyway-service-user-api</artifactId>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 		    <groupId>com.alibaba</groupId>
@@ -87,6 +100,10 @@
 		<dependency>
 			<groupId>com.github.pagehelper</groupId>
 			<artifactId>pagehelper</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
 	</dependencies>
 	<build>
