@@ -1,10 +1,15 @@
 package com.way.api;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.TypeReference;
+import com.github.pagehelper.PageInfo;
 import com.way.api.system.SysUserApi;
 import com.way.common.constant.CodeConstants;
 import com.way.common.constant.CommonConstant;
@@ -81,7 +86,7 @@ public class SysUserApImpl implements SysUserApi {
 		SysUser sysUser = new SysUser();
         BeanUtils.copyProperties(userDto, sysUser);
         sysUser.setDelState(CommonConstant.STATUS_NORMAL);
-        sysUser.setPassword(DEncryptionUtils.aesDecoder(userDto.getNewpassword1()));
+        sysUser.setPassword(DEncryptionUtils.aesEncoder(userDto.getNewpassword1()));
         sysUserService.insertSysUser(sysUser);
         userDto.getRole().forEach(roleId -> {
             SysUserRole userRole = new SysUserRole();
@@ -107,19 +112,40 @@ public class SysUserApImpl implements SysUserApi {
 
 	@Override
 	public String selectSysUserPage(String param) throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
+		RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
+		Map<String, Object> paramMap = JSONObject.parseObject(rw.getValue(),
+				new TypeReference<HashMap<String, Object>>() {
+				});
+		PageInfo<SysUser> sysUserpage = sysUserService.selectPage(paramMap);
+		result.setCode(CodeConstants.RESULT_SUCCESS);
+		result.setValue(sysUserpage);
+		return result.toJSONString();
 	}
 
 	@Override
 	public String sysUser(String param) throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
+		RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
+		JSONObject obj=JSONObject.parseObject(rw.getValue());
+		Integer id = obj.getInteger("id");
+		SysUser sysuser = sysUserService.selectUseById(id);
+		result.setCode(CodeConstants.RESULT_SUCCESS);
+		result.setValue(sysuser);
+		return result.toJSONString();
 	}
 
 	@Override
 	public String sysUserList(String param) throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
+		RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
+		JSONObject obj=JSONObject.parseObject(rw.getValue());
+		Integer id = obj.getInteger("id");
+		SysUser sysuser = sysUserService.selectUseById(id);
+		if(CommonConstant.ADMIN_USER_NAME.equals(sysuser.getUsername())) {
+			result.setMessage("不允许删除超级管理员");
+			result.setCode(CodeConstants.RESULT_FAIL);
+			return result.toJSONString();
+		}
+		Boolean flag = sysUserService.deleteUserById(sysuser);
+		result.setValue(flag);
+		return result.toJSONString();
 	}
 }

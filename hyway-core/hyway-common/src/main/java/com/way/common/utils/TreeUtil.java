@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.way.common.pojos.system.SysResources;
-import com.way.common.pojos.system.dto.MenuTree;
+import com.way.common.pojos.system.dto.ResourcesTree;
 import com.way.common.pojos.system.dto.TreeNode;
 
 
@@ -83,11 +83,11 @@ public class TreeUtil {
      * @param root
      * @return
      */
-    public static List<MenuTree> bulidTree(List<SysResources> menus, int root) {
-        List<MenuTree> trees = new ArrayList<MenuTree>();
-        MenuTree node;
+    public static List<ResourcesTree> bulidTree(List<SysResources> menus, int root) {
+        List<ResourcesTree> trees = new ArrayList<ResourcesTree>();
+        ResourcesTree node;
         for (SysResources menu : menus) {
-            node = new MenuTree();
+            node = new ResourcesTree();
             node.setId(menu.getResourceId());
             node.setParentId(menu.getParentId());
             node.setName(menu.getName());

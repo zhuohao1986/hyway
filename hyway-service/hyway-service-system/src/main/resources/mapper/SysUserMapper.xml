@@ -145,4 +145,8 @@
             </if>
             ORDER BY `user`.create_time DESC
     </select>
+    <select id="selectList" resultMap="BaseResultMap" parameterType="map">
+     select  * FROM
+            t_sys_user AS `user` where 1=1
+    </select>
 </mapper>

@@ -15,11 +15,10 @@ import com.way.common.constant.CodeConstants;
 import com.way.common.exception.BusinessException;
 import com.way.common.exception.ClientToolsException;
 import com.way.common.pojos.system.SysRole;
-import com.way.common.pojos.system.SysRoleResources;
 import com.way.common.pojos.system.dto.RoleDTO;
 import com.way.common.stdo.RequestWrapper;
 import com.way.common.stdo.Result;
-import com.way.system.service.SysRoleMenuService;
+import com.way.system.service.SysRoleResourcesService;
 import com.way.system.service.SysRoleService;
 
 /**
@@ -34,7 +33,7 @@ public class SysRoleApImpl implements SysRoleApi {
 	@Autowired
 	private SysRoleService sysRoleService;
 	@Autowired
-	private SysRoleMenuService sysRoleMenuService;
+	private SysRoleResourcesService sysRoleResourcesService;
 
 	Result result = new Result();
 
@@ -87,8 +86,8 @@ public class SysRoleApImpl implements SysRoleApi {
 	public String deleteSysRoleById(String param) throws BusinessException {
 		RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
 		JSONObject obj = JSONObject.parseObject(rw.getValue());
-		Integer RoleId = obj.getInteger("RoleId");
-		int deleteById = sysRoleService.deleteRoleById(RoleId);
+		Integer roleId = obj.getInteger("RoleId");
+		int deleteById = sysRoleService.deleteRoleById(roleId);
 		result.setCode(CodeConstants.RESULT_SUCCESS);
 		result.setValue(deleteById);
 		return result.toJSONString();
@@ -100,13 +99,20 @@ public class SysRoleApImpl implements SysRoleApi {
 		RoleDTO roleDTO = JSONObject.parseObject(rw.getValue(), RoleDTO.class);
 		boolean updateSysRole = sysRoleService.updateRoleById(roleDTO);
 		result.setCode(CodeConstants.RESULT_SUCCESS);
-		result.setValue(JSONObject.toJSONString(updateSysRole));
+		result.setValue(updateSysRole);
 		return result.toJSONString();
 	}
 
 	@Override
-	public String updateRoleResources(String string) {
-		// TODO Auto-generated method stub
-		return null;
+	public String updateRoleResources(String param) {
+		RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
+		JSONObject obj = JSONObject.parseObject(rw.getValue());
+		Integer roleId = obj.getInteger("roleId");
+		String roleName = obj.getString("roleName");
+		List<Integer> menuIds=JSONObject.parseArray(obj.getString("menuIds"), Integer.class);
+		Boolean insertRoleResources = sysRoleResourcesService.insertRoleResources(roleName, roleId, menuIds);
+		result.setCode(CodeConstants.RESULT_SUCCESS);
+		result.setValue(insertRoleResources);
+		return result.toJSONString();
 	}
 }

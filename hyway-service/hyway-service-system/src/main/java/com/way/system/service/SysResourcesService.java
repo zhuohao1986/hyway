@@ -2,8 +2,11 @@ package com.way.system.service;
 
 
 import java.util.List;
+import java.util.Map;
 
+import com.github.pagehelper.PageInfo;
 import com.way.common.pojos.system.SysResources;
+import com.way.common.pojos.system.dto.ResourcesTree;
 import com.way.common.vo.MenuVO;
 
 
@@ -32,11 +35,24 @@ public interface SysResourcesService{
      */
     Boolean deleteMenu(Integer id);
 
-    /**
+    Boolean updateMenuById(SysResources sysResources);
+
+	PageInfo<SysResources> selectPage(Map<String, Object> paramMap);
+
+	List<ResourcesTree> selectListTree(Map<String, Object> paramMap);
+
+	SysResources selectById(Integer id);
+
+	List<SysResources> selectList(Map<String, Object> paramMap);
+
+	Boolean insertSysResources(SysResources sysResources);
+	 /**
      * 更新菜单信息
      *
      * @param sysMenu 菜单信息
      * @return 成功、失败
      */
-    Boolean updateMenuById(SysResources sysResources);
+	boolean deleteResourcesById(Integer resourcesId);
+
+	boolean updateSysResourcesById(SysResources sysResources);
 }

@@ -7,8 +7,8 @@ public class SysRoleResources {
     @Column(name = "role_id")
     private Integer roleId;
 
-    @Column(name = "menu_id")
-    private Integer menuId;
+    @Column(name = "resources_id")
+    private Integer resourcesId;
 
     /**
      * @return roleId
@@ -27,14 +27,14 @@ public class SysRoleResources {
     /**
      * @return menuId
      */
-    public Integer getMenuId() {
-        return menuId;
+    public Integer getResourcesId() {
+        return resourcesId;
     }
 
     /**
      * @param menuid
      */
-    public void setMenuId(Integer menuId) {
-        this.menuId = menuId;
+    public void setResourcesId(Integer resourcesId) {
+        this.resourcesId = resourcesId;
     }
 }

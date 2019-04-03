@@ -33,7 +33,7 @@ public interface SysUserService {
      * @param userVO
      * @return
      */
-    Page selectWithRolePage(Query query, UserVO userVO);
+	/* PageInfo<UserVO> selectWithRolePage(Query query, UserVO userVO); */
 
     /**
      * 查询用户信息
@@ -101,9 +101,11 @@ public interface SysUserService {
      */
     UserVO selectUserVoById(Integer id);
 
-	PageInfo<UserVO> selectWithRolePage(Map<String, Object> paramMap, UserVO userVO);
+	PageInfo<UserVO> selectWithRolePage(Map<String, Object> paramMap);
 
 	SysUser selectUseById(Integer id);
 	
 	int insertSysUser(SysUser ysUser);
+
+	PageInfo<SysUser> selectPage(Map<String, Object> paramMap);
 }

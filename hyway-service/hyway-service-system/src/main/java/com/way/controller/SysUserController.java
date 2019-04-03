@@ -24,8 +24,8 @@ public class SysUserController extends BaseController{
 		try {
 			initParams();
 			RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
-			String sysDictPageStr = sysUserApi.selectSysUserPage(rw.toString());
-			result = JSONObject.parseObject(sysDictPageStr, Result.class);
+			String SysUsertPageStr = sysUserApi.selectSysUserPage(rw.toString());
+			result = JSONObject.parseObject(SysUsertPageStr, Result.class);
 		} catch (Exception e) {
 			
 		}
@@ -36,8 +36,8 @@ public class SysUserController extends BaseController{
 		initParams();
 		Result result = new Result(CodeConstants.RESULT_SUCCESS);
 		RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
-		String sysDictStr = sysUserApi.sysUser(rw.toString());
-		result = JSONObject.parseObject(sysDictStr, Result.class);
+		String SysUsertStr = sysUserApi.sysUser(rw.toString());
+		result = JSONObject.parseObject(SysUsertStr, Result.class);
 		return result.toString();
 	}
 	
@@ -46,8 +46,8 @@ public class SysUserController extends BaseController{
 		initParams();
 		Result result = new Result(CodeConstants.RESULT_SUCCESS);
 		RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
-		String sysDictListStr = sysUserApi.sysUserList(rw.toString());
-		result = JSONObject.parseObject(sysDictListStr, Result.class);
+		String SysUsertListStr = sysUserApi.sysUserList(rw.toString());
+		result = JSONObject.parseObject(SysUsertListStr, Result.class);
 		return result.toString();
 	}
 	@RequestMapping(value="/insertSysUser")
@@ -55,27 +55,27 @@ public class SysUserController extends BaseController{
 		initParams();
 		Result result = new Result(CodeConstants.RESULT_SUCCESS);
 		RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
-		String insertSysDictStr = sysUserApi.userInsert(rw.toString());
-		result = JSONObject.parseObject(insertSysDictStr, Result.class);
+		String insertSysUsertStr = sysUserApi.userInsert(rw.toString());
+		result = JSONObject.parseObject(insertSysUsertStr, Result.class);
 		return result.toString();
 	}
-	@RequestMapping(value="/deleteSysDictById")
-	public String deleteSysDictById() {
+	@RequestMapping(value="/deleteSysUserById")
+	public String deleteSysUsertById() {
 		initParams();
 		Result result = new Result(CodeConstants.RESULT_SUCCESS);
 		RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
-		String deleteSysDictByIdStr = sysUserApi.userDelete(rw.toString());
-		result = JSONObject.parseObject(deleteSysDictByIdStr, Result.class);
+		String deleteSysUsertByIdStr = sysUserApi.userDelete(rw.toString());
+		result = JSONObject.parseObject(deleteSysUsertByIdStr, Result.class);
 		return result.toString();
 	}
 	
-	@RequestMapping(value="/updateSysDict")
-	public String updateSysDict() {
+	@RequestMapping(value="/updatesysUser")
+	public String updateSysUsert() {
 		initParams();
 		Result result = new Result(CodeConstants.RESULT_SUCCESS);
 		RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
-		String updateSysDictStr = sysUserApi.userInsert(rw.toString());
-		result = JSONObject.parseObject(updateSysDictStr, Result.class);
+		String updateSysUsertStr = sysUserApi.userUpdate(rw.toString());
+		result = JSONObject.parseObject(updateSysUsertStr, Result.class);
 		return result.toString();
 	}
 }

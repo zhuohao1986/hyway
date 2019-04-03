@@ -1,6 +1,7 @@
 package com.way.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -25,4 +26,6 @@ public interface SysResourcesMapper extends IBaseMapper<SysResources> {
      * @return 菜单列表
      */
     List<MenuVO> findMenuByRoleName(@Param("role") String role);
+
+	List<SysResources> selectList(Map<String, Object> paramMap);
 }
