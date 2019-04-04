@@ -3,11 +3,8 @@ package com.way.dao;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.way.common.context.IBaseMapper;
 import com.way.common.pojos.system.SysResources;
-import com.way.common.vo.MenuVO;
 
 /**
  * <p>
@@ -19,13 +16,13 @@ import com.way.common.vo.MenuVO;
  */
 public interface SysResourcesMapper extends IBaseMapper<SysResources> {
 
-    /**
+
+	List<SysResources> selectList(Map<String, Object> paramMap);
+	/**
      * 通过角色名查询菜单
      *
      * @param role 角色名称
      * @return 菜单列表
      */
-    List<MenuVO> findMenuByRoleName(@Param("role") String role);
-
-	List<SysResources> selectList(Map<String, Object> paramMap);
+	List<SysResources> selectRoleResourcesList(Integer roleId);
 }

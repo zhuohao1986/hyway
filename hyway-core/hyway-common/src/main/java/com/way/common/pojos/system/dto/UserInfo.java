@@ -13,6 +13,10 @@ import com.way.common.pojos.system.SysUser;
  */
 public class UserInfo implements Serializable {
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
      * 用户基本信息
      */
     private SysUser sysUser;
@@ -24,7 +28,7 @@ public class UserInfo implements Serializable {
     /**
      * 角色集合
      */
-    private String[] roles;
+    private Integer[] roles;
 
 	public SysUser getSysUser() {
 		return sysUser;
@@ -42,13 +46,15 @@ public class UserInfo implements Serializable {
 		this.permissions = permissions;
 	}
 
-	public String[] getRoles() {
+	public Integer[] getRoles() {
 		return roles;
 	}
 
-	public void setRoles(String[] roles) {
+	public void setRoles(Integer[] roles) {
 		this.roles = roles;
 	}
+
+	
     
     
 }

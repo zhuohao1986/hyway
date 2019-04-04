@@ -15,10 +15,13 @@ import com.way.common.constant.CodeConstants;
 import com.way.common.exception.BusinessException;
 import com.way.common.exception.ClientToolsException;
 import com.way.common.pojos.system.SysResources;
+import com.way.common.pojos.system.SysUserRole;
 import com.way.common.pojos.system.dto.ResourcesTree;
 import com.way.common.stdo.RequestWrapper;
 import com.way.common.stdo.Result;
 import com.way.system.service.SysResourcesService;
+import com.way.system.service.SysRoleResourcesService;
+import com.way.system.service.SysUserRoleService;
 
 /**
  * <p>
@@ -31,6 +34,8 @@ public class SysResourcesApiImpl implements SysResourcesApi {
 
 	@Autowired
 	private SysResourcesService sysResourcesService;
+	@Autowired
+	private SysUserRoleService sysUserRoleService;
 
 	Result result = new Result();
 
@@ -52,9 +57,9 @@ public class SysResourcesApiImpl implements SysResourcesApi {
 		Map<String, Object> paramMap = JSONObject.parseObject(rw.getValue(),
 				new TypeReference<HashMap<String, Object>>() {
 				});
-		List<ResourcesTree> SysResourcespage = sysResourcesService.selectListTree(paramMap);
+		List<ResourcesTree> sysResourcespage = sysResourcesService.selectListTree(paramMap);
 		result.setCode(CodeConstants.RESULT_SUCCESS);
-		result.setValue(SysResourcespage);
+		result.setValue(sysResourcespage);
 		return result.toJSONString();
 	}
 
@@ -110,6 +115,18 @@ public class SysResourcesApiImpl implements SysResourcesApi {
 		boolean updateSysResources = sysResourcesService.updateSysResourcesById(SysResources);
 		result.setCode(CodeConstants.RESULT_SUCCESS);
 		result.setValue(JSONObject.toJSONString(updateSysResources));
+		return result.toJSONString();
+	}
+
+	@Override
+	public String selectUserSysResources(String param) {
+		RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
+		JSONObject obj = JSONObject.parseObject(rw.getValue());
+		Integer userId = obj.getInteger("userId");
+		SysUserRole userRole = sysUserRoleService.getUserRole(userId);
+		List<ResourcesTree> resourcesTree = sysResourcesService.selectListResourcesTree(userRole.getRoleId());
+		result.setCode(CodeConstants.RESULT_SUCCESS);
+		result.setValue(JSONObject.toJSONString(resourcesTree));
 		return result.toJSONString();
 	}
 }

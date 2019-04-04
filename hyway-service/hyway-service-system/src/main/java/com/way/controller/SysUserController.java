@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONObject;
+import com.way.api.system.SysResourcesApi;
 import com.way.api.system.SysUserApi;
 import com.way.common.constant.CodeConstants;
 import com.way.common.context.BaseController;
@@ -17,7 +18,13 @@ public class SysUserController extends BaseController{
 
 	@Autowired 
 	private SysUserApi sysUserApi;
-	 
+	
+	@Autowired 
+	private SysResourcesApi sysResourcesApi;
+	/**
+	 * 查询用户分页
+	 * @return
+	 */
 	@RequestMapping(value="/sysUserPage")
 	public String sysUserPage() {
 		Result result = new Result(CodeConstants.RESULT_SUCCESS);
@@ -31,6 +38,10 @@ public class SysUserController extends BaseController{
 		}
 		return result.toString();
 	}
+	/**
+	 * 查询用户
+	 * @return
+	 */
 	@RequestMapping(value="/sysUser")
 	public String sysUser() {
 		initParams();
@@ -40,7 +51,36 @@ public class SysUserController extends BaseController{
 		result = JSONObject.parseObject(SysUsertStr, Result.class);
 		return result.toString();
 	}
-	
+	/**
+	 * 用户登录
+	 * @return
+	 */
+	@RequestMapping(value="/userSignIn")
+	public String userSignIn() {
+		initParams();
+		Result result = new Result(CodeConstants.RESULT_SUCCESS);
+		RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
+		String SysUsertStr = sysUserApi.sysUser(rw.toString());
+		result = JSONObject.parseObject(SysUsertStr, Result.class);
+		return result.toString();
+	}
+	/**
+	 * 用户注销
+	 * @return
+	 */
+	@RequestMapping(value="/userSignOut")
+	public String userSignOut() {
+		initParams();
+		Result result = new Result(CodeConstants.RESULT_SUCCESS);
+		RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
+		String SysUsertStr = sysUserApi.sysUser(rw.toString());
+		result = JSONObject.parseObject(SysUsertStr, Result.class);
+		return result.toString();
+	}
+	/**
+	 * 查询用户
+	 * @return
+	 */
 	@RequestMapping(value="/sysUserList")
 	public String sysUserList() {
 		initParams();
@@ -50,6 +90,10 @@ public class SysUserController extends BaseController{
 		result = JSONObject.parseObject(SysUsertListStr, Result.class);
 		return result.toString();
 	}
+	/**
+	 * 添加用户
+	 * @return
+	 */
 	@RequestMapping(value="/insertSysUser")
 	public String insertSysUser() {
 		initParams();
@@ -59,6 +103,10 @@ public class SysUserController extends BaseController{
 		result = JSONObject.parseObject(insertSysUsertStr, Result.class);
 		return result.toString();
 	}
+	/**
+	 * 用户删除
+	 * @return
+	 */
 	@RequestMapping(value="/deleteSysUserById")
 	public String deleteSysUsertById() {
 		initParams();
@@ -68,13 +116,29 @@ public class SysUserController extends BaseController{
 		result = JSONObject.parseObject(deleteSysUsertByIdStr, Result.class);
 		return result.toString();
 	}
-	
-	@RequestMapping(value="/updatesysUser")
+	/**
+	 * 更新用户
+	 * @return
+	 */
+	@RequestMapping(value="/updateSysUser")
 	public String updateSysUsert() {
 		initParams();
 		Result result = new Result(CodeConstants.RESULT_SUCCESS);
 		RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
 		String updateSysUsertStr = sysUserApi.userUpdate(rw.toString());
+		result = JSONObject.parseObject(updateSysUsertStr, Result.class);
+		return result.toString();
+	}
+	/**
+	 * 查询用户菜单
+	 * @return
+	 */
+	@RequestMapping(value="/getUserResources")
+	public String getUserResources() {
+		initParams();
+		Result result = new Result(CodeConstants.RESULT_SUCCESS);
+		RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
+		String updateSysUsertStr = sysResourcesApi.selectUserSysResources(rw.toString());
 		result = JSONObject.parseObject(updateSysUsertStr, Result.class);
 		return result.toString();
 	}

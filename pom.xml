@@ -19,13 +19,12 @@
 	<modules>
         <!-- core -->
 		<module>hyway-core</module>
-		<!-- springcloud-service -->
+		<!-- spring-cloud -->
     	<module>hyway-cloud</module>
-    	<!-- service -->
+    	<!-- serviceAPi -->
     	<module>hyway-service</module>
-    	 <!-- net-im -->
-	    <module>hyway-service-im</module>
-    	<module>hyway-service-im-client</module>
+    	<!-- net-im -->
+    	<module>hyway-net</module>
     	<!-- ui -->
     	<module>hyway-web</module>
   </modules>
@@ -98,51 +97,61 @@
 			<artifactId>hyway-common</artifactId>
 			<version>${hyway.version}</version>
 	    </dependency>
+	    <!-- 日志 -->
 	    <dependency>
 			<groupId>com.way</groupId>
 			<artifactId>hyway-log</artifactId>
 			<version>${hyway.version}</version>
 	    </dependency>
+	     <!-- 缓存 -->
 	    <dependency>
 			<groupId>com.way</groupId>
 			<artifactId>hyway-cache</artifactId>
 			<version>${hyway.version}</version>
 	    </dependency>
+	     <!-- 工具 -->
 		<dependency>
 		   <groupId>com.way</groupId>
 		   <artifactId>hyway-tools</artifactId>
 		   <version>${hyway.version}</version>
 		</dependency>
+		 <!--API文档 -->
 		<dependency>
 		   <groupId>com.way</groupId>
 		   <artifactId>hyway-swagger</artifactId>
 		   <version>${hyway.version}</version>
 		</dependency>
+		 <!-- 用户 -->
 	    <dependency>
 			<groupId>com.way</groupId>
 			<artifactId>hyway-service-user-api</artifactId>
 			<version>${hyway.version}</version>
 	    </dependency>
+	     <!-- 系统 -->
 	    <dependency>
 			<groupId>com.way</groupId>
 			<artifactId>hyway-service-system-api</artifactId>
 			<version>${hyway.version}</version>
 	    </dependency>
+	     <!-- sso -->
 	    <dependency>
 			<groupId>com.way</groupId>
 			<artifactId>hyway-service-sso-api</artifactId>
 			<version>${hyway.version}</version>
 	    </dependency>
+	     <!-- 三方服务 -->
 	    <dependency>
 			<groupId>com.way</groupId>
 			<artifactId>hyway-service-open-api</artifactId>
 			<version>${hyway.version}</version>
 	    </dependency>
+	     <!-- 定时任务 -->
 	    <dependency>
 			<groupId>com.way</groupId>
 			<artifactId>hyway-service-task-api</artifactId>
 			<version>${hyway.version}</version>
 	    </dependency>
+	     <!-- 网关 -->
 	    <dependency>
 			<groupId>com.way</groupId>
 			<artifactId>hyway-service-gateway-api</artifactId>
@@ -154,23 +163,25 @@
 			<artifactId>druid</artifactId>
 			<version>${druid.version}</version>
 		</dependency>
-		<!-- 分页 -->
+		<!-- 通用Mapper -->
 		<dependency>
 			<groupId>tk.mybatis</groupId>
 			<artifactId>mapper</artifactId>
 			<version>${mapper.version}</version>
 		</dependency>
+		<!-- 分页 -->
 		<dependency>
 			<groupId>com.github.pagehelper</groupId>
 			<artifactId>pagehelper</artifactId>
 			<version>${pagehelper.version}</version>
 		</dependency>
+		<!-- durid-->
 	    <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
             <version>${druid.version}</version>
         </dependency>
-		<!-- 分页 -->
+		<!-- mybatis -->
 		<dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
@@ -199,6 +210,7 @@
 		    <artifactId>fastjson</artifactId>
 		    <version>${fastjson.version}</version>
 		</dependency>
+		<!-- 工具类 -->
 		<dependency>
 		    <groupId>org.apache.commons</groupId>
 		    <artifactId>commons-lang3</artifactId>
@@ -329,6 +341,7 @@
 		    <artifactId>commons-codec</artifactId>
     		<version>${commons-codec.version}</version>
 		</dependency>
+		<!-- zipkin监控 -->
 		<dependency>
 			<groupId>io.zipkin.java</groupId>
 			<artifactId>zipkin-autoconfigure-ui</artifactId>
@@ -353,33 +366,14 @@
 	        <groupId>org.springframework.cloud</groupId>
 	        <artifactId>spring-cloud-starter-openfeign</artifactId>
 	    </dependency>
-	  <!--   <dependency>
-		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency> -->
-		<!-- spring-boot-admin client-->
-        <!-- <dependency>
-             <groupId>de.codecentric</groupId>
-             <artifactId>spring-boot-admin-starter-client</artifactId>
-         </dependency> -->
-          <!-- cloud config -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-config</artifactId>
 		</dependency>
-        <!-- <dependency>
-        	<groupId>org.springframework.boot</groupId>
-        	<artifactId>spring-boot-configuration-processor</artifactId>
-        	<optional>true</optional>
-        	</dependency> -->
         <dependency>
 		    <groupId>org.springframework.cloud</groupId>
 		    <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
 		</dependency>
-		<!-- <dependency>
-		    <groupId>org.springframework.cloud</groupId>
-		    <artifactId>spring-cloud-starter-netflix-hystrix-dashboard</artifactId>
-		</dependency> -->
 		</dependencies>
 	<repositories>
 		<repository>

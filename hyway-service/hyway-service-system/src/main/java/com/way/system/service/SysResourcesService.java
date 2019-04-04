@@ -7,7 +7,6 @@ import java.util.Map;
 import com.github.pagehelper.PageInfo;
 import com.way.common.pojos.system.SysResources;
 import com.way.common.pojos.system.dto.ResourcesTree;
-import com.way.common.vo.MenuVO;
 
 
 /**
@@ -19,14 +18,7 @@ import com.way.common.vo.MenuVO;
  * @since 2017-10-29
  */
 public interface SysResourcesService{
-    /**
-     * 通过角色名称查询URL 权限
-     *
-     * @param role 角色名称
-     * @return 菜单列表
-     */
-    List<MenuVO> findMenuByRoleName(String role);
-
+   
     /**
      * 级联删除菜单
      *
@@ -55,4 +47,8 @@ public interface SysResourcesService{
 	boolean deleteResourcesById(Integer resourcesId);
 
 	boolean updateSysResourcesById(SysResources sysResources);
+
+	List<ResourcesTree> selectListResourcesTree(Integer roleId);
+
+	List<SysResources> selectRoleListResources(Integer roleId);
 }

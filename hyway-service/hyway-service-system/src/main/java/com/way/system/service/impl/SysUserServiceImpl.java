@@ -23,6 +23,7 @@ import com.way.common.cache.JedisClient;
 import com.way.common.constant.CodeConstants;
 import com.way.common.constant.SecurityConstants;
 import com.way.common.pojos.system.SysDeptRelation;
+import com.way.common.pojos.system.SysResources;
 import com.way.common.pojos.system.SysUser;
 import com.way.common.pojos.system.SysUserRole;
 import com.way.common.pojos.system.dto.UserDTO;
@@ -32,7 +33,6 @@ import com.way.common.utils.LogUtil;
 import com.way.common.utils.LogUtils;
 import com.way.common.utils.RandomUtil;
 import com.way.common.utils.StringUtils;
-import com.way.common.vo.MenuVO;
 import com.way.common.vo.SysRole;
 import com.way.common.vo.UserVO;
 import com.way.dao.SysUserMapper;
@@ -54,7 +54,7 @@ public class SysUserServiceImpl  implements SysUserService {
 	
     private static final PasswordEncoder ENCODER = new BCryptPasswordEncoder();
     @Autowired
-    private SysResourcesService sysMenuService;
+    private SysResourcesService sysResourcesService;
     @Autowired
     private JedisClient jedisClient;
     @Autowired
@@ -85,19 +85,19 @@ public class SysUserServiceImpl  implements SysUserService {
                 }
             }
         }
-        String[] roles = roleNames.toArray(new String[roleNames.size()]);
+        Integer[] roles = roleNames.toArray(new Integer[roleNames.size()]);
         userInfo.setRoles(roles);
 
         //设置权限列表（menu.permission）
-        Set<MenuVO> menuVoSet = new HashSet<>();
-        for (String role : roles) {
-            List<MenuVO> menuVos = sysMenuService.findMenuByRoleName(role);
-            menuVoSet.addAll(menuVos);
+        Set<SysResources> resourcesSet = new HashSet<>();
+        for (Integer role : roles) {
+            List<SysResources> resources = sysResourcesService.selectRoleListResources(role);
+            resourcesSet.addAll(resources);
         }
         Set<String> permissions = new HashSet<>();
-        for (MenuVO menuVo : menuVoSet) {
-            if (StringUtils.isNotEmpty(menuVo.getPermission())) {
-                String permission = menuVo.getPermission();
+        for (SysResources sysResources : resourcesSet) {
+            if (StringUtils.isNotEmpty(sysResources.getPermission())) {
+                String permission = sysResources.getPermission();
                 permissions.add(permission);
             }
         }

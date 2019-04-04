@@ -3,9 +3,8 @@ package com.way.dao;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.way.common.context.IBaseMapper;
 import com.way.common.pojos.system.SysUserRole;
-
-import tk.mybatis.mapper.common.BaseMapper;
 
 /**
  * <p>
@@ -15,7 +14,7 @@ import tk.mybatis.mapper.common.BaseMapper;
  * @author 
  * @since 2017-10-29
  */
-public interface SysUserRoleMapper extends BaseMapper<SysUserRole> {
+public interface SysUserRoleMapper extends IBaseMapper<SysUserRole> {
     /**
      * 根据用户Id删除该用户的角色关系
      *

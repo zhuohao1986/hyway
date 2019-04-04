@@ -13,7 +13,6 @@ import com.way.common.constant.CommonConstant;
 import com.way.common.pojos.system.SysResources;
 import com.way.common.pojos.system.dto.ResourcesTree;
 import com.way.common.utils.TreeUtil;
-import com.way.common.vo.MenuVO;
 import com.way.dao.SysResourcesMapper;
 import com.way.system.service.SysResourcesService;
 
@@ -32,11 +31,6 @@ import tk.mybatis.mapper.entity.Example;
 public class SysResourcesServiceImpl implements SysResourcesService {
     @Autowired
     private SysResourcesMapper sysResourcesMapper;
-
-    @Override
-    public List<MenuVO> findMenuByRoleName(String role) {
-        return sysResourcesMapper.findMenuByRoleName(role);
-    }
 
     @Override
     public Boolean deleteMenu(Integer id) {
@@ -89,8 +83,19 @@ public class SysResourcesServiceImpl implements SysResourcesService {
     	
         return getResourcesTree(this.selectList(paramMap), 0);
     }
+    
+    @Override
+    public List<ResourcesTree> selectListResourcesTree(Integer roleId) {
+    	
+        return getResourcesTree(sysResourcesMapper.selectRoleResourcesList(roleId), 0);
+    }
+    @Override
+    public List<SysResources> selectRoleListResources(Integer roleId) {
+    	
+        return sysResourcesMapper.selectRoleResourcesList(roleId);
+    }
 
-    /**
+	/**
      * 构建部门树
      *
      * @param depts 部门
@@ -115,13 +120,13 @@ public class SysResourcesServiceImpl implements SysResourcesService {
 
 	@Override
 	public SysResources selectById(Integer id) {
-		// TODO Auto-generated method stub
+		
 		return sysResourcesMapper.selectByPrimaryKey(id);
 	}
 
 	@Override
 	public List<SysResources> selectList(Map<String, Object> paramMap) {
-		// TODO Auto-generated method stub
+		
 		return sysResourcesMapper.selectList(paramMap);
 	}
 

@@ -1,10 +1,14 @@
 package com.way.system.service.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.way.common.pojos.system.SysUserRole;
 import com.way.dao.SysUserRoleMapper;
 import com.way.system.service.SysUserRoleService;
+
+import tk.mybatis.mapper.entity.Example;
 
 /**
  * <p>
@@ -35,5 +39,16 @@ public class SysUserRoleServiceImpl  implements SysUserRoleService {
 	@Override
 	public void insert(SysUserRole userRole) {
 		sysUserRoleMapper.insert(userRole);
+	}
+	
+	@Override
+	public SysUserRole getUserRole(Integer userId) {
+		Example example=new Example(SysUserRole.class);
+		example.createCriteria().andEqualTo("userId", userId);
+		List<SysUserRole> sysUserRoleList = sysUserRoleMapper.selectByExample(example);
+		if(sysUserRoleList.size()>0) {
+			return sysUserRoleList.get(0);
+		}
+		return null;
 	}
 }

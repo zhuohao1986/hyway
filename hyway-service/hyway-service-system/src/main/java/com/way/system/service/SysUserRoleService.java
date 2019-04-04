@@ -23,4 +23,6 @@ public interface SysUserRoleService {
     Boolean deleteByUserId(Integer userId);
 
 	void insert(SysUserRole userRole);
+
+	SysUserRole getUserRole(Integer userId);
 }
