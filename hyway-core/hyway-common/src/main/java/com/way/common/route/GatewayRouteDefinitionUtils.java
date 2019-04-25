@@ -10,7 +10,7 @@ import com.way.common.pojos.system.SysRouteConfig;
  * @author way
  *
  */
-public class GatewayRouteDefinitionUils {
+public class GatewayRouteDefinitionUtils {
 	/**
 	 * 把传递进来的参数转换成路由对象
 	 * @param gwdefinition

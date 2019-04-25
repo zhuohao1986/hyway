@@ -2321,20 +2321,35 @@ public class JedisClientSingle implements JedisClient{
 	 */
 	public  void returnResource(JedisPool jedisPool, Jedis jedis) {
 		if (jedis != null) {
+			jedis.close();
 			jedisPool.isClosed();
 		}
 	}
 	public long del(String key) {
-		Jedis jedis = jedisPool.getResource();
-		Long result = jedis.del(key);
-		jedis.close();
+		Jedis jedis = null;
+		Long result = null;
+		try {
+			jedis = jedisPool.getResource();
+			result = jedis.del(key);
+		}catch (Exception e) {
+			log.error(e.getMessage());
+		}finally {
+			returnResource(jedisPool, jedis);
+		}
 		return result;
 	}
 	@Override
 	public long hdel(String hkey, String key) {
-		Jedis jedis = jedisPool.getResource();
-		Long result = jedis.hdel(hkey, key);
-		jedis.close();
+		Jedis jedis = null;
+		Long result = null;
+		try {
+			jedis = jedisPool.getResource();
+			result = jedis.hdel(hkey, key);
+		}catch (Exception e) {
+			log.error(e.getMessage());
+		}finally {
+			returnResource(jedisPool, jedis);
+		}
 		return result;
 	}
 

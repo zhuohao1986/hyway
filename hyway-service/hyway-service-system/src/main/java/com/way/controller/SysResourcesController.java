@@ -31,19 +31,6 @@ public class SysResourcesController extends BaseController{
 		}
 		return result.toString();
 	}
-	@RequestMapping(value="/resourcesPage",produces=MediaType.APPLICATION_JSON_VALUE)
-	public String resourcesPage() {
-		Result result = new Result(CodeConstants.RESULT_SUCCESS);
-		try {
-			initParams();
-			RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
-			String sysResourcesPageStr = sysResourcesApi.selectSysResourcesPage(rw.toString());
-			result = JSONObject.parseObject(sysResourcesPageStr, Result.class);
-		} catch (Exception e) {
-			
-		}
-		return result.toString();
-	}
 	@RequestMapping(value="/sysResources",produces=MediaType.APPLICATION_JSON_VALUE)
 	public String sysResources() {
 		initParams();

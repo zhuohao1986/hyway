@@ -6,7 +6,7 @@ package com.way.common.constant;
  *
  */
 public class ConfigKeyConstant {
-	// tekon
+	// token
 	public final static String REDIS_USER_SESSION_KEY = "REDIS_USER_SESSION";
 	//全局COOKIE TOKEN
 	public final static String REDIS_USER_KEY = "HY_TOKEN";
@@ -17,5 +17,7 @@ public class ConfigKeyConstant {
 	//发布路由信息的版本号
 	public final static String GATEWAY_ROUTES_VERSION="GATEWAY_ROUTES_VERSION";
 	
-	public final static String REDIS_ADMIN_USER_SESSION_KEY="hyway-admin-token";
+	public final static String REDIS_ADMIN_USER_SESSION_KEY="hyway-token";
+	
+	public final static Integer REDIS_ADMIN_USER_EXPIRE=1800;
 }

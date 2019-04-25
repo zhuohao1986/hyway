@@ -10,6 +10,8 @@ public class SysUser {
     private Integer userId;
 
     private String username;
+    
+    private String uuid;
 
     private String password;
 
@@ -67,7 +69,15 @@ public class SysUser {
         this.username = username == null ? null : username.trim();
     }
 
-    /**
+    public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
+
+	/**
      * @return password
      */
     public String getPassword() {

@@ -27,8 +27,12 @@
         <dependency>
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-starter-server</artifactId>
-        </dependency>
- -->	</dependencies>
+        </dependency> --> 
+	     <dependency>
+				<groupId>com.way</groupId>
+				<artifactId>hyway-log</artifactId>
+	     </dependency>	
+     </dependencies>
   
   <build>
     <finalName>hyway-eureka-server</finalName>

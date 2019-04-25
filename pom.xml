@@ -46,7 +46,7 @@
 		<lcn.last.version>4.1.0</lcn.last.version>
 	    <jackson.version>2.9.8</jackson.version>
 	    <mapper.version>4.1.0</mapper.version>
-	    <redis.version>2.9.1</redis.version>
+	    <redis.version>2.9.0</redis.version>
 	    <jsoup.version>1.11.3</jsoup.version>
 	    <mail.version>1.4</mail.version>
 	    <swagger.version>2.5.0</swagger.version>

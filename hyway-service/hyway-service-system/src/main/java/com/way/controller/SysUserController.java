@@ -9,9 +9,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.way.api.system.SysResourcesApi;
 import com.way.api.system.SysUserApi;
 import com.way.common.constant.CodeConstants;
+import com.way.common.constant.ConfigKeyConstant;
 import com.way.common.context.BaseController;
 import com.way.common.stdo.RequestWrapper;
 import com.way.common.stdo.Result;
+import com.way.common.utils.CookieUtils;
 @RestController
 @RequestMapping(value="/user",produces=MediaType.APPLICATION_JSON_VALUE)
 public class SysUserController extends BaseController{
@@ -55,12 +57,12 @@ public class SysUserController extends BaseController{
 	 * 用户登录
 	 * @return
 	 */
-	@RequestMapping(value="/userSignIn")
+	@RequestMapping(value="/login")
 	public String userSignIn() {
 		initParams();
 		Result result = new Result(CodeConstants.RESULT_SUCCESS);
 		RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
-		String SysUsertStr = sysUserApi.sysUser(rw.toString());
+		String SysUsertStr = sysUserApi.userSignIn(rw.toString());
 		result = JSONObject.parseObject(SysUsertStr, Result.class);
 		return result.toString();
 	}
@@ -68,12 +70,12 @@ public class SysUserController extends BaseController{
 	 * 用户注销
 	 * @return
 	 */
-	@RequestMapping(value="/userSignOut")
+	@RequestMapping(value="/loginOut")
 	public String userSignOut() {
 		initParams();
 		Result result = new Result(CodeConstants.RESULT_SUCCESS);
 		RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
-		String SysUsertStr = sysUserApi.sysUser(rw.toString());
+		String SysUsertStr = sysUserApi.userSignOut(rw.toString());
 		result = JSONObject.parseObject(SysUsertStr, Result.class);
 		return result.toString();
 	}
@@ -99,7 +101,7 @@ public class SysUserController extends BaseController{
 		initParams();
 		Result result = new Result(CodeConstants.RESULT_SUCCESS);
 		RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
-		String insertSysUsertStr = sysUserApi.userInsert(rw.toString());
+		String insertSysUsertStr = sysUserApi.insertUser(rw.toString());
 		result = JSONObject.parseObject(insertSysUsertStr, Result.class);
 		return result.toString();
 	}
@@ -112,7 +114,7 @@ public class SysUserController extends BaseController{
 		initParams();
 		Result result = new Result(CodeConstants.RESULT_SUCCESS);
 		RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
-		String deleteSysUsertByIdStr = sysUserApi.userDelete(rw.toString());
+		String deleteSysUsertByIdStr = sysUserApi.deleteUser(rw.toString());
 		result = JSONObject.parseObject(deleteSysUsertByIdStr, Result.class);
 		return result.toString();
 	}
@@ -125,7 +127,7 @@ public class SysUserController extends BaseController{
 		initParams();
 		Result result = new Result(CodeConstants.RESULT_SUCCESS);
 		RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
-		String updateSysUsertStr = sysUserApi.userUpdate(rw.toString());
+		String updateSysUsertStr = sysUserApi.updateUser(rw.toString());
 		result = JSONObject.parseObject(updateSysUsertStr, Result.class);
 		return result.toString();
 	}
@@ -136,6 +138,8 @@ public class SysUserController extends BaseController{
 	@RequestMapping(value="/getUserResources")
 	public String getUserResources() {
 		initParams();
+		String cookieValue = CookieUtils.getCookieValue(request,ConfigKeyConstant.REDIS_ADMIN_USER_SESSION_KEY);
+		jsonData.put("token", cookieValue);
 		Result result = new Result(CodeConstants.RESULT_SUCCESS);
 		RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
 		String updateSysUsertStr = sysResourcesApi.selectUserSysResources(rw.toString());

@@ -23,6 +23,8 @@ public class UserVO implements Serializable {
      * 用户名
      */
     private String username;
+    
+    private String uuid;
     /**
      * 密码
      */
@@ -42,7 +44,7 @@ public class UserVO implements Serializable {
     /**
      * 0-正常，1-删除
      */
-    private String delFlag;
+    private String delState;
     /**
      * 简介
      */
@@ -86,6 +88,15 @@ public class UserVO implements Serializable {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	
+
+	public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
 
 	public String getPassword() {
 		return password;
@@ -119,12 +130,13 @@ public class UserVO implements Serializable {
 		this.updateTime = updateTime;
 	}
 
-	public String getDelFlag() {
-		return delFlag;
+
+	public String getDelState() {
+		return delState;
 	}
 
-	public void setDelFlag(String delFlag) {
-		this.delFlag = delFlag;
+	public void setDelState(String delState) {
+		this.delState = delState;
 	}
 
 	public String getPhone() {

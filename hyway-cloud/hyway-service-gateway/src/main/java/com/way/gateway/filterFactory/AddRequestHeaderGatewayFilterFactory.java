@@ -1,4 +1,4 @@
-package com.way.gateway.filter;
+package com.way.gateway.filterFactory;
 
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractNameValueGatewayFilterFactory;

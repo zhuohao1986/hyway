@@ -26,19 +26,24 @@ public interface SysUserApi{
 	 */
 	public String user(String param) throws BusinessException;
 	
+	public String deleteUser(String param) throws BusinessException;
 	
-	public String userDelete(String param) throws BusinessException;
+	public String insertUser(String param) throws BusinessException;
 	
-	public String userInsert(String param) throws BusinessException;
+	public String updateUser(String param) throws BusinessException;
 	
-	public String userUpdate(String param) throws BusinessException;
-	
-	public String slectUserByName(String param) throws BusinessException;
+	public String selectUserByName(String param) throws BusinessException;
 
 	public String selectSysUserPage(String param) throws BusinessException;
 
 	public String sysUser(String param) throws BusinessException;
 
 	public String sysUserList(String param) throws BusinessException;
+
+	public String userSignIn(String param);
+
+	public String userSignOut(String param);
+
+	public String getUserByToken(String param);
 
 }

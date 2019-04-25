@@ -34,4 +34,8 @@
 			AND srole.role_id =#{roleId}
 			ORDER BY sres.sort DESC
 	</select>
+	<select id="selectList" resultMap="BaseResultMap" parameterType="map">
+	 
+	
+	</select>
 </mapper>

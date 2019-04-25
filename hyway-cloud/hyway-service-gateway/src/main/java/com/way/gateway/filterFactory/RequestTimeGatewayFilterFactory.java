@@ -1,4 +1,4 @@
-package com.way.gateway.filter;
+package com.way.gateway.filterFactory;
 
 import java.util.Arrays;
 import java.util.List;

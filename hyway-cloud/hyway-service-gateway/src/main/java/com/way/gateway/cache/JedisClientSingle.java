@@ -39,16 +39,15 @@ public class JedisClientSingle implements JedisClient{
 	 * @return 成功返回value 失败返回null
 	 */
 	@Override
-	public String get(String key, int indexdb) {
+	public String get(String key) {
 		Jedis jedis = null;
 		String value = null;
 		try {
 			jedis = jedisPool.getResource();
-			jedis.select(indexdb);
 			value = jedis.get(key);
 			log.info(value);
+			jedis.close();
 		} catch (Exception e) {
-
 			log.error(e.getMessage());
 		} finally {
 			returnResource(jedisPool, jedis);
@@ -69,12 +68,12 @@ public class JedisClientSingle implements JedisClient{
 	 * @return 成功返回value 失败返回null
 	 */
 	@Override
-	public byte[] get(byte[] key, int indexdb) {
+	public byte[] get(byte[] key) {
 		Jedis jedis = null;
 		byte[] value = null;
 		try {
 			jedis = jedisPool.getResource();
-			jedis.select(indexdb);
+			
 			value = jedis.get(key);
 		} catch (Exception e) {
 
@@ -99,11 +98,11 @@ public class JedisClientSingle implements JedisClient{
 	 * @return 成功 返回OK 失败返回 0
 	 */
 	@Override
-	public String set(String key, String value, int indexdb) {
+	public String set(String key, String value) {
 		Jedis jedis = null;
 		try {
 			jedis = jedisPool.getResource();
-			jedis.select(indexdb);
+			
 			return jedis.set(key, value);
 		} catch (Exception e) {
 
@@ -128,11 +127,11 @@ public class JedisClientSingle implements JedisClient{
 	 * @return 成功 返回OK 失败返回 0
 	 */
 	@Override
-	public String set(byte[] key, byte[] value, int indexdb) {
+	public String set(byte[] key, byte[] value) {
 		Jedis jedis = null;
 		try {
 			jedis = jedisPool.getResource();
-			jedis.select(indexdb);
+			
 			return jedis.set(key, value);
 		} catch (Exception e) {
 
@@ -176,36 +175,11 @@ public class JedisClientSingle implements JedisClient{
 	 * @return 返回删除成功的个数
 	 */
 	@Override
-	public Long del(int indexdb, String... keys) {
+	public Long del(byte[]... keys) {
 		Jedis jedis = null;
 		try {
 			jedis = jedisPool.getResource();
-			jedis.select(indexdb);
-			return jedis.del(keys);
-		} catch (Exception e) {
-
-			log.error(e.getMessage());
-			return 0L;
-		} finally {
-			returnResource(jedisPool, jedis);
-		}
-	}
-
-	/**
-	 * <p>
-	 * 删除指定的key,也可以传入一个包含key的数组
-	 * </p>
-	 * 
-	 * @param indexdb 选择redis库 0-15
-	 * @param keys    一个key 也可以使 string 数组
-	 * @return 返回删除成功的个数
-	 */
-	@Override
-	public Long del(int indexdb, byte[]... keys) {
-		Jedis jedis = null;
-		try {
-			jedis = jedisPool.getResource();
-			jedis.select(indexdb);
+			
 			return jedis.del(keys);
 		} catch (Exception e) {
 
@@ -295,11 +269,11 @@ public class JedisClientSingle implements JedisClient{
 	 * @return 成功返回1 如果存在 和 发生异常 返回 0
 	 */
 	@Override
-	public Long expire(String key, int value, int indexdb) {
+	public Long expire(String key, int value) {
 		Jedis jedis = null;
 		try {
 			jedis = jedisPool.getResource();
-			jedis.select(indexdb);
+			
 			return jedis.expire(key, value);
 		} catch (Exception e) {
 			log.error(e.getMessage());
@@ -319,11 +293,11 @@ public class JedisClientSingle implements JedisClient{
 	 *         的剩余生存时间。 发生异常 返回 0
 	 */
 	@Override
-	public Long ttl(String key, int indexdb) {
+	public Long ttl(String key) {
 		Jedis jedis = null;
 		try {
 			jedis = jedisPool.getResource();
-			jedis.select(indexdb);
+			
 			return jedis.ttl(key);
 		} catch (Exception e) {
 
@@ -825,12 +799,12 @@ public class JedisClientSingle implements JedisClient{
 	 * @return 返回OK 异常返回null
 	 */
 	@Override
-	public String hmset(String key, Map<String, String> hash, int indexdb) {
+	public String hmset(String key, Map<String, String> hash) {
 		Jedis jedis = null;
 		String res = null;
 		try {
 			jedis = jedisPool.getResource();
-			jedis.select(indexdb);
+			
 			res = jedis.hmset(key, hash);
 		} catch (Exception e) {
 
@@ -876,12 +850,12 @@ public class JedisClientSingle implements JedisClient{
 	 * @return
 	 */
 	@Override
-	public List<String> hmget(String key, int indexdb, String... fields) {
+	public List<String> hmget(String key, String... fields) {
 		Jedis jedis = null;
 		List<String> res = null;
 		try {
 			jedis = jedisPool.getResource();
-			jedis.select(indexdb);
+			
 			res = jedis.hmget(key, fields);
 		} catch (Exception e) {
 
@@ -1050,12 +1024,12 @@ public class JedisClientSingle implements JedisClient{
 	 * @return
 	 */
 	@Override
-	public Map<String, String> hgetall(String key, int indexdb) {
+	public Map<String, String> hgetall(String key) {
 		Jedis jedis = null;
 		Map<String, String> res = null;
 		try {
 			jedis = jedisPool.getResource();
-			jedis.select(indexdb);
+			
 			res = jedis.hgetAll(key);
 		} catch (Exception e) {
 			log.error(e.getMessage());
@@ -1075,12 +1049,12 @@ public class JedisClientSingle implements JedisClient{
 	 * @return 返回list的value个数
 	 */
 	@Override
-	public Long lpush(int indexdb, String key, String... strs) {
+	public Long lpush(String key, String... strs) {
 		Jedis jedis = null;
 		Long res = null;
 		try {
 			jedis = jedisPool.getResource();
-			jedis.select(indexdb);
+			
 			res = jedis.lpush(key, strs);
 		} catch (Exception e) {
 
@@ -1257,12 +1231,12 @@ public class JedisClientSingle implements JedisClient{
 	 * @return
 	 */
 	@Override
-	synchronized public String rpop(String key, int indexdb) {
+	synchronized public String rpop(String key) {
 		Jedis jedis = null;
 		String res = null;
 		try {
 			jedis = jedisPool.getResource();
-			jedis.select(indexdb);
+			
 			res = jedis.rpop(key);
 		} catch (Exception e) {
 
@@ -1286,12 +1260,12 @@ public class JedisClientSingle implements JedisClient{
 	 * @return
 	 */
 	@Override
-	public String rpoplpush(String srckey, String dstkey, int indexdb) {
+	public String rpoplpush(String srckey, String dstkey) {
 		Jedis jedis = null;
 		String res = null;
 		try {
 			jedis = jedisPool.getResource();
-			jedis.select(indexdb);
+			
 			res = jedis.rpoplpush(srckey, dstkey);
 		} catch (Exception e) {
 
@@ -1365,12 +1339,12 @@ public class JedisClientSingle implements JedisClient{
 	 * @return
 	 */
 	@Override
-	public List<String> lrange(String key, long start, long end, int indexdb) {
+	public List<String> lrange(String key, long start, long end) {
 		Jedis jedis = null;
 		List<String> res = null;
 		try {
 			jedis = jedisPool.getResource();
-			jedis.select(indexdb);
+			
 			res = jedis.lrange(key, start, end);
 		} catch (Exception e) {
 
@@ -2350,46 +2324,31 @@ public class JedisClientSingle implements JedisClient{
 			jedisPool.isClosed();
 		}
 	}
-	@Override
-	public String get(String key) {
-		Jedis jedis = jedisPool.getResource();
-		String string = jedis.get(key);
-		jedis.close();
-		return string;
-	}
-	@Override
-	public String set(String key, String value) {
-		Jedis jedis = jedisPool.getResource();
-		String string = jedis.set(key, value);
-		jedis.close();
-		return string;
-	}
-	@Override
-	public long expire(String key, int second) {
-		Jedis jedis = jedisPool.getResource();
-		Long result = jedis.expire(key, second);
-		jedis.close();
-		return result;
-	}
-	@Override
-	public long ttl(String key) {
-		Jedis jedis = jedisPool.getResource();
-		Long result = jedis.ttl(key);
-		jedis.close();
-		return result;
-	}
-
 	public long del(String key) {
-		Jedis jedis = jedisPool.getResource();
-		Long result = jedis.del(key);
-		jedis.close();
+		Jedis jedis = null;
+		Long result = null;
+		try {
+			jedis = jedisPool.getResource();
+			result = jedis.del(key);
+		}catch (Exception e) {
+			log.error(e.getMessage());
+		}finally {
+			returnResource(jedisPool, jedis);
+		}
 		return result;
 	}
 	@Override
 	public long hdel(String hkey, String key) {
-		Jedis jedis = jedisPool.getResource();
-		Long result = jedis.hdel(hkey, key);
-		jedis.close();
+		Jedis jedis = null;
+		Long result = null;
+		try {
+			jedis = jedisPool.getResource();
+			result = jedis.hdel(hkey, key);
+		}catch (Exception e) {
+			log.error(e.getMessage());
+		}finally {
+			returnResource(jedisPool, jedis);
+		}
 		return result;
 	}
 

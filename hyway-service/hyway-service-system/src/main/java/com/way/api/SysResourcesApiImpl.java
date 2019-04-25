@@ -20,7 +20,6 @@ import com.way.common.pojos.system.dto.ResourcesTree;
 import com.way.common.stdo.RequestWrapper;
 import com.way.common.stdo.Result;
 import com.way.system.service.SysResourcesService;
-import com.way.system.service.SysRoleResourcesService;
 import com.way.system.service.SysUserRoleService;
 
 /**

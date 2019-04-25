@@ -23,7 +23,7 @@ import com.way.common.exception.BusinessException;
 import com.way.common.exception.ClientToolsException;
 import com.way.common.pojos.system.SysRouteConfig;
 import com.way.common.route.GatewayRouteDefinition;
-import com.way.common.route.GatewayRouteDefinitionUils;
+import com.way.common.route.GatewayRouteDefinitionUtils;
 import com.way.common.stdo.RequestWrapper;
 import com.way.common.stdo.Result;
 import com.way.common.utils.DateUtils;
@@ -155,7 +155,7 @@ public class SysRouteConfigApiImpl implements SysRouteConfigApi{
                 //数据库获取配置
                 Map<String,Object> paramMap =new HashMap<>();
                 List<SysRouteConfig> resultRoutesList = sysRouteConfigService.selectSysRouteConfigList(paramMap);
-                List<GatewayRouteDefinition> gatewayRouteDefinitionlist=GatewayRouteDefinitionUils.assembleSysRouteConfigToRouteDefinition(resultRoutesList);
+                List<GatewayRouteDefinition> gatewayRouteDefinitionlist=GatewayRouteDefinitionUtils.assembleSysRouteConfigToRouteDefinition(resultRoutesList);
                 resultRoutes=JSONObject.toJSONString(gatewayRouteDefinitionlist);
                 logger.info("路由信息为：" + JSONObject.toJSONString(resultRoutes));
                 if(!StringUtils.isEmpty(resultRoutes)){
@@ -180,7 +180,7 @@ public class SysRouteConfigApiImpl implements SysRouteConfigApi{
     		}else {
     			Map<String,Object> paramMap =new HashMap<>();
                 List<SysRouteConfig> resultRoutesList = sysRouteConfigService.selectSysRouteConfigList(paramMap);
-                List<GatewayRouteDefinition> gatewayRouteDefinitionlist=GatewayRouteDefinitionUils.assembleSysRouteConfigToRouteDefinition(resultRoutesList);
+                List<GatewayRouteDefinition> gatewayRouteDefinitionlist=GatewayRouteDefinitionUtils.assembleSysRouteConfigToRouteDefinition(resultRoutesList);
                 resultRoutes=JSONObject.toJSONString(gatewayRouteDefinitionlist);
                 resultRoutes.replaceAll("\\\\", "");
     		}

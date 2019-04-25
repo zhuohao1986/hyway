@@ -1,6 +1,5 @@
 package com.way.gateway.cache;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -22,7 +21,7 @@ public interface JedisClient {
 	 * @return 成功返回value 失败返回null
 	 */
 
-	public String get(String key, int indexdb);
+	public String get(String key);
 
 	/**
 	 * <p>
@@ -36,7 +35,7 @@ public interface JedisClient {
 	 * @return 成功返回value 失败返回null
 	 */
 
-	public byte[] get(byte[] key, int indexdb);
+	public byte[] get(byte[] key);
 
 	/**
 	 * <p>
@@ -52,7 +51,7 @@ public interface JedisClient {
 	 * @return 成功 返回OK 失败返回 0
 	 */
 
-	public String set(String key, String value, int indexdb);
+	public String set(String key, String value);
 
 	/**
 	 * <p>
@@ -68,7 +67,7 @@ public interface JedisClient {
 	 * @return 成功 返回OK 失败返回 0
 	 */
 
-	public String set(byte[] key, byte[] value, int indexdb);
+	public String set(byte[] key, byte[] value);
 
 	/**
 	 * <p>
@@ -91,19 +90,7 @@ public interface JedisClient {
 	 * @return 返回删除成功的个数
 	 */
 
-	public Long del(int indexdb, String... keys);
-
-	/**
-	 * <p>
-	  * 删除指定的key,也可以传入一个包含key的数组
-	 * </p>
-	 * 
-	 * @param indexdb 选择redis库 0-15
-	 * @param keys    一个key 也可以使 string 数组
-	 * @return 返回删除成功的个数
-	 */
-
-	public Long del(int indexdb, byte[]... keys);
+	public Long del(byte[]... keys);
 
 	/**
 	 * <p>
@@ -138,7 +125,7 @@ public interface JedisClient {
 	 * @return 成功返回1 如果存在 和 发生异常 返回 0
 	 */
 
-	public Long expire(String key, int value, int indexdb);
+	public Long expire(String key, int value);
 
 	/**
 	 * <p>
@@ -150,7 +137,7 @@ public interface JedisClient {
 	 *         的剩余生存时间。 发生异常 返回 0
 	 */
 
-	public Long ttl(String key, int indexdb);
+	public Long ttl(String key);
 
 	/**
 	 * <p>
@@ -414,7 +401,7 @@ public interface JedisClient {
 	 * @return 返回OK 异常返回null
 	 */
 
-	public String hmset(String key, Map<String, String> hash, int indexdb);
+	public String hmset(String key, Map<String, String> hash);
 
 	/**
 	 * <p>
@@ -438,7 +425,7 @@ public interface JedisClient {
 	 * @return
 	 */
 
-	public List<String> hmget(String key, int indexdb, String... fields);
+	public List<String> hmget(String key, String... fields);
 
 	/**
 	 * <p>
@@ -519,7 +506,7 @@ public interface JedisClient {
 	 * @return
 	 */
 
-	public Map<String, String> hgetall(String key, int indexdb);
+	public Map<String, String> hgetall(String key);
 
 	/**
 	 * <p>
@@ -531,7 +518,7 @@ public interface JedisClient {
 	 * @return 返回list的value个数
 	 */
 
-	public Long lpush(int indexdb, String key, String... strs);
+	public Long lpush(String key, String... strs);
 
 	/**
 	 * <p>
@@ -621,7 +608,7 @@ public interface JedisClient {
 	 * @return
 	 */
 
-	public String rpop(String key, int indexdb);
+	public String rpop(String key);
 
 	/**
 	 * <p>
@@ -636,7 +623,7 @@ public interface JedisClient {
 	 * @return
 	 */
 
-	public String rpoplpush(String srckey, String dstkey, int indexdb);
+	public String rpoplpush(String srckey, String dstkey);
 
 	/**
 	 * <p>
@@ -675,7 +662,7 @@ public interface JedisClient {
 	 * @return
 	 */
 
-	public List<String> lrange(String key, long start, long end, int indexdb);
+	public List<String> lrange(String key, long start, long end);
 
 	/**
 	 * <p>
@@ -1132,14 +1119,6 @@ public interface JedisClient {
 	 */
 
 	public String type(String key);
-
-	public String get(String key) throws IOException;
-
-	public String set(String key, String value);
-
-	public long expire(String key, int second);
-
-	public long ttl(String key);
 
 	public long del(String key);
 
