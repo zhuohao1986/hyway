@@ -113,9 +113,15 @@ public class SysResourcesServiceImpl implements SysResourcesService {
             node.setId(res.getResourceId());
             node.setParentId(res.getParentId());
             node.setName(res.getName());
+            node.setAuthority(res.getPermission());
+            node.setIcon(res.getIcon());
+            node.setComponent(res.getComponent());
+            node.setSort(res.getSort());
+            node.setType(res.getType());
+            node.setUrl(res.getUrl());
             trees.add(node);
         }
-        return TreeUtil.bulid(trees, root);
+        return TreeUtil.buildByRecursive(trees, root);
     }
 
 	@Override

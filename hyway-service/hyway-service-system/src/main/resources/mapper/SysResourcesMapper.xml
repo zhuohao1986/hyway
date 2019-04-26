@@ -35,7 +35,12 @@
 			ORDER BY sres.sort DESC
 	</select>
 	<select id="selectList" resultMap="BaseResultMap" parameterType="map">
-	 
-	
+	 SELECT
+			sres.* 
+		FROM
+			t_sys_resources sres 
+		WHERE
+			sres.del_state = 0 
+			ORDER BY sres.sort DESC
 	</select>
 </mapper>

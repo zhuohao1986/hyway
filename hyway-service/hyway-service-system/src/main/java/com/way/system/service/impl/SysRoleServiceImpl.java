@@ -61,8 +61,8 @@ public class SysRoleServiceImpl  implements SysRoleService {
      */
     @Override
     public PageInfo<RoleDTO> selectwithDeptPage(Map<String,Object> paramMap) {
-    	Integer pageNum=Integer.parseInt(String.valueOf(paramMap.get("pageNum")));
-    	Integer pageSize=Integer.parseInt(String.valueOf(paramMap.get("pageSize")));
+    	Integer pageNum=Integer.parseInt(String.valueOf(paramMap.get("page")));
+    	Integer pageSize=Integer.parseInt(String.valueOf(paramMap.get("limit")));
     	PageHelper.startPage(pageNum, pageSize);
     	List<RoleDTO> selectRolePage = sysRoleMapper.selectRolePage(paramMap);
     	PageInfo<RoleDTO> page=new PageInfo<RoleDTO>(selectRolePage);

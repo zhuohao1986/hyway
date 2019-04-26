@@ -43,9 +43,9 @@ public class SysRoleApImpl implements SysRoleApi {
 		Map<String, Object> paramMap = JSONObject.parseObject(rw.getValue(),
 				new TypeReference<HashMap<String, Object>>() {
 				});
-		PageInfo<RoleDTO> SysRolepage = sysRoleService.selectwithDeptPage(paramMap);
+		PageInfo<RoleDTO> sysRolepage = sysRoleService.selectwithDeptPage(paramMap);
 		result.setCode(CodeConstants.RESULT_SUCCESS);
-		result.setValue(SysRolepage);
+		result.setValue(sysRolepage);
 		return result.toJSONString();
 	}
 	

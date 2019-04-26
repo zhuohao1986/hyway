@@ -5,9 +5,35 @@ package com.way.common.exception;
  *
  * @author 
  */
-class BaseException extends RuntimeException {
+public class BaseException extends RuntimeException {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -417206525414814482L;
 
-    BaseException() {
+	private int code;
+	
+	private String message;
+	
+
+    public int getCode() {
+		return code;
+	}
+
+	public void setCode(int code) {
+		this.code = code;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	BaseException() {
         super();
     }
 

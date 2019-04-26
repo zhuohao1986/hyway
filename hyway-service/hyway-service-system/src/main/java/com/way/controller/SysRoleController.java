@@ -11,6 +11,8 @@ import com.way.common.constant.CodeConstants;
 import com.way.common.context.BaseController;
 import com.way.common.stdo.RequestWrapper;
 import com.way.common.stdo.Result;
+import com.way.common.utils.LogUtil;
+import com.way.common.utils.LogUtils;
 @RestController
 @RequestMapping(value="/role",produces=MediaType.APPLICATION_JSON_VALUE)
 public class SysRoleController extends BaseController{
@@ -37,10 +39,10 @@ public class SysRoleController extends BaseController{
 		try {
 			initParams();
 			RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
-			String SysRolePageStr = sysRoleApi.selectSysRolePage(rw.toString());
-			result = JSONObject.parseObject(SysRolePageStr, Result.class);
+			String sysRolePageStr = sysRoleApi.selectSysRolePage(rw.toString());
+			result = JSONObject.parseObject(sysRolePageStr, Result.class);
 		} catch (Exception e) {
-			
+			LogUtil.error(e.getMessage(), "rolePage");
 		}
 		return result.toString();
 	}

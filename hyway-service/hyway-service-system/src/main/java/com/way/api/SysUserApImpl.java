@@ -24,6 +24,7 @@ import com.way.common.pojos.system.dto.UserInfo;
 import com.way.common.stdo.RequestWrapper;
 import com.way.common.stdo.Result;
 import com.way.common.utils.DEncryptionUtils;
+import com.way.common.utils.StringUtils;
 import com.way.common.vo.UserVO;
 import com.way.system.service.SysUserRoleService;
 import com.way.system.service.SysUserService;
@@ -45,10 +46,9 @@ public class SysUserApImpl implements SysUserApi {
 	@Autowired
 	private SysUserRoleService sysUserRoleService;
 
-	Result result = new Result(CodeConstants.RESULT_SUCCESS);
-
 	@Override
 	public String userinfo(String param) throws BusinessException {
+		Result result = new Result(CodeConstants.RESULT_SUCCESS);
 		RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
 		UserVO userVo=JSONObject.parseObject(rw.getValue(),UserVO.class);
 		UserInfo findUserInfo = sysUserService.findUserInfo(userVo);
@@ -59,6 +59,7 @@ public class SysUserApImpl implements SysUserApi {
 
 	@Override
 	public String user(String param) throws BusinessException {
+		Result result = new Result(CodeConstants.RESULT_SUCCESS);
 		RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
 		JSONObject obj=JSONObject.parseObject(rw.getValue());
 		Integer id = obj.getInteger("id");
@@ -70,6 +71,7 @@ public class SysUserApImpl implements SysUserApi {
 
 	@Override
 	public String deleteUser(String param) throws BusinessException {
+		Result result = new Result(CodeConstants.RESULT_SUCCESS);
 		RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
 		JSONObject obj=JSONObject.parseObject(rw.getValue());
 		Integer id = obj.getInteger("id");
@@ -86,6 +88,7 @@ public class SysUserApImpl implements SysUserApi {
 
 	@Override
 	public String insertUser(String param) {
+		Result result = new Result(CodeConstants.RESULT_SUCCESS);
 		RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
 		UserDTO userDto=JSONObject.parseObject(rw.getValue(), UserDTO.class);
 		SysUser sysUser = new SysUser();
@@ -118,6 +121,7 @@ public class SysUserApImpl implements SysUserApi {
 
 	@Override
 	public String selectSysUserPage(String param) throws BusinessException {
+		Result result = new Result(CodeConstants.RESULT_SUCCESS);
 		RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
 		Map<String, Object> paramMap = JSONObject.parseObject(rw.getValue(),new TypeReference<HashMap<String, Object>>(){});
 		PageInfo<SysUser> sysUserpage = sysUserService.selectPage(paramMap);
@@ -128,6 +132,7 @@ public class SysUserApImpl implements SysUserApi {
 
 	@Override
 	public String sysUser(String param) throws BusinessException {
+		Result result = new Result(CodeConstants.RESULT_SUCCESS);
 		RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
 		JSONObject obj=JSONObject.parseObject(rw.getValue());
 		Integer id = obj.getInteger("id");
@@ -139,6 +144,7 @@ public class SysUserApImpl implements SysUserApi {
 
 	@Override
 	public String sysUserList(String param) throws BusinessException {
+		Result result = new Result(CodeConstants.RESULT_SUCCESS);
 		RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
 		JSONObject obj=JSONObject.parseObject(rw.getValue());
 		Integer id = obj.getInteger("id");
@@ -155,17 +161,18 @@ public class SysUserApImpl implements SysUserApi {
 
 	@Override
 	public String userSignIn(String param) {
+		Result result = new Result(CodeConstants.RESULT_SUCCESS,"登陆成功");
 		RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
 		JSONObject obj=JSONObject.parseObject(rw.getValue());
-		String userName = obj.getString("userName");
-		String pwd = obj.getString("userPwd");
+		String userName = obj.getString("username");
+		String pwd = obj.getString("password");
 		UserVO sysuser = sysUserService.findUserByUsername(userName);
 		if(sysuser==null) {
 			result.setMessage("用户不存在");
 			result.setCode(CodeConstants.RESULT_FAIL);
 			return result.toJSONString();
 		}
-		if(DEncryptionUtils.aesEncoder(pwd).equals(sysuser.getPassword())) {
+		if(!StringUtils.equals(sysuser.getPassword(), DEncryptionUtils.aesEncoder(pwd))) {
 			result.setMessage("密码不正确");
 			result.setCode(CodeConstants.RESULT_FAIL);
 			return result.toJSONString();
@@ -184,6 +191,7 @@ public class SysUserApImpl implements SysUserApi {
 
 	@Override
 	public String userSignOut(String param) {
+		Result result = new Result(CodeConstants.RESULT_SUCCESS);
 		RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
 		JSONObject obj=JSONObject.parseObject(rw.getValue());
 		String hyway_admin_token = obj.getString("hyway_admin_token");
@@ -195,14 +203,16 @@ public class SysUserApImpl implements SysUserApi {
 	 */
 	@Override
 	public String getUserByToken(String param) {
+		Result result = new Result(CodeConstants.RESULT_SUCCESS);
 		try {
 			RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
 			String hyway_admin_token = rw.getValue();
 			JSONObject josn = JSONObject.parseObject(hyway_admin_token);
 			String redisKey = ConfigKeyConstant.REDIS_ADMIN_USER_SESSION_KEY+ ":" + josn.getString("hyway_admin_token");
 			// 取出用户信息json
-			String frUserStr = jedisClient.get(redisKey);
-			
+			String userStr = jedisClient.get(redisKey);
+			UserVO sysuser=JSONObject.parseObject(userStr, UserVO.class);
+			result.setValue(JSONObject.toJSONString(sysuser));
 		} catch (Exception e) {
 			e.printStackTrace();
 			result = new Result(CodeConstants.RESULT_FAIL, "004");
