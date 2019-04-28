@@ -12,6 +12,7 @@ import com.github.pagehelper.PageInfo;
 import com.way.common.constant.CommonConstant;
 import com.way.common.pojos.system.SysResources;
 import com.way.common.pojos.system.dto.ResourcesTree;
+import com.way.common.utils.DateUtils;
 import com.way.common.utils.TreeUtil;
 import com.way.dao.SysResourcesMapper;
 import com.way.system.service.SysResourcesService;
@@ -117,6 +118,7 @@ public class SysResourcesServiceImpl implements SysResourcesService {
             node.setIcon(res.getIcon());
             node.setComponent(res.getComponent());
             node.setSort(res.getSort());
+            node.setLabel(res.getName());
             node.setType(res.getType());
             node.setUrl(res.getUrl());
             trees.add(node);
@@ -138,6 +140,8 @@ public class SysResourcesServiceImpl implements SysResourcesService {
 
 	@Override
 	public Boolean insertSysResources(SysResources sysResources) {
+		sysResources.setCreateTime(DateUtils.getCurrentDate());
+		sysResources.setDelState(CommonConstant.DEL_FLAG_FALSE);
 		int insert = sysResourcesMapper.insert(sysResources);
 		if(insert<=0) {
 			return false;

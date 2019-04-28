@@ -66,6 +66,10 @@ public interface CommonConstant {
      * 删除标记
      */
     String DEL_FLAG = "del_state";
+    
+    int DEL_FLAG_TRUE =1;
+    
+    int DEL_FLAG_FALSE = 0;
 
     /**
      * 编码

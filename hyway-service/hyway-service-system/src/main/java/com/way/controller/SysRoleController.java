@@ -93,4 +93,13 @@ public class SysRoleController extends BaseController{
 		result = JSONObject.parseObject(updateSysRoleStr, Result.class);
 		return result.toString();
 	}
+	@RequestMapping(value="/assignRoleermissions",produces=MediaType.APPLICATION_JSON_VALUE)
+	public String assignRoleermissions() {
+		initParams();
+		Result result = new Result(CodeConstants.RESULT_SUCCESS);
+		RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
+		String updateSysRoleStr = sysRoleApi.updateRoleResources(rw.toString());
+		result = JSONObject.parseObject(updateSysRoleStr, Result.class);
+		return result.toString();
+	}
 }
