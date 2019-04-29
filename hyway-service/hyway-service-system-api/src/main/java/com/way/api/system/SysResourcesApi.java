@@ -54,5 +54,8 @@ public interface SysResourcesApi {
      * @return
      */
 	String selectUserSysResources(String param);
+	
+	
+	String selectRoleListTree(String param) throws BusinessException;
 
 }

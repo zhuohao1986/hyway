@@ -60,6 +60,10 @@ public class BaseController {
 	public HttpSession getSession() {
 		return this.request.getSession();
 	}
+	public String getHeaderUserDetails() {
+		String token=request.getHeader("userDetails");
+		return token;
+	}
 
 	/**
 	 * controller初始化参数
@@ -72,12 +76,13 @@ public class BaseController {
 		retJson = new JSONObject();
 		if (null != getRequest()) {
 			this.paramMap = getRequestParamters();
-
+			
 			if (null != paramMap.get("params")) {
 				logger.info("params:" + params);
 				this.params = (String) paramMap.get("params");
 				this.jsonpCallback = (String) paramMap.get("jsonpCallback");
 				this.jsonData = JSONObject.parseObject(this.params);
+				jsonData.put("token", getHeaderUserDetails());
 			}
 
 			this.jsonData = (this.jsonData == null ? new JSONObject() : jsonData);

@@ -138,8 +138,6 @@ public class SysUserController extends BaseController{
 	@RequestMapping(value="/getUserResources")
 	public String getUserResources() {
 		initParams();
-		String cookieValue = CookieUtils.getCookieValue(request,ConfigKeyConstant.REDIS_ADMIN_USER_SESSION_KEY);
-		jsonData.put("token", cookieValue);
 		Result result = new Result(CodeConstants.RESULT_SUCCESS);
 		RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
 		String updateSysUsertStr = sysResourcesApi.selectUserSysResources(rw.toString());

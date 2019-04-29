@@ -63,6 +63,17 @@ public class SysResourcesController extends BaseController{
 		result = JSONObject.parseObject(sysResourcesListStr, Result.class);
 		return result.toString();
 	}
+	
+	@RequestMapping(value="/selectRoleListTree",produces=MediaType.APPLICATION_JSON_VALUE)
+	public String selectRoleListTree() {
+		initParams();
+		Result result = new Result(CodeConstants.RESULT_SUCCESS);
+		RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
+		String sysResourcesListStr = sysResourcesApi.selectRoleListTree(rw.toString());
+		result = JSONObject.parseObject(sysResourcesListStr, Result.class);
+		return result.toString();
+	}
+	
 	@RequestMapping(value="/insertSysResources",produces=MediaType.APPLICATION_JSON_VALUE)
 	public String insertSysResources() {
 		initParams();

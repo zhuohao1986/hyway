@@ -11,7 +11,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.github.pagehelper.PageInfo;
 import com.way.api.system.SysResourcesApi;
+import com.way.common.cache.JedisClient;
 import com.way.common.constant.CodeConstants;
+import com.way.common.constant.ConfigKeyConstant;
 import com.way.common.exception.BusinessException;
 import com.way.common.exception.ClientToolsException;
 import com.way.common.pojos.system.SysResources;
@@ -19,6 +21,7 @@ import com.way.common.pojos.system.SysUserRole;
 import com.way.common.pojos.system.dto.ResourcesTree;
 import com.way.common.stdo.RequestWrapper;
 import com.way.common.stdo.Result;
+import com.way.common.vo.UserVO;
 import com.way.system.service.SysResourcesService;
 import com.way.system.service.SysUserRoleService;
 
@@ -35,6 +38,8 @@ public class SysResourcesApiImpl implements SysResourcesApi {
 	private SysResourcesService sysResourcesService;
 	@Autowired
 	private SysUserRoleService sysUserRoleService;
+	@Autowired
+	private JedisClient jedisClient;
 
 	Result result = new Result();
 
@@ -57,6 +62,17 @@ public class SysResourcesApiImpl implements SysResourcesApi {
 				new TypeReference<HashMap<String, Object>>() {
 				});
 		List<ResourcesTree> sysResourcespage = sysResourcesService.selectListTree(paramMap);
+		result.setCode(CodeConstants.RESULT_SUCCESS);
+		result.setValue(sysResourcespage);
+		return result.toJSONString();
+	}
+	
+	@Override
+	public String selectRoleListTree(String param) throws BusinessException {
+		RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
+		JSONObject obj = JSONObject.parseObject(rw.getValue());
+		Integer roleId = obj.getInteger("roleId");
+		List<ResourcesTree> sysResourcespage = sysResourcesService.selectListResourcesTree(roleId);
 		result.setCode(CodeConstants.RESULT_SUCCESS);
 		result.setValue(sysResourcespage);
 		return result.toJSONString();
@@ -121,8 +137,9 @@ public class SysResourcesApiImpl implements SysResourcesApi {
 	public String selectUserSysResources(String param) {
 		RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
 		JSONObject obj = JSONObject.parseObject(rw.getValue());
-		Integer userId = obj.getInteger("userId");
-		SysUserRole userRole = sysUserRoleService.getUserRole(userId);
+		String userStr = jedisClient.get(ConfigKeyConstant.REDIS_ADMIN_USER_SESSION_KEY+":"+obj.getString("token"));
+		UserVO user=JSONObject.parseObject(userStr, UserVO.class);
+		SysUserRole userRole = sysUserRoleService.getUserRole(user.getUserId());
 		List<ResourcesTree> resourcesTree = sysResourcesService.selectListResourcesTree(userRole.getRoleId());
 		result.setCode(CodeConstants.RESULT_SUCCESS);
 		result.setValue(JSONObject.toJSONString(resourcesTree));
