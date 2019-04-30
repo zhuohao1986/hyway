@@ -8,7 +8,12 @@ package com.way.common.exception;
  */
 public class SmsTooMuchException extends BusinessException {
 
-    public SmsTooMuchException(String message) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2133826209156924171L;
+
+	public SmsTooMuchException(String message) {
         super(message);
     }
 

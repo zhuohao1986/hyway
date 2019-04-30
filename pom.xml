@@ -154,7 +154,7 @@
 	     <!-- 网关 -->
 	    <dependency>
 			<groupId>com.way</groupId>
-			<artifactId>hyway-service-gateway-api</artifactId>
+			<artifactId>hyway-gateway-api</artifactId>
 			<version>${hyway.version}</version>
 		</dependency>
 	    <!-- 添加Druid依赖 -->
@@ -358,7 +358,7 @@
 	<!-- 全局依赖 -->
 	<dependencies>
 		<!-- eureka-client -->
-       <dependency>
+       <!-- <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
@@ -373,7 +373,7 @@
         <dependency>
 		    <groupId>org.springframework.cloud</groupId>
 		    <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
-		</dependency>
+		</dependency> -->
 		</dependencies>
 	<repositories>
 		<repository>

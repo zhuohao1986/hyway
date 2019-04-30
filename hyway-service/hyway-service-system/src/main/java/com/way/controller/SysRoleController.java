@@ -12,7 +12,6 @@ import com.way.common.context.BaseController;
 import com.way.common.stdo.RequestWrapper;
 import com.way.common.stdo.Result;
 import com.way.common.utils.LogUtil;
-import com.way.common.utils.LogUtils;
 @RestController
 @RequestMapping(value="/role",produces=MediaType.APPLICATION_JSON_VALUE)
 public class SysRoleController extends BaseController{

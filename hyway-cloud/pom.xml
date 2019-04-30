@@ -11,11 +11,11 @@
   <name>hyway-cloud</name>
   <modules>
     	<!-- server -->
-	    <module>hyway-eureka-server</module>
-	    <module>hyway-config-server</module>
-	    <module>hyway-service-gateway</module>
-   		<module>hyway-service-zipkin</module>
-   		<module>hyway-service-monitor</module>
+	    <module>hyway-registry</module>
+	    <module>hyway-config</module>
+	    <module>hyway-gateway</module>
+   		<module>hyway-zipkin</module>
+   		<module>hyway-monitor</module>
   </modules>
   <dependencies>
   </dependencies>

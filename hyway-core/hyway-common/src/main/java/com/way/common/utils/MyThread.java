@@ -73,7 +73,7 @@ public abstract class MyThread implements Runnable {
 	}
 
 	public void setErrorTimes(int errorTimes) {
-		this.errorTimes = errorTimes;
+		MyThread.errorTimes = errorTimes;
 	}
 
 	public static int getMaxThread() {

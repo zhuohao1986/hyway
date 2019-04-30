@@ -1,7 +1,5 @@
 package com.way.common.pojos.im;
 
-import javax.persistence.*;
-
 public class Friendlist {
     private Integer master;
 

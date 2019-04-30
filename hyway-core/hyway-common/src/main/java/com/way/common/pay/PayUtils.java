@@ -27,16 +27,12 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 
 public class PayUtils {
-	
-	private static final Logger logger = LoggerFactory.getLogger(PayUtils.class);
 
 	/**
 	 * 获取POST过来的数据XML数据转成MAP

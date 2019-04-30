@@ -36,7 +36,7 @@ public interface SysUserMapper extends IBaseMapper<SysUser> {
      * @param dataScope 数据权限
      * @return list
      */
-    List selectUserVoPageDataScope(Query query, @Param("username") Object username);
+    List<?> selectUserVoPageDataScope(Query query, @Param("username") Object username);
 
     /**
      * 通过手机号查询用户信息（含有角色信息）

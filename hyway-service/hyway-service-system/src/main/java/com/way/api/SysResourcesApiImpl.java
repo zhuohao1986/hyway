@@ -1,5 +1,6 @@
 package com.way.api;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -137,10 +138,16 @@ public class SysResourcesApiImpl implements SysResourcesApi {
 	public String selectUserSysResources(String param) {
 		RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
 		JSONObject obj = JSONObject.parseObject(rw.getValue());
-		String userStr = jedisClient.get(ConfigKeyConstant.REDIS_ADMIN_USER_SESSION_KEY+":"+obj.getString("token"));
+		String userStr = jedisClient.get(ConfigKeyConstant.REDIS_ADMIN_USER_SESSION_KEY+obj.getString("token"));
 		UserVO user=JSONObject.parseObject(userStr, UserVO.class);
 		SysUserRole userRole = sysUserRoleService.getUserRole(user.getUserId());
-		List<ResourcesTree> resourcesTree = sysResourcesService.selectListResourcesTree(userRole.getRoleId());
+		List<ResourcesTree> resourcesTree=new ArrayList<>();
+		if(jedisClient.exists(ConfigKeyConstant.REDIS_ROLE_RESOURCES_SESSION_KEY+userRole.getRoleId())) {
+			String roleResourcesStr=jedisClient.get(ConfigKeyConstant.REDIS_ROLE_RESOURCES_SESSION_KEY+userRole.getRoleId());
+			resourcesTree=JSONObject.parseArray(roleResourcesStr, ResourcesTree.class);
+		}else {
+			resourcesTree = sysResourcesService.selectListResourcesTree(userRole.getRoleId());
+		}
 		result.setCode(CodeConstants.RESULT_SUCCESS);
 		result.setValue(JSONObject.toJSONString(resourcesTree));
 		return result.toJSONString();

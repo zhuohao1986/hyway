@@ -7,7 +7,11 @@ package com.way.common.exception;
  */
 public class ServerException extends BaseException {
 
-    private IError error;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6954148546032767778L;
+	private IError error;
     private String extMessage;
 
 

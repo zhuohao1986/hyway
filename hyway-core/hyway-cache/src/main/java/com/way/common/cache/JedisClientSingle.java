@@ -46,7 +46,6 @@ public class JedisClientSingle implements JedisClient{
 			jedis = jedisPool.getResource();
 			value = jedis.get(key);
 			log.info(value);
-			jedis.close();
 		} catch (Exception e) {
 			log.error(e.getMessage());
 		} finally {
@@ -2322,7 +2321,7 @@ public class JedisClientSingle implements JedisClient{
 	public  void returnResource(JedisPool jedisPool, Jedis jedis) {
 		if (jedis != null) {
 			jedis.close();
-			jedisPool.isClosed();
+			//jedisPool.close();
 		}
 	}
 	public long del(String key) {

@@ -21,6 +21,8 @@ import com.way.common.utils.StringUtils;
  * 基础controller
  * 
  * @author 
+ * @param <K>
+ * @param <V>
  * @date 2016-06-16
  */
 public class BaseController {

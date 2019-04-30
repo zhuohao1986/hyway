@@ -17,7 +17,9 @@ public class ConfigKeyConstant {
 	//发布路由信息的版本号
 	public final static String GATEWAY_ROUTES_VERSION="GATEWAY_ROUTES_VERSION";
 	
-	public final static String REDIS_ADMIN_USER_SESSION_KEY="hyway-token";
+	public final static String REDIS_ADMIN_USER_SESSION_KEY="hyway-token:";
+	
+	public final static String REDIS_ROLE_RESOURCES_SESSION_KEY="ROLE_RESOURCES:";
 	
 	public final static Integer REDIS_ADMIN_USER_EXPIRE=1800;
 }

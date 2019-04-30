@@ -7,7 +7,12 @@ package com.way.common.exception;
  */
 public class SystemException extends BaseException {
 
-    public SystemException() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1908490653209532101L;
+
+	public SystemException() {
         super();
     }
 

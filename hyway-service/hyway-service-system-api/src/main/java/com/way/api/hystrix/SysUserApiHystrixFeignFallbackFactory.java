@@ -31,7 +31,7 @@ public class SysUserApiHystrixFeignFallbackFactory implements FallbackFactory<Sy
 			@Override
 			public String selectSysUserPage(String param) {
 				// TODO Auto-generated method stub
-				return null;
+				return result.toJSONString();
 			}
 
 			@Override

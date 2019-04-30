@@ -9,11 +9,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.way.api.system.SysResourcesApi;
 import com.way.api.system.SysUserApi;
 import com.way.common.constant.CodeConstants;
-import com.way.common.constant.ConfigKeyConstant;
 import com.way.common.context.BaseController;
 import com.way.common.stdo.RequestWrapper;
 import com.way.common.stdo.Result;
-import com.way.common.utils.CookieUtils;
 @RestController
 @RequestMapping(value="/user",produces=MediaType.APPLICATION_JSON_VALUE)
 public class SysUserController extends BaseController{

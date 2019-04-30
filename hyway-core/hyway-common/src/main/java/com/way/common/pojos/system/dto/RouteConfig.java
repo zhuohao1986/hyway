@@ -5,7 +5,11 @@ import java.util.Map;
 
 public class RouteConfig implements Serializable{
 
-    @com.alibaba.fastjson.annotation.JSONField(name = "path")
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6402879099254689764L;
+	@com.alibaba.fastjson.annotation.JSONField(name = "path")
     private String path;
     @com.alibaba.fastjson.annotation.JSONField(name = "component")
     private String component;
