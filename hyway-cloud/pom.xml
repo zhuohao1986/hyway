@@ -11,8 +11,6 @@
   <name>hyway-cloud</name>
   <modules>
     	<!-- server -->
-	    <module>hyway-registry</module>
-	    <module>hyway-config</module>
 	    <module>hyway-gateway</module>
    		<module>hyway-zipkin</module>
    		<module>hyway-monitor</module>

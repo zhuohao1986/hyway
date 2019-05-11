@@ -10,6 +10,7 @@ import de.codecentric.boot.admin.server.config.AdminServerProperties;
 
 @Configuration
 public class SecuritySecureConfig extends WebSecurityConfigurerAdapter {
+	
 	private final String adminContextPath;
 
 	public SecuritySecureConfig(AdminServerProperties adminServerProperties) {
@@ -30,9 +31,8 @@ public class SecuritySecureConfig extends WebSecurityConfigurerAdapter {
 				.anyRequest().authenticated().and()
 				// 配置登录和注销。
 				.formLogin().loginPage(adminContextPath + "/login").successHandler(successHandler).and().logout()
-				.logoutUrl(adminContextPath + "/logout").and()
-				.logout().logoutUrl(adminContextPath + "/logout").and()
-				 //启用HTTP-Basic支持。这是Spring Boot Admin Client注册所必需的
+				.logoutUrl(adminContextPath + "/logout").and().logout().logoutUrl(adminContextPath + "/logout").and()
+				// 启用HTTP-Basic支持。这是Spring Boot Admin Client注册所必需的
 				.httpBasic().and().csrf()
 				// 使用Cookie启用CSRF保护
 				.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
