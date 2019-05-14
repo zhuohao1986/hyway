@@ -5,6 +5,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -232,5 +233,10 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
 		String[] files = fileName.split("\\.");
 		String str = newName + "." + fileName.split("\\.")[files.length - 1];
 		return str;
+	}
+
+	public static String getUUIDString() {
+		String uuid=UUID.randomUUID().toString().replaceAll("-", "");
+		return uuid;
 	}
 }

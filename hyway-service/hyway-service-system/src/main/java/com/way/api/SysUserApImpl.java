@@ -178,14 +178,16 @@ public class SysUserApImpl implements SysUserApi {
 			return result.toJSONString();
 		}
 		sysuser.setPassword(null);
-		String hyway_admin_token=UUID.randomUUID().toString().replaceAll("-","");
-		jedisClient.set(ConfigKeyConstant.REDIS_ADMIN_USER_SESSION_KEY+hyway_admin_token,JSONObject.toJSONString(sysuser));
-		jedisClient.expire(ConfigKeyConstant.REDIS_ADMIN_USER_SESSION_KEY+hyway_admin_token, ConfigKeyConstant.REDIS_ADMIN_USER_EXPIRE);
-		Map<String,Object> map=new HashMap<>();
-		map.put("uuid", sysuser.getUuid());
-		map.put("name", sysuser.getUsername());
-		map.put("token",hyway_admin_token);
-		result.setValue(JSONObject.toJSONString(map));
+		/*
+		 * String hyway_admin_token=UUID.randomUUID().toString().replaceAll("-","");
+		 * jedisClient.set(ConfigKeyConstant.REDIS_ADMIN_USER_SESSION_KEY+
+		 * hyway_admin_token,JSONObject.toJSONString(sysuser));
+		 * jedisClient.expire(ConfigKeyConstant.REDIS_ADMIN_USER_SESSION_KEY+
+		 * hyway_admin_token, ConfigKeyConstant.REDIS_ADMIN_USER_EXPIRE);
+		 * Map<String,Object> map=new HashMap<>(); map.put("uuid", sysuser.getUuid());
+		 * map.put("name", sysuser.getUsername()); map.put("token",hyway_admin_token);
+		 */
+		result.setValue(JSONObject.toJSONString(sysuser));
 		return result.toJSONString();
 	}
 

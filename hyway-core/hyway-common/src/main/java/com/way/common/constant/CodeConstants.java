@@ -12,5 +12,6 @@ public class CodeConstants {
 	public final static String ALL_REQUEST_CHANNEL_IOS = "ios";// ios
 	public final static String ALL_REQUEST_CHANNEL_WEB = "web";// web
 	public final static String ALL_REQUEST_CHANNEL_WAP = "wap";
+	public final static String ALL_REQUEST_CHANNEL_SERVICE = "service";// web
 
 }

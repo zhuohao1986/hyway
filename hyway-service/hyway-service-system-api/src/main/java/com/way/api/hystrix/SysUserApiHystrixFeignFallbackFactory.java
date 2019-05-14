@@ -31,7 +31,7 @@ public class SysUserApiHystrixFeignFallbackFactory implements FallbackFactory<Sy
 			@Override
 			public String selectSysUserPage(String param) {
 				// TODO Auto-generated method stub
-				return result.toJSONString();
+				return null;
 			}
 
 			@Override
@@ -59,16 +59,18 @@ public class SysUserApiHystrixFeignFallbackFactory implements FallbackFactory<Sy
 			}
 
 			@Override
-			public String updateSysDict(String param) {
+			public String login(String param) {
+				// TODO Auto-generated method stub
+				return result.toJSONString();
+			}
+
+			@Override
+			public String logout(String param) {
 				// TODO Auto-generated method stub
 				return null;
 			}
 
-			@Override
-			public String refreshSysDict(String param) {
-				// TODO Auto-generated method stub
-				return null;
-			}
+			
            
         };
 	}

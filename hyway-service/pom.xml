@@ -27,6 +27,7 @@
 		<module>hyway-service-open</module>
 		<module>hyway-service-task</module>
         <module>hyway-messge-mq</module>
+    <module>hyway-authentication</module>
   </modules>
   <dependencies>
   </dependencies>

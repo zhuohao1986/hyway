@@ -68,7 +68,7 @@ public class SysUserController extends BaseController{
 	 * 用户注销
 	 * @return
 	 */
-	@RequestMapping(value="/loginOut")
+	@RequestMapping(value="/logout")
 	public String userSignOut() {
 		initParams();
 		Result result = new Result(CodeConstants.RESULT_SUCCESS);

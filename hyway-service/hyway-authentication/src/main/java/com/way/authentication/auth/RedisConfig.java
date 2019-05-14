@@ -1,4 +1,4 @@
-package com.way.gateway.config;
+package com.way.authentication.auth;
 
 import java.time.Duration;
 
@@ -48,7 +48,6 @@ public class RedisConfig extends CachingConfigurerSupport{
 
 	@Value("${spring.redis.jedis.timeout}")
 	private int timeout;
-	
 	
 	@Bean
 	public RedisConnectionFactory connectionFactory() {
