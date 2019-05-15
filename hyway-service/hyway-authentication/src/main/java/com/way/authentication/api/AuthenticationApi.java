@@ -8,4 +8,6 @@ public interface AuthenticationApi {
 
 	String refreshToken(String param);
 
+	String getInfo(String param);
+
 }

@@ -13,11 +13,13 @@ public class ConfigKeyConstant {
 	//全局字典缓存
 	public final static String REDIS_SYS_DICT_KEY = "REDIS_SYS_DICT_KEY";
 	//路由
-	public final static String GATEWAY_ROUTES="GATEWAY_ROUTES:";
+	public final static String GATEWAY_ROUTES="GATEWAY_ROUTES";
 	//发布路由信息的版本号
 	public final static String GATEWAY_ROUTES_VERSION="GATEWAY_ROUTES_VERSION";
 	
-	public final static String REDIS_ADMIN_USER_SESSION_KEY="hyway-token:";
+	public final static String REDIS_ADMIN_USER_SESSION_KEY="HYWAY_ADMIN_TOKEN:";
+	
+	public static final String AUTHENTICATION_KEY="user_token";
 	
 	public final static String REDIS_ROLE_RESOURCES_SESSION_KEY="ROLE_RESOURCES:";
 	

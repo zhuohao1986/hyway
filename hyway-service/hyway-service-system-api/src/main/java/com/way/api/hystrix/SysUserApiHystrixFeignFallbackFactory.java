@@ -29,49 +29,15 @@ public class SysUserApiHystrixFeignFallbackFactory implements FallbackFactory<Sy
         {
 
 			@Override
-			public String selectSysUserPage(String param) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public String sysUser(String param) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public String selectUserList(String param) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public String insertUser(String param) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public String deleteSysUserById(String param) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public String login(String param) {
-				// TODO Auto-generated method stub
+			public String logout(String param) {
 				return result.toJSONString();
 			}
 
 			@Override
-			public String logout(String param) {
+			public Result login(String param) {
 				// TODO Auto-generated method stub
 				return null;
 			}
-
-			
-           
         };
 	}
 }

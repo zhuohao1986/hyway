@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 
-import com.way.gateway.filter.JWTAuthFilter;
 import com.way.gateway.filter.RequestGlobalFilter;
 
 @EnableDiscoveryClient
@@ -27,11 +26,4 @@ public class GateWaySpringApplication {
 	public RequestGlobalFilter requestGlobalFilter() {
 		return new RequestGlobalFilter();
 	}
-	
-	@Bean
-	public JWTAuthFilter jWTAuthFilter() {
-		return new JWTAuthFilter();
-	}
-	
-
 }

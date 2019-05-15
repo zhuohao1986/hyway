@@ -138,7 +138,7 @@ public class SysResourcesApiImpl implements SysResourcesApi {
 	public String selectUserSysResources(String param) {
 		RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
 		JSONObject obj = JSONObject.parseObject(rw.getValue());
-		String userStr = jedisClient.get(ConfigKeyConstant.REDIS_ADMIN_USER_SESSION_KEY+obj.getString("token"));
+		String userStr = jedisClient.hget(ConfigKeyConstant.REDIS_ADMIN_USER_SESSION_KEY+obj.getString("user"),ConfigKeyConstant.AUTHENTICATION_KEY);
 		UserVO user=JSONObject.parseObject(userStr, UserVO.class);
 		SysUserRole userRole = sysUserRoleService.getUserRole(user.getUserId());
 		List<ResourcesTree> resourcesTree=new ArrayList<>();

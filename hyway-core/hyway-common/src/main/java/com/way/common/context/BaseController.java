@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.alibaba.fastjson.JSONObject;
 import com.way.common.utils.StringUtils;
+import com.way.common.vo.UserVO;
 
 /**
  * 基础controller
@@ -63,8 +64,10 @@ public class BaseController {
 		return this.request.getSession();
 	}
 	public String getHeaderUserDetails() {
-		String token=request.getHeader("userDetails");
-		return token;
+		if(request.getHeader("userDetails") != null) {
+			return request.getHeader("userDetails");
+		}
+		return null;
 	}
 
 	/**
@@ -84,7 +87,7 @@ public class BaseController {
 				this.params = (String) paramMap.get("params");
 				this.jsonpCallback = (String) paramMap.get("jsonpCallback");
 				this.jsonData = JSONObject.parseObject(this.params);
-				jsonData.put("token", getHeaderUserDetails());
+				jsonData.put("user", getHeaderUserDetails());
 			}
 
 			this.jsonData = (this.jsonData == null ? new JSONObject() : jsonData);

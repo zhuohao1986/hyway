@@ -163,7 +163,8 @@ public class SysUserApImpl implements SysUserApi {
 	public String userSignIn(String param) {
 		Result result = new Result(CodeConstants.RESULT_SUCCESS,"登陆成功");
 		RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
-		JSONObject obj=JSONObject.parseObject(rw.getValue());
+		JSONObject params=JSONObject.parseObject(rw.getValue());
+		JSONObject obj=JSONObject.parseObject(params.getString("param"));
 		String userName = obj.getString("username");
 		String pwd = obj.getString("password");
 		UserVO sysuser = sysUserService.findUserByUsername(userName);

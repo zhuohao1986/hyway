@@ -56,13 +56,13 @@ public class SysUserController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping(value="/login")
-	public String userSignIn() {
+	public Result userSignIn() {
 		initParams();
 		Result result = new Result(CodeConstants.RESULT_SUCCESS);
 		RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
-		String SysUsertStr = sysUserApi.userSignIn(rw.toString());
-		result = JSONObject.parseObject(SysUsertStr, Result.class);
-		return result.toString();
+		String sysUsertStr = sysUserApi.userSignIn(rw.toString());
+		result = JSONObject.parseObject(sysUsertStr, Result.class);
+		return result;
 	}
 	/**
 	 * 用户注销
