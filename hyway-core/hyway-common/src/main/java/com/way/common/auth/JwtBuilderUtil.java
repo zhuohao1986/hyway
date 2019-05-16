@@ -102,11 +102,11 @@ public class JwtBuilderUtil {
 		// jwt的签发时间
 		Calendar cal = Calendar.getInstance();
 		Date date = cal.getTime();
-		cal.add(Calendar.MILLISECOND, duration);
+		cal.add(Calendar.SECOND, duration);
 		Date plusdate = cal.getTime();
 
 		cal.setTime(nbf);
-		cal.add(Calendar.MILLISECOND, duration);
+		cal.add(Calendar.SECOND, duration);
 		Date nbfdate = cal.getTime();
 
 		// jwt的过期时间，这个过期时间必须要大于签发时间

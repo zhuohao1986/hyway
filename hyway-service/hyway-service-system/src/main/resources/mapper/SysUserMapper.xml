@@ -13,7 +13,7 @@
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="avatar" jdbcType="VARCHAR" property="avatar" />
     <result column="label" jdbcType="VARCHAR" property="label" />
-    <result column="deptId" jdbcType="INTEGER" property="deptid" />
+    <result column="dept_id" jdbcType="INTEGER" property="deptId" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
     <result column="create_by" jdbcType="VARCHAR" property="createBy" />
@@ -150,6 +150,9 @@
     </select>
     <select id="selectList" resultMap="BaseResultMap" parameterType="map">
      select  * FROM
-            t_sys_user AS `user` where 1=1
+            t_sys_user AS `user` where 1=1 
+            <if test="username != null and username != ''">
+                and `user`.username LIKE CONCAT('%',#{username},'%') 
+            </if>
     </select>
 </mapper>

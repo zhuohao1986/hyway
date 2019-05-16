@@ -21,8 +21,12 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import com.alibaba.fastjson.JSON;
+import com.way.common.constant.CodeConstants;
 import com.way.common.exception.BaseException;
+import com.way.common.exception.DefaultError;
+import com.way.common.exception.IError;
 import com.way.common.exception.ResultExecption;
+import com.way.common.stdo.Result;
 
 /**
  * 全局异常控制类
@@ -135,11 +139,9 @@ public class GlobalExceptionHandler {
             response.setCharacterEncoding("UTF8");
             response.setHeader("Content-Type", "application/json");
             try {
-                response.getWriter().write(/*ResultJsonTools.build(
-                        ResponseCodeConstant.SYSTEM_ERROR,
-                        ResponseMessageConstant.APP_EXCEPTION,
-                        JSONObject.parseObject(*/JSON.toJSONString(entity)/*)*/
-                );
+            	
+            	Result result=new Result(CodeConstants.RESULT_FAIL,DefaultError.ACCESS_DENIED);
+                response.getWriter().write(JSON.toJSONString(entity));
             } catch (IOException e) {
                 e.printStackTrace();
             }

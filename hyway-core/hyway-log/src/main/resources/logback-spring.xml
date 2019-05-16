@@ -39,9 +39,12 @@
             <charset>UTF-8</charset>
         </encoder>
     </appender>
-
 	<root level="info">
        <appender-ref ref="STDOUT" />
     </root>
+    <!--开发环境:打印控制台-->
+    <springProfile name="dev,test">
+    <logger name="com.way.dao" level="DEBUG" />
+    </springProfile>
 
 </configuration>

@@ -2,6 +2,7 @@ package com.way.system.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.way.common.pojos.system.SysUserRole;
@@ -21,6 +22,7 @@ import tk.mybatis.mapper.entity.Example;
 @Service
 public class SysUserRoleServiceImpl  implements SysUserRoleService {
 	
+	@Autowired
 	private SysUserRoleMapper sysUserRoleMapper;
 
     /**

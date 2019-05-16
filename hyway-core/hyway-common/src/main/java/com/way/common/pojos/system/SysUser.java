@@ -22,9 +22,9 @@ public class SysUser {
     private String avatar;
 
     private String label;
-
-    @Column(name = "deptId")
-    private Integer deptid;
+    
+    @Column(name = "dept_id")
+    private Integer deptId;
 
     @Column(name = "create_time")
     private Date createTime;
@@ -147,21 +147,15 @@ public class SysUser {
         this.label = label == null ? null : label.trim();
     }
 
-    /**
-     * @return deptId
-     */
-    public Integer getDeptid() {
-        return deptid;
-    }
+    public Integer getDeptId() {
+		return deptId;
+	}
 
-    /**
-     * @param deptid
-     */
-    public void setDeptid(Integer deptid) {
-        this.deptid = deptid;
-    }
+	public void setDeptId(Integer deptId) {
+		this.deptId = deptId;
+	}
 
-    /**
+	/**
      * @return create_time
      */
     public Date getCreateTime() {

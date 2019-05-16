@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.alibaba.fastjson.JSONObject;
 import com.way.common.utils.StringUtils;
-import com.way.common.vo.UserVO;
 
 /**
  * 基础controller
@@ -81,21 +80,20 @@ public class BaseController {
 		retJson = new JSONObject();
 		if (null != getRequest()) {
 			this.paramMap = getRequestParamters();
-			
 			if (null != paramMap.get("params")) {
 				logger.info("params:" + params);
 				this.params = (String) paramMap.get("params");
 				this.jsonpCallback = (String) paramMap.get("jsonpCallback");
 				this.jsonData = JSONObject.parseObject(this.params);
-				jsonData.put("user", getHeaderUserDetails());
 			}
-
 			this.jsonData = (this.jsonData == null ? new JSONObject() : jsonData);
 
 			this.jsonData = JSONObject.parseObject(JSONObject.toJSONString(this.paramMap)); // paramMap.getJSONObject("params");//JSONObject.parseObject(request.getParameter("params"));
 			this.jsonData = (jsonData == null ? new JSONObject() : jsonData);
+			
 			this.jsonpCallback = (String) paramMap.get("jsonpCallback");
 		}
+		this.jsonData.put("user_token", getHeaderUserDetails());
 	}
 
 	/**

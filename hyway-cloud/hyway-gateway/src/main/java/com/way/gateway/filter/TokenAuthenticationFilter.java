@@ -15,7 +15,6 @@ import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 
 import com.way.common.auth.JWTUtil;
-import com.way.common.constant.ConfigKeyConstant;
 import com.way.common.utils.StringUtils;
 
 import reactor.core.publisher.Mono;
@@ -28,7 +27,7 @@ public class TokenAuthenticationFilter extends AbstractGatewayFilterFactory<Obje
 	
 	private static final Logger logger = LoggerFactory.getLogger(TokenAuthenticationFilter.class);
 	
-	public static final String[] ignoreUrl= {"/auth/auth/login"};
+	public static final String[] ignoreUrl= {"/auth/auth/login","/auth/auth/logout"};
 	
 	public final static String REDIS_USER_SESSION_KEY = "Bearer ";
 

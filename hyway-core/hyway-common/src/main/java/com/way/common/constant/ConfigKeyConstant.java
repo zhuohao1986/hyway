@@ -21,6 +21,8 @@ public class ConfigKeyConstant {
 	
 	public static final String AUTHENTICATION_KEY="user_token";
 	
+	public static final String AUTHENTICATION_USERINFO_CACHE_KEY="user";
+	
 	public final static String REDIS_ROLE_RESOURCES_SESSION_KEY="ROLE_RESOURCES:";
 	
 	public final static Integer REDIS_ADMIN_USER_EXPIRE=1800;

@@ -8,7 +8,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 
 public class JWTUtil {
-	public static final int TOKEN_EXPIRE_TIME = 30 * 60 * 1000; // token过期时间
+	public static final int TOKEN_EXPIRE_TIME = 1800; // token过期时间
 	public static final int REFRESH_TOKEN_EXPIRE_TIME = 10 * 60 * 1000; // refreshToken过期时间
 	private static final String ISSUER = "issuer"; // 签发人
 

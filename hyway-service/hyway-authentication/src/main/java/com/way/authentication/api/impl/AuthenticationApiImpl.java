@@ -52,7 +52,7 @@ public class AuthenticationApiImpl implements AuthenticationApi {
 		jedisClient.hset(ConfigKeyConstant.REDIS_ADMIN_USER_SESSION_KEY+ user_token, ConfigKeyConstant.AUTHENTICATION_KEY, user_token);
 		jedisClient.hset(ConfigKeyConstant.REDIS_ADMIN_USER_SESSION_KEY+ user_token, "user", result.getValue().toString());
 		// 设置token的过期时间
-		jedisClient.expire(ConfigKeyConstant.REDIS_ADMIN_USER_SESSION_KEY+ user_token, JWTUtil.REFRESH_TOKEN_EXPIRE_TIME);
+		jedisClient.expire(ConfigKeyConstant.REDIS_ADMIN_USER_SESSION_KEY+ user_token, ConfigKeyConstant.REDIS_ADMIN_USER_EXPIRE);
 		Map<String, String> respMap = new HashMap<String, String>();
 		respMap.put("token", token);
 		respMap.put("refreshToken", user_token);
