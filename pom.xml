@@ -24,7 +24,7 @@
     	<!-- serviceAPi -->
     	<module>hyway-service</module>
     	<!-- net-im -->
-    	<module>hyway-net</module>
+    	<!--<module>hyway-net</module>-->
   </modules>
 	<build/>
 	  <properties>

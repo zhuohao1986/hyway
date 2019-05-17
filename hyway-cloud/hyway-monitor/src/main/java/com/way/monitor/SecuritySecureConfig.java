@@ -8,7 +8,7 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 import de.codecentric.boot.admin.server.config.AdminServerProperties;
 
-@Configuration
+//@Configuration
 public class SecuritySecureConfig extends WebSecurityConfigurerAdapter {
 	private final String adminContextPath;
 

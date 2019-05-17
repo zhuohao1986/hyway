@@ -11,9 +11,6 @@
   <name>hyway-net</name>
   <packaging>pom</packaging>
   <modules>
-    	<!-- im -->
-	    <module>hyway-im</module>
-	    <module>hyway-im-client</module>
   </modules>
   <dependencies>
   </dependencies>
