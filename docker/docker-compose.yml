@@ -1,0 +1,78 @@
+version: '3'
+services:
+    registry:
+        #registry.cn-shenzhen.aliyuncs.com/beni/mysql:latest
+        image: hyway-registry:1.0
+        build: 
+           context: ./
+           dockerfile:  Dockerfile-registry
+           args:
+              buildno: 1
+        ports: 
+          - "2000:2000"
+        volumes: 
+          - /usr/local/cloud/logs/consumer:/logs
+          
+    config:
+        image: hyway-config:1.0
+        build: 
+           context: ./
+           dockerfile:  Dockerfile-config
+           args:
+              buildno: 1
+        ports: 
+          - "3000:3000"
+        volumes: 
+          - /usr/local/cloud/logs/consumer:/logs
+        links:
+          - hyway-registry
+
+    gateway:
+        image: hyway-system-service:1.0
+        build: 
+           context: ./
+           dockerfile:  Dockerfile-gateway
+           args:
+              buildno: 1
+        ports: 
+          - "8080:8000"
+        volumes: 
+          - /usr/local/cloud/logs/consumer:/logs
+        links:
+          - hyway-registry
+          - hyway-config          
+          
+    system-service:
+        image: hyway-system-service:1.0
+        build: 
+           context: ./
+           dockerfile:  Dockerfile-system-service
+           args:
+              buildno: 1
+        ports: 
+          - "4000:4000"
+        volumes: 
+          - /usr/local/cloud/logs/consumer:/logs
+        links:
+          - hyway-registry
+          - hyway-config
+          
+    authentication:
+        image: hyway-authentication:1.0
+        build: 
+           context: ./
+           dockerfile:  Dockerfile-authentication
+           args:
+              buildno: 1
+        ports: 
+          - "8888:8888"
+        volumes: 
+          - /usr/local/cloud/logs/consumer:/logs
+        links:
+          - hyway-registry
+          - hyway-config
+          
+          
+networks:
+    clooud:
+        driver: bridge
