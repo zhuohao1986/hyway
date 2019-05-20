@@ -17,7 +17,7 @@ VOLUME /tmp
 ENV JAVA_OPTS="-Xmx256m -Xms256m"
 ENV CONFIG_PROFILE=test
 
-ADD hyway-service-gateway.jar gateway.jar
+ADD ./hyway-gateway.jar gateway.jar
 
 RUN bash -c 'touch /gateway.jar'
 

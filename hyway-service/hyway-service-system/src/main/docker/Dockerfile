@@ -1,8 +1,8 @@
 #Dockerfile中的ENV支持以下变量的访问：ADD、COPY、ENV、EXPOSE、FROM、LABEL、STOPSIGNAL、USER、VOLUME、WORKDIR。
 
-#docker build -t hyway-registry .
+#docker build -t service-system .
 
-#docker run -d -it -P  hyway-registry 
+#docker run -d -it -P  service-system 
 
 #FROM（指定基础镜像） 
 FROM java:8-jre
@@ -17,8 +17,8 @@ VOLUME /tmp
 ENV JAVA_OPTS="-Xmx256m -Xms256m"
 ENV CONFIG_PROFILE=test
 
-ADD hyway-registry.jar hyway-registry.jar
+ADD hyway-system-service.jar service-system.jar
 
-RUN bash -c 'touch /hyway-registry.jar'
+RUN bash -c 'touch /service-system.jar'
 
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -Dfile.encoding=UTF8 -Duser.timezone=GMT+08 -Djava.security.egd=file:/dev/./urandom -jar /hyway-registry.jar --spring.profiles.active=$CONFIG_PROFILE"]

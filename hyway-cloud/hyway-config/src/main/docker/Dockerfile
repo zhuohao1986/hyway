@@ -17,7 +17,7 @@ VOLUME /tmp
 ENV JAVA_OPTS="-Xmx256m -Xms256m"
 ENV CONFIG_PROFILE=test
 
-ADD hyway-config-server.jar config-server.jar
+ADD ./hyway-config.jar config-server.jar
 
 RUN bash -c 'touch /config-server.jar'
 
