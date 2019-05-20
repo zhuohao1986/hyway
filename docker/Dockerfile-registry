@@ -10,15 +10,15 @@ FROM java:8-jre
 #指定镜像的作者和联系方式信息。
 MAINTAINER hyway "Samuel_way@163.com"
 
-EXPOSE 8080
+EXPOSE 2000
 
 VOLUME /tmp
 
 ENV JAVA_OPTS="-Xmx256m -Xms256m"
 ENV CONFIG_PROFILE=test
 
-ADD hyway-registry.jar registry.jar
+ADD hyway-registry.jar /app/registry.jar
 
-RUN bash -c 'touch /registry.jar'
+RUN bash -c 'touch /app/registry.jar'
 
-ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -Dfile.encoding=UTF8 -Duser.timezone=GMT+08 -Djava.security.egd=file:/dev/./urandom -jar /registry.jar --spring.profiles.active=$CONFIG_PROFILE"]
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -Dfile.encoding=UTF8 -Duser.timezone=GMT+08 -Djava.security.egd=file:/dev/./urandom -jar /app/registry.jar --spring.profiles.active=$CONFIG_PROFILE"]

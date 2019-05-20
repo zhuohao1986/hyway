@@ -2,7 +2,7 @@ version: '3'
 services:
     registry:
         #registry.cn-shenzhen.aliyuncs.com/beni/mysql:latest
-        image: hyway-registry:1.0
+        image: hyway-registry:latest
         build: 
            context: ./
            dockerfile:  Dockerfile-registry
@@ -11,10 +11,10 @@ services:
         ports: 
           - "2000:2000"
         volumes: 
-          - /usr/local/cloud/logs/consumer:/logs
+          - /hyway/logs/registry:/logs
           
     config:
-        image: hyway-config:1.0
+        image: hyway-config:latest
         build: 
            context: ./
            dockerfile:  Dockerfile-config
@@ -28,14 +28,14 @@ services:
           - hyway-registry
 
     gateway:
-        image: hyway-system-service:1.0
+        image: hyway-system-service:latest
         build: 
            context: ./
            dockerfile:  Dockerfile-gateway
            args:
               buildno: 1
         ports: 
-          - "8080:8000"
+          - "8080:8080"
         volumes: 
           - /usr/local/cloud/logs/consumer:/logs
         links:
@@ -43,7 +43,7 @@ services:
           - hyway-config          
           
     system-service:
-        image: hyway-system-service:1.0
+        image: hyway-system-service:latest
         build: 
            context: ./
            dockerfile:  Dockerfile-system-service
@@ -58,7 +58,7 @@ services:
           - hyway-config
           
     authentication:
-        image: hyway-authentication:1.0
+        image: hyway-authentication:latest
         build: 
            context: ./
            dockerfile:  Dockerfile-authentication
