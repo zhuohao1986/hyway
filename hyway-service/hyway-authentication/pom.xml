@@ -115,6 +115,16 @@
 	</dependencies>
 	<build>
 		<finalName>hyway-authentication</finalName>
+		<resources><!-- 使用@@站位符，输出Dockerfile至docker文件夹 -->
+            <resource>
+                <directory>src/main/docker</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/Dockerfile</include>
+                </includes>
+                <targetPath>../docker</targetPath>
+            </resource>
+        </resources>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
