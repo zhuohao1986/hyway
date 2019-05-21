@@ -17,7 +17,7 @@ VOLUME /tmp
 ENV JAVA_OPTS="-Xmx256m -Xms256m"
 ENV CONFIG_PROFILE=test
 
-ADD hyway-authentication.jar authentication.jar
+ADD ./hyway-authentication.jar authentication.jar
 
 RUN bash -c 'touch /authentication.jar'
 

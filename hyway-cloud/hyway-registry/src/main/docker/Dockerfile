@@ -17,7 +17,7 @@ VOLUME /tmp
 ENV JAVA_OPTS="-Xmx256m -Xms256m"
 ENV CONFIG_PROFILE=test
 
-ADD hyway-registry.jar hyway-registry.jar
+ADD ./hyway-registry.jar hyway-registry.jar
 
 RUN bash -c 'touch /hyway-registry.jar'
 
