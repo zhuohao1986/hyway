@@ -153,6 +153,13 @@
                 </includes>
                 <targetPath>../docker</targetPath>
             </resource>
+            <resource>
+        		<directory>${project.basedir}/src/main/resources</directory>
+       		 	<filtering>true</filtering>
+       		 	<excludes>
+       		 		<exclude>Dockerfile</exclude>
+       		 	</excludes>
+    		</resource>
         </resources>
 		<plugins>
 			<plugin>

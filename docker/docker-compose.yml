@@ -1,6 +1,6 @@
 version: '3'
 services:
-    registry:
+    hyway-registry:
         #registry.cn-shenzhen.aliyuncs.com/beni/mysql:latest
         image: hyway-registry:latest
         build: 
@@ -11,7 +11,7 @@ services:
         ports: 
           - "2000:2000"
         volumes: 
-          - /hyway/logs/registry:/logs
+          - /hyway/logs/registry:/hyway/logs/registry
           
     config:
         image: hyway-config:latest
@@ -23,7 +23,7 @@ services:
         ports: 
           - "3000:3000"
         volumes: 
-          - /usr/local/cloud/logs/consumer:/logs
+          - /hyway/logs/config:/hyway/logs/hyway-config
         links:
           - hyway-registry
 
@@ -37,7 +37,7 @@ services:
         ports: 
           - "8080:8080"
         volumes: 
-          - /usr/local/cloud/logs/consumer:/logs
+          - /hyway/logs/gateway:/hyway/logs/hyway-gateway
         links:
           - hyway-registry
           - hyway-config          
@@ -52,7 +52,7 @@ services:
         ports: 
           - "4000:4000"
         volumes: 
-          - /usr/local/cloud/logs/consumer:/logs
+          - /hyway/logs/system-service:/hyway/logs/hyway-system-service
         links:
           - hyway-registry
           - hyway-config
@@ -67,7 +67,7 @@ services:
         ports: 
           - "8888:8888"
         volumes: 
-          - /usr/local/cloud/logs/consumer:/logs
+          - /hyway/logs/authentication:/hyway/logs/hyway-authentication
         links:
           - hyway-registry
           - hyway-config
