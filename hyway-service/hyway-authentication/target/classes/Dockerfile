@@ -5,7 +5,7 @@
 #docker run -d -it -P  authentication 
 
 #FROM（指定基础镜像） 
-FROM java:8-jre
+FROM openjdk:8
 
 #指定镜像的作者和联系方式信息。
 MAINTAINER hyway "Samuel_way@163.com"
