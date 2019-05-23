@@ -84,22 +84,29 @@
 	</dependencies>
 	<build>
 		<finalName>hyway-service-task</finalName>
+		<resources><!-- 使用@@站位符，输出Dockerfile至docker文件夹 -->
+            <resource>
+                <directory>src/main/docker</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/Dockerfile</include>
+                </includes>
+                <targetPath>../docker</targetPath>
+            </resource>
+            <resource>
+        		<directory>${project.basedir}/src/main/resources</directory>
+       		 	<filtering>true</filtering>
+       		 	<excludes>
+       		 		<exclude>Dockerfile</exclude>
+       		 	</excludes>
+    		</resource>
+        </resources>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<mainClass>com.way.TaskServiceSpringApplication</mainClass>
-				</configuration>
-
-			</plugin>
-			<!-- ... -->
-			<!-- maven打包的时候告诉maven不需要web.xml,否刚会报找不到web.xml错误 -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<configuration>
-					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
 		</plugins>
