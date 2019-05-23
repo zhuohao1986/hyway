@@ -19,6 +19,6 @@ ENV CONFIG_PROFILE=test
 
 ADD ./hyway-service-task.jar service-task.jar
 
-RUN bash -c 'touch /monitor.jar'
+RUN bash -c 'touch /service-task.jar'
 
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -Dfile.encoding=UTF8 -Duser.timezone=GMT+08 -Djava.security.egd=file:/dev/./urandom -jar /service-task.jar --spring.profiles.active=$CONFIG_PROFILE"]
