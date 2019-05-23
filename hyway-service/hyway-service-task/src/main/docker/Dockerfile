@@ -10,7 +10,7 @@ FROM openjdk:8-jdk-alpine
 #指定镜像的作者和联系方式信息。
 MAINTAINER hyway "Samuel_way@163.com"
 
-EXPOSE 9200
+EXPOSE 2000
 
 VOLUME /tmp
 
