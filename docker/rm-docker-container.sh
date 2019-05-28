@@ -4,3 +4,5 @@ docker ps | awk  '{print $1}' | xargs docker stop
 docker ps -a | awk  '{print $1}' | xargs docker rm
 # 或者
 docker rm $(docker ps -a -q)
+#删除所有镜像
+docker rmi $(docker images)
