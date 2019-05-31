@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.way.common.utils.SpringUtil;
-import com.way.service.ExcuteJobService;
+import com.way.job.ExcuteJobService;
 
 /**
  * 定时任务工作类
