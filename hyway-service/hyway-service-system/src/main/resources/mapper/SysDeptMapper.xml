@@ -17,7 +17,7 @@
   </resultMap>
   <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        dept_id AS deptId, parent_id AS parentId, name, order_num AS orderNum, create_time AS createTime, modify_time AS modifyTime, del_state AS delState
+        dept_id,parent_id,name,order_num,create_time,create_by,modify_by,modify_time,del_state
     </sql>
   <select id="selectList" resultMap="BaseResultMap" parameterType="map">
      select 

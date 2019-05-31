@@ -15,6 +15,7 @@ import com.way.common.constant.CommonConstant;
 import com.way.common.pojos.system.SysDept;
 import com.way.common.pojos.system.SysDeptRelation;
 import com.way.common.pojos.system.dto.DeptTree;
+import com.way.common.utils.DateUtils;
 import com.way.common.utils.TreeUtil;
 import com.way.dao.SysDeptMapper;
 import com.way.dao.SysDeptRelationMapper;
@@ -47,8 +48,10 @@ public class SysDeptServiceImpl  implements SysDeptService {
     public Boolean insertDept(SysDept dept) {
         SysDept sysDept = new SysDept();
         BeanUtils.copyProperties(dept, sysDept);
+        sysDept.setCreateTime(DateUtils.getCurrentDate());
+        sysDept.setDelState(CommonConstant.DEL_FLAG_FALSE);
         sysDeptMapper.insert(sysDept);
-        insertDeptRelation(sysDept);
+        //insertDeptRelation(sysDept);
         return Boolean.TRUE;
     }
 
@@ -140,6 +143,7 @@ public class SysDeptServiceImpl  implements SysDeptService {
             node.setId(dept.getDeptId());
             node.setParentId(dept.getParentId());
             node.setName(dept.getName());
+            node.setLabel(dept.getName());
             trees.add(node);
         }
         return TreeUtil.bulid(trees, root);

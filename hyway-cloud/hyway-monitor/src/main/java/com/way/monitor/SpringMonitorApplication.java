@@ -2,20 +2,12 @@ package com.way.monitor;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
-import org.springframework.cloud.netflix.turbine.EnableTurbine;
-import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 import de.codecentric.boot.admin.server.config.EnableAdminServer;
 
 @EnableAdminServer
-@EnableEurekaClient
-@EnableHystrixDashboard
-@EnableCircuitBreaker
-@EnableTurbine
-@EnableFeignClients
+@EnableDiscoveryClient
 @SpringBootApplication
 public class SpringMonitorApplication {
 

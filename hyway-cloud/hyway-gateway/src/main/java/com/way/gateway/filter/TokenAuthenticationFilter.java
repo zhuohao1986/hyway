@@ -27,7 +27,7 @@ public class TokenAuthenticationFilter extends AbstractGatewayFilterFactory<Obje
 	
 	private static final Logger logger = LoggerFactory.getLogger(TokenAuthenticationFilter.class);
 	
-	public static final String[] ignoreUrl= {"/auth/auth/login","/auth/auth/logout"};
+	public static final String[] ignoreUrl= {"/auth/auth/login","/auth/auth/logout","/actuator/hystrix.stream"};
 	
 	public final static String REDIS_USER_SESSION_KEY = "Bearer ";
 

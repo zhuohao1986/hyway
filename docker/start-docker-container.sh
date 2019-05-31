@@ -5,3 +5,10 @@ docker-compose up -d
 docker-compose down 
 #重启服务
 docker-compose restart 
+
+
+
+#nacos 启动
+
+
+
