@@ -1,4 +1,4 @@
-package com.way.system.service.impl;
+package com.way.service.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.way.common.pojos.system.SysRoleResources;
 import com.way.dao.SysRoleResourcesMapper;
-import com.way.system.service.SysRoleResourcesService;
+import com.way.service.SysRoleResourcesService;
 
 import tk.mybatis.mapper.entity.Example;
 

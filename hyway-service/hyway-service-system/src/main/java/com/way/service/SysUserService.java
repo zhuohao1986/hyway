@@ -1,4 +1,4 @@
-package com.way.system.service;
+package com.way.service;
 
 import java.io.IOException;
 import java.util.Map;

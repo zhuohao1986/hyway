@@ -1,4 +1,4 @@
-package com.way.system.service.impl;
+package com.way.service.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,7 +19,7 @@ import com.way.common.utils.DateUtils;
 import com.way.common.utils.TreeUtil;
 import com.way.dao.SysDeptMapper;
 import com.way.dao.SysDeptRelationMapper;
-import com.way.system.service.SysDeptService;
+import com.way.service.SysDeptService;
 
 import tk.mybatis.mapper.entity.Example;
 

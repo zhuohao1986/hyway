@@ -1,4 +1,4 @@
-package com.way.system.service.impl;
+package com.way.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ import com.way.common.pojos.system.dto.ResourcesTree;
 import com.way.common.utils.DateUtils;
 import com.way.common.utils.TreeUtil;
 import com.way.dao.SysResourcesMapper;
-import com.way.system.service.SysResourcesService;
+import com.way.service.SysResourcesService;
 
 import tk.mybatis.mapper.entity.Example;
 

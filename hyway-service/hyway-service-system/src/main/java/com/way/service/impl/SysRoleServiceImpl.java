@@ -1,4 +1,4 @@
-package com.way.system.service.impl;
+package com.way.service.impl;
 
 import java.util.List;
 import java.util.Map;
@@ -15,7 +15,7 @@ import com.way.common.pojos.system.SysRoleDept;
 import com.way.common.pojos.system.dto.RoleDTO;
 import com.way.dao.SysRoleDeptMapper;
 import com.way.dao.SysRoleMapper;
-import com.way.system.service.SysRoleService;
+import com.way.service.SysRoleService;
 
 import tk.mybatis.mapper.entity.Example;
 

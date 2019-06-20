@@ -26,12 +26,12 @@ import com.way.common.stdo.Result;
 import com.way.common.utils.DEncryptionUtils;
 import com.way.common.utils.StringUtils;
 import com.way.common.vo.UserVO;
-import com.way.system.service.SysUserRoleService;
-import com.way.system.service.SysUserService;
+import com.way.service.SysUserRoleService;
+import com.way.service.SysUserService;
 
 /**
  * <p>
- * 字典表 服务类
+ * 用户表 服务类
  * </p>
  * 
  */
@@ -166,7 +166,17 @@ public class SysUserApImpl implements SysUserApi {
 		JSONObject params=JSONObject.parseObject(rw.getValue());
 		JSONObject obj=JSONObject.parseObject(params.getString("param"));
 		String userName = obj.getString("username");
+		if(StringUtils.isEmpty(userName)) {
+			result.setMessage("用户名不能为空");
+			result.setCode(CodeConstants.RESULT_FAIL);
+			return result.toJSONString();
+		}
 		String pwd = obj.getString("password");
+		if(StringUtils.isEmpty(pwd)) {
+			result.setMessage("密码不能为空");
+			result.setCode(CodeConstants.RESULT_FAIL);
+			return result.toJSONString();
+		}
 		UserVO sysuser = sysUserService.findUserByUsername(userName);
 		if(sysuser==null) {
 			result.setMessage("用户不存在");

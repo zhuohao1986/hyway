@@ -1,4 +1,4 @@
-package com.way.system.service.impl;
+package com.way.service.impl;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.way.common.pojos.system.SysUserRole;
 import com.way.dao.SysUserRoleMapper;
-import com.way.system.service.SysUserRoleService;
+import com.way.service.SysUserRoleService;
 
 import tk.mybatis.mapper.entity.Example;
 

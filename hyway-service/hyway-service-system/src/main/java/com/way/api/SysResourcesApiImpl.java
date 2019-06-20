@@ -23,12 +23,12 @@ import com.way.common.pojos.system.dto.ResourcesTree;
 import com.way.common.stdo.RequestWrapper;
 import com.way.common.stdo.Result;
 import com.way.common.vo.UserVO;
-import com.way.system.service.SysResourcesService;
-import com.way.system.service.SysUserRoleService;
+import com.way.service.SysResourcesService;
+import com.way.service.SysUserRoleService;
 
 /**
  * <p>
- * 字典表 服务类
+ * 菜单 服务类
  * </p>
  * 
  */
