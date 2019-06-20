@@ -18,11 +18,11 @@ import com.way.common.pojos.system.SysDept;
 import com.way.common.pojos.system.dto.DeptTree;
 import com.way.common.stdo.RequestWrapper;
 import com.way.common.stdo.Result;
-import com.way.system.service.SysDeptService;
+import com.way.service.SysDeptService;
 
 /**
  * <p>
- * 字典表 服务类
+ * 部门表 服务类
  * </p>
  * 
  */

@@ -1,4 +1,4 @@
-package com.way.system.service;
+package com.way.service;
 
 import com.way.common.pojos.system.SysUserRole;
 

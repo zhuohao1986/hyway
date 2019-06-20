@@ -1,4 +1,4 @@
-package com.way.system.service.impl;
+package com.way.service.impl;
 
 import java.util.List;
 import java.util.Map;
@@ -10,7 +10,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.way.common.pojos.system.SysRouteConfig;
 import com.way.dao.SysRouteConfigMapper;
-import com.way.system.service.SysRouteConfigService;
+import com.way.service.SysRouteConfigService;
 
 @Service
 public class SysRouteConfigServiceImpl implements SysRouteConfigService {

@@ -1,4 +1,4 @@
-package com.way.system.service.impl;
+package com.way.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -7,7 +7,7 @@ import com.way.common.constant.CommonConstant;
 import com.way.common.pojos.system.SysOperRecord;
 import com.way.common.utils.DateUtils;
 import com.way.dao.SysOperRecordMapper;
-import com.way.system.service.SysOperRecordService;
+import com.way.service.SysOperRecordService;
 
 /**
  * <p>

@@ -1,4 +1,4 @@
-package com.way.system.service.impl;
+package com.way.service.impl;
 
 
 import java.io.IOException;
@@ -36,10 +36,10 @@ import com.way.common.utils.StringUtils;
 import com.way.common.vo.SysRole;
 import com.way.common.vo.UserVO;
 import com.way.dao.SysUserMapper;
-import com.way.system.service.SysDeptRelationService;
-import com.way.system.service.SysResourcesService;
-import com.way.system.service.SysUserRoleService;
-import com.way.system.service.SysUserService;
+import com.way.service.SysDeptRelationService;
+import com.way.service.SysResourcesService;
+import com.way.service.SysUserRoleService;
+import com.way.service.SysUserService;
 
 import tk.mybatis.mapper.entity.Example;
 

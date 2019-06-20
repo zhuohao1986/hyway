@@ -28,8 +28,12 @@ import com.way.common.stdo.RequestWrapper;
 import com.way.common.stdo.Result;
 import com.way.common.utils.DateUtils;
 import com.way.common.utils.StringUtils;
-import com.way.system.service.SysRouteConfigService;
-
+import com.way.service.SysRouteConfigService;
+/**
+ * 
+ * @author way
+ *  网管路由配置
+ */
 @Service
 public class SysRouteConfigApiImpl implements SysRouteConfigApi{
 	

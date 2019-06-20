@@ -19,7 +19,7 @@ import com.way.common.exception.ClientToolsException;
 import com.way.common.pojos.system.SysDict;
 import com.way.common.stdo.RequestWrapper;
 import com.way.common.stdo.Result;
-import com.way.system.service.SysDictService;
+import com.way.service.SysDictService;
 
 /**
  * <p>

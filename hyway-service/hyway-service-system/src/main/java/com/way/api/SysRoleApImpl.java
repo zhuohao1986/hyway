@@ -18,12 +18,12 @@ import com.way.common.pojos.system.SysRole;
 import com.way.common.pojos.system.dto.RoleDTO;
 import com.way.common.stdo.RequestWrapper;
 import com.way.common.stdo.Result;
-import com.way.system.service.SysRoleResourcesService;
-import com.way.system.service.SysRoleService;
+import com.way.service.SysRoleResourcesService;
+import com.way.service.SysRoleService;
 
 /**
  * <p>
- * 字典表 服务类
+ * 角色表 服务类
  * </p>
  * 
  */
