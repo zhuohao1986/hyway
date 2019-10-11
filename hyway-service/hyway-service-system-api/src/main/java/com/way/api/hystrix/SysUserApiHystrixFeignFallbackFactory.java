@@ -34,6 +34,16 @@ public class SysUserApiHystrixFeignFallbackFactory implements FallbackFactory<Sy
 			}
 
 			@Override
+			public Result loginOpenId(String param) {
+				return null;
+			}
+
+			@Override
+			public Result userAutoReg(String param) {
+				return null;
+			}
+
+			@Override
 			public Result login(String param) {
 				// TODO Auto-generated method stub
 				return null;
