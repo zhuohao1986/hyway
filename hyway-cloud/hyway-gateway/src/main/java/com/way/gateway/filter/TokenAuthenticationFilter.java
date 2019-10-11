@@ -1,10 +1,12 @@
 package com.way.gateway.filter;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.core.io.buffer.DataBuffer;
@@ -14,8 +16,11 @@ import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 
+import com.alibaba.fastjson.JSONObject;
 import com.way.common.auth.JWTUtil;
+import com.way.common.constant.ConfigKeyConstant;
 import com.way.common.utils.StringUtils;
+import com.way.gateway.cache.JedisClient;
 
 import reactor.core.publisher.Mono;
 
@@ -27,9 +32,14 @@ public class TokenAuthenticationFilter extends AbstractGatewayFilterFactory<Obje
 	
 	private static final Logger logger = LoggerFactory.getLogger(TokenAuthenticationFilter.class);
 	
-	public static final String[] ignoreUrl= {"/auth/auth/login","/auth/auth/logout","/actuator/hystrix.stream"};
-	
 	public final static String REDIS_USER_SESSION_KEY = "Bearer ";
+	
+	private final JedisClient jedisClient;
+	
+	@Autowired
+	public TokenAuthenticationFilter(JedisClient jedisClient) {
+		this.jedisClient = jedisClient;
+	}
 
 	@Override
 	public GatewayFilter apply(Object config) {
@@ -38,12 +48,11 @@ public class TokenAuthenticationFilter extends AbstractGatewayFilterFactory<Obje
 			ServerHttpRequest.Builder mutate = request.mutate();
 			ServerHttpResponse response = exchange.getResponse();
 			try {
+				List<String> ignoreUrlList=JSONObject.parseArray(jedisClient.get(ConfigKeyConstant.GATEWAY_IGNORE_URLS_KEY),String.class);
 				boolean flag = false;
-		        for (String page:ignoreUrl) {
-		            if (request.getURI().getPath().equals(page)){
-		                flag = true;
-		            }
-		        }
+				if(ignoreUrlList.contains(request.getURI().getPath())) {
+					flag = true;
+				}
 		        if(flag) {
 		        	ServerHttpRequest build = mutate.build();
 					return chain.filter(exchange.mutate().request(build).build());

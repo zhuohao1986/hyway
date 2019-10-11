@@ -26,4 +26,6 @@ public class ConfigKeyConstant {
 	public final static String REDIS_ROLE_RESOURCES_SESSION_KEY="ROLE_RESOURCES:";
 	
 	public final static Integer REDIS_ADMIN_USER_EXPIRE=1800;
+	
+	public final static String GATEWAY_IGNORE_URLS_KEY="GATEWAY_IGNORE_URLS";
 }
