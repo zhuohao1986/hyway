@@ -12,7 +12,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 public class AuthenticationServiceSpringApplication {
 
 	public static void main(String[] args) {
-		
+
 		SpringApplication.run(AuthenticationServiceSpringApplication.class, args);
 	}
 }

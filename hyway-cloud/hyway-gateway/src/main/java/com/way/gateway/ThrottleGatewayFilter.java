@@ -1,5 +1,6 @@
 package com.way.gateway;
 
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import org.isomorphism.util.TokenBucket;
@@ -31,6 +32,7 @@ public class ThrottleGatewayFilter implements GatewayFilter {
 
 	public ThrottleGatewayFilter setCapacity(int capacity) {
 		this.capacity = capacity;
+		new Date();
 		return this;
 	}
 

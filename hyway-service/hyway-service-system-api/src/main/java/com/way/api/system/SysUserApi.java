@@ -29,6 +29,8 @@ public interface SysUserApi{
 	public String deleteUser(String param) throws BusinessException;
 	
 	public String insertUser(String param) throws BusinessException;
+
+	public String autoInsertUser(String param) throws BusinessException;
 	
 	public String updateUser(String param) throws BusinessException;
 	
@@ -46,4 +48,5 @@ public interface SysUserApi{
 
 	public String getUserByToken(String param);
 
+    public String userLoginOpenId(String toString);
 }

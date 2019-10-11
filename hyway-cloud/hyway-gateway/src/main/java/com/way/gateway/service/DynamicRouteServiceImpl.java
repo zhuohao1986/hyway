@@ -54,10 +54,6 @@ public class DynamicRouteServiceImpl implements DynamicRouteService,ApplicationE
         this.publisher.publishEvent(new RefreshRoutesEvent(this));
     }
  
-    /**
-     * 增加路由
-     *
-     */
     @Override
     public String add(String param) throws GateWayException{
     	Result result=new Result(CodeConstants.RESULT_SUCCESS);

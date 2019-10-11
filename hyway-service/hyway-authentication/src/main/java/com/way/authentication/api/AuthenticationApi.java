@@ -10,4 +10,9 @@ public interface AuthenticationApi {
 
 	String getInfo(String param);
 
+	String openIDLogin(String param);
+
+	String updateOpenId(String param) throws Exception;
+
+	String userCreate(String param);
 }

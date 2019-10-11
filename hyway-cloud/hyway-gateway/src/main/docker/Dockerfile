@@ -10,7 +10,7 @@ FROM openjdk:8
 #指定镜像的作者和联系方式信息。
 MAINTAINER hyway "Samuel_way@163.com"
 
-EXPOSE 8080
+EXPOSE 10000
 
 VOLUME /tmp
 

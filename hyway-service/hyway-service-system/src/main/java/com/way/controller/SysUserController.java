@@ -65,6 +65,20 @@ public class SysUserController extends BaseController{
 		return result;
 	}
 	/**
+	 * 用户登录
+	 * @return
+	 */
+	@RequestMapping(value="/login/openId")
+	public Result userLoginOpenId() {
+		initParams();
+		Result result = new Result(CodeConstants.RESULT_SUCCESS);
+		RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
+		String sysUsertStr = sysUserApi.userLoginOpenId(rw.toString());
+		result = JSONObject.parseObject(sysUsertStr, Result.class);
+		return result;
+	}
+
+	/**
 	 * 用户注销
 	 * @return
 	 */
@@ -104,6 +118,20 @@ public class SysUserController extends BaseController{
 		return result.toString();
 	}
 	/**
+	 * 添加用户
+	 * @return
+	 */
+	@RequestMapping(value="/autoRegUser")
+	public String autoRegUser() {
+		initParams();
+		Result result = new Result(CodeConstants.RESULT_SUCCESS);
+		RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
+		String insertSysUsertStr = sysUserApi.autoInsertUser(rw.toString());
+		result = JSONObject.parseObject(insertSysUsertStr, Result.class);
+		return result.toString();
+	}
+
+	/**
 	 * 用户删除
 	 * @return
 	 */
@@ -142,4 +170,6 @@ public class SysUserController extends BaseController{
 		result = JSONObject.parseObject(updateSysUsertStr, Result.class);
 		return result.toString();
 	}
+
+
 }

@@ -1,8 +1,6 @@
 package com.way.api;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,6 +102,28 @@ public class SysUserApImpl implements SysUserApi {
             sysUserRoleService.insert(userRole);
         });
         result.setMessage("添加成功");
+		return result.toJSONString();
+	}
+	@Override
+	public String autoInsertUser(String param) {
+		Result result = new Result(CodeConstants.RESULT_SUCCESS);
+		RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
+		UserDTO userDto=JSONObject.parseObject(rw.getValue(), UserDTO.class);
+		SysUser sysUser = new SysUser();
+		BeanUtils.copyProperties(userDto, sysUser);
+		sysUser.setDelState(CommonConstant.STATUS_NORMAL);
+		sysUser.setUuid(UUID.randomUUID().toString());
+		sysUserService.insertSysUser(sysUser);
+		List<Integer> iLIst=new ArrayList<>();
+		iLIst.add(1);
+		userDto.setRole(iLIst);
+		userDto.getRole().forEach(roleId -> {
+			SysUserRole userRole = new SysUserRole();
+			userRole.setUserId(sysUser.getUserId());
+			userRole.setRoleId(roleId);
+			sysUserRoleService.insert(userRole);
+		});
+		result.setMessage("添加成功");
 		return result.toJSONString();
 	}
 
@@ -232,6 +252,23 @@ public class SysUserApImpl implements SysUserApi {
 			return result.toString();
 		}
 
+		return result.toJSONString();
+	}
+
+	@Override
+	public String userLoginOpenId(String param) {
+		Result result = new Result(CodeConstants.RESULT_SUCCESS);
+		try {
+			RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
+			JSONObject obj = JSONObject.parseObject(rw.getValue());
+			String openId=obj.getString("openId");
+			UserVO sysuser = sysUserService.findUserByOpenId(openId);
+			result.setValue(JSONObject.toJSONString(sysuser));
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = new Result(CodeConstants.RESULT_FAIL, "004");
+			return result.toString();
+		}
 		return result.toJSONString();
 	}
 }

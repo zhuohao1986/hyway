@@ -23,4 +23,9 @@ public interface SysUserFeignApi {
 	@RequestMapping(method=RequestMethod.GET,value="/user/logout", consumes=MediaType.APPLICATION_JSON_UTF8_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
 	public String logout(@RequestParam String param);
 
+	@RequestMapping(method=RequestMethod.GET,value="/user/login/openId", consumes=MediaType.APPLICATION_JSON_UTF8_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+	public Result loginOpenId(@RequestParam String param);
+
+	@RequestMapping(method=RequestMethod.GET,value="/user/autoRegUser", consumes=MediaType.APPLICATION_JSON_UTF8_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+	public Result userAutoReg(@RequestParam String param);
 }
