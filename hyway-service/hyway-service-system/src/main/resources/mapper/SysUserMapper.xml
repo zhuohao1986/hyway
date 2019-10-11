@@ -14,7 +14,7 @@
     <result column="avatar" jdbcType="VARCHAR" property="avatar" />
     <result column="label" jdbcType="VARCHAR" property="label" />
     <result column="dept_id" jdbcType="INTEGER" property="deptId" />
-    <result column="qq_open_id" jdbcType="qqOpenId" property="label" />
+    <result column="qq_open_id" jdbcType="VARCHAR" property="qqOpenId" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
     <result column="create_by" jdbcType="VARCHAR" property="createBy" />
