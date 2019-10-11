@@ -3,9 +3,15 @@ package com.way.authentication.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.way.authentication.tools.PoolCache;
 import com.way.authentication.tools.ScanPool;
+import com.way.common.constant.CodeConstants;
+import com.way.common.stdo.Result;
+
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,7 +23,7 @@ import javax.servlet.http.HttpSession;
  * @Date2019/10/10 19:10
  * @Version V1.0
  **/
-
+@RestController
 public class QRScanController {
 
     /**
@@ -35,23 +41,20 @@ public class QRScanController {
 
     @RequestMapping("/scanLogin")
     public String scanLogin(String uuid) {
+    	Result result = new Result(CodeConstants.RESULT_SUCCESS);
         ScanPool pool = null;
         if (!(PoolCache.cacheMap == null || PoolCache.cacheMap.isEmpty())) {
             pool = PoolCache.cacheMap.get(uuid);
         }
         if (pool == null) {
-            obj.put("successFlag", "0");
-            obj.put("msg", "该二维码已经失效,请重新获取");
+        	result.setCode(CodeConstants.RESULT_FAIL);
+        	result.setMessage("该二维码已经失效,请重新获取");
         } else {
             pool.setSession("123123");
             pool.scanSuccess();
-            obj.put("msg", "扫码成功!");
-            obj.put("successFlag", "1");
-
+            result.setMessage("扫码成功!");
         }
-
-
-        return "home";
+        return result.toJSONString();
     }
 
     @RequestMapping("/login")
