@@ -52,6 +52,19 @@ public class SysUserController extends BaseController{
 		return result.toString();
 	}
 	/**
+	 * 查询用户
+	 * @return
+	 */
+	@RequestMapping(value="/userinfo")
+	public String userinfo() {
+		initParams();
+		Result result = new Result(CodeConstants.RESULT_SUCCESS);
+		RequestWrapper rw=new RequestWrapper(CodeConstants.ALL_REQUEST_CHANNEL_WEB, jsonData.toString());
+		String SysUsertStr = sysUserApi.getUser(rw.toString());
+		result = JSONObject.parseObject(SysUsertStr, Result.class);
+		return result.toString();
+	}
+	/**
 	 * 用户登录
 	 * @return
 	 */

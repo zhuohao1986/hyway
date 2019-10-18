@@ -22,6 +22,7 @@ import com.way.common.pojos.system.dto.UserInfo;
 import com.way.common.stdo.RequestWrapper;
 import com.way.common.stdo.Result;
 import com.way.common.utils.DEncryptionUtils;
+import com.way.common.utils.DateUtils;
 import com.way.common.utils.StringUtils;
 import com.way.common.vo.UserVO;
 import com.way.service.SysUserRoleService;
@@ -55,6 +56,18 @@ public class SysUserApImpl implements SysUserApi {
 		return result.toJSONString();
 	}
 
+	@Override
+	public String getUser(String param) throws BusinessException {
+		Result result = new Result(CodeConstants.RESULT_SUCCESS);
+		RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
+		JSONObject obj=JSONObject.parseObject(rw.getValue());
+		Integer id = obj.getInteger("uuid");
+		UserVO userVO = sysUserService.selectUserVoById(id);
+		result.setMessage("查询成功");
+		result.setValue(userVO);
+		return result.toJSONString();
+	}
+	
 	@Override
 	public String user(String param) throws BusinessException {
 		Result result = new Result(CodeConstants.RESULT_SUCCESS);
@@ -108,11 +121,14 @@ public class SysUserApImpl implements SysUserApi {
 	public String autoInsertUser(String param) {
 		Result result = new Result(CodeConstants.RESULT_SUCCESS);
 		RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
-		UserDTO userDto=JSONObject.parseObject(rw.getValue(), UserDTO.class);
+		JSONObject params=JSONObject.parseObject(rw.getValue());
+		JSONObject obj=JSONObject.parseObject(params.getString("param"));
+		UserDTO userDto=JSONObject.parseObject(obj.toString(), UserDTO.class);
 		SysUser sysUser = new SysUser();
 		BeanUtils.copyProperties(userDto, sysUser);
 		sysUser.setDelState(CommonConstant.STATUS_NORMAL);
-		sysUser.setUuid(UUID.randomUUID().toString());
+		sysUser.setUuid(UUID.randomUUID().toString().replaceAll("-", ""));
+		sysUser.setCreateTime(DateUtils.getCurrentDate());
 		sysUserService.insertSysUser(sysUser);
 		List<Integer> iLIst=new ArrayList<>();
 		iLIst.add(1);
@@ -260,7 +276,8 @@ public class SysUserApImpl implements SysUserApi {
 		Result result = new Result(CodeConstants.RESULT_SUCCESS);
 		try {
 			RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
-			JSONObject obj = JSONObject.parseObject(rw.getValue());
+			JSONObject valueJson = JSONObject.parseObject(rw.getValue());
+			JSONObject obj=JSONObject.parseObject(valueJson.getString("param"));
 			String openId=obj.getString("openId");
 			UserVO sysuser = sysUserService.findUserByOpenId(openId);
 			result.setValue(JSONObject.toJSONString(sysuser));

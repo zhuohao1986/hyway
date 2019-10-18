@@ -49,4 +49,6 @@ public interface SysUserApi{
 	public String getUserByToken(String param);
 
     public String userLoginOpenId(String toString);
+
+	String getUser(String param) throws BusinessException;
 }

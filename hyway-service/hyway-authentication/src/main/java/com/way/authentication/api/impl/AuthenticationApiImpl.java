@@ -2,9 +2,7 @@ package com.way.authentication.api.impl;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
-import com.way.common.utils.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +17,7 @@ import com.way.common.pojos.system.SysUser;
 import com.way.common.stdo.RequestWrapper;
 import com.way.common.stdo.Result;
 import com.way.common.utils.StringUtils;
+import com.way.common.vo.UserVO;
 
 @Service
 public class AuthenticationApiImpl implements AuthenticationApi {
@@ -92,15 +91,14 @@ public class AuthenticationApiImpl implements AuthenticationApi {
 	public String getInfo(String param) {
 		RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
 		JSONObject obj = JSONObject.parseObject(rw.getValue());
-		String refreshToken = obj.getString("refreshToken");
-		String hgetval = jedisClient.hget(refreshToken, "user");
-		SysUser user=JSONObject.parseObject(hgetval, SysUser.class);
+		String user_token = obj.getString("token");
+		String hgetval = jedisClient.hget(ConfigKeyConstant.REDIS_ADMIN_USER_SESSION_KEY+ user_token, "user");
+		UserVO user=JSONObject.parseObject(hgetval, UserVO.class);
 		return new Result(CodeConstants.RESULT_SUCCESS, "success",JSONObject.toJSON(user)).toJSONString();
 	}
 	@Override
 	public String openIDLogin(String param) {
 		Result result = new Result(CodeConstants.RESULT_SUCCESS);
-		String mw_token;
 		try {
 			RequestWrapper rw = JSONObject.parseObject(param, RequestWrapper.class);
 			String valueJson = rw.getValue();
