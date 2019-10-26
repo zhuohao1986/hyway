@@ -115,6 +115,11 @@
 			<groupId>com.xkcoding</groupId>
 			<artifactId>justauth-spring-boot-starter</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.xujin.moss</groupId>
+			<artifactId>moss-client-2.x</artifactId>
+			<version>1.0.0.RELEASE</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>hyway-authentication</finalName>
@@ -136,6 +141,20 @@
     		</resource>
         </resources>
 		<plugins>
+		    <plugin>
+				<groupId>pl.project13.maven</groupId>
+				<artifactId>git-commit-id-plugin</artifactId>
+				<executions>
+							<execution>
+								<goals>
+									<goal>revision</goal>
+								</goals>
+							</execution>
+						</executions>
+				<configuration>
+					  <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+				</configuration>
+		    </plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>

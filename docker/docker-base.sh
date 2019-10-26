@@ -6,10 +6,13 @@ docker run -tid --name=rancher-server  --restart=unless-stopped   -p 80:80 -p 44
 #添加docker mariadb
 docker run -p 3306:3306 -v /data/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=hyway@123# --name mariadb -d --restart unless-stopped docker.io/mariadb:latest
 GRANT ALL PRIVILEGES ON *.* TO 'hyway'@'%' IDENTIFIED BY 'hyway@123#' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
 
 #docker 博客软件
 docker run --detach --name solo   --volume ~/skins/:/opt/solo/skins/ --env RUNTIME_DB="MYSQL"     --env JDBC_USERNAME="hyway"     --env JDBC_PASSWORD="hyway@123#"    --env JDBC_DRIVER="com.mysql.cj.jdbc.Driver"  --env JDBC_URL="jdbc:mysql://62.234.110.157:3306/solo?useUnicode=yes&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC"  b3log/solo --listen_port=9200 --server_scheme=http --server_host=47.100.166.116 --server_port=9010
 
+
+docker  run --name nacos -d -p 8848:8848 --privileged=true --restart=always -e PREFER_HOST_MODE=hostname -e MODE=standalone -v /data/nacos/logs:/home/nacos/logs -v /data/nacos/init.d/application.properties:/home/nacos/init.d/custom.properties nacos/nacos-server
 
 
 

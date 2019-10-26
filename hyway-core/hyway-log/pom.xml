@@ -9,4 +9,11 @@
   <artifactId>hyway-log</artifactId>
   <packaging>jar</packaging>
   <name>hyway-log</name>
+  <dependencies>
+    <!-- https://mvnrepository.com/artifact/net.logstash.logback/logstash-logback-encoder -->
+	<dependency>
+	    <groupId>net.logstash.logback</groupId>
+	    <artifactId>logstash-logback-encoder</artifactId>
+	    </dependency>
+  </dependencies>
 </project>

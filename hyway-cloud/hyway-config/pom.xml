@@ -38,7 +38,11 @@
 			<groupId>com.way</groupId>
 			<artifactId>hyway-log</artifactId>
 		</dependency>
-		
+		<dependency>
+			<groupId>org.xujin.moss</groupId>
+			<artifactId>moss-client-2.x</artifactId>
+			<version>1.0.0.RELEASE</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>hyway-config</finalName>
@@ -67,6 +71,20 @@
 					<mainClass>com.way.config.server.ConfigSpringApplication</mainClass>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>pl.project13.maven</groupId>
+				<artifactId>git-commit-id-plugin</artifactId>
+				<executions>
+							<execution>
+								<goals>
+									<goal>revision</goal>
+								</goals>
+							</execution>
+						</executions>
+				<configuration>
+					  <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+				</configuration>
+		    </plugin>
 		</plugins>
 	</build>
 </project>

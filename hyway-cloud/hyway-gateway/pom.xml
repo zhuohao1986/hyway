@@ -140,7 +140,11 @@
 		<!-- https://mvnrepository.com/artifact/io.reactivex.rxjava2/rxjava -->
 		<!-- <dependency> <groupId>io.reactivex.rxjava2</groupId> <artifactId>rxjava</artifactId> 
 			</dependency> -->
-		
+		<dependency>
+			<groupId>org.xujin.moss</groupId>
+			<artifactId>moss-client-2.x</artifactId>
+			<version>1.0.0.RELEASE</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>hyway-gateway</finalName>
@@ -169,6 +173,20 @@
 					<mainClass>com.way.gateway.GateWaySpringApplication</mainClass>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>pl.project13.maven</groupId>
+				<artifactId>git-commit-id-plugin</artifactId>
+				<executions>
+							<execution>
+								<goals>
+									<goal>revision</goal>
+								</goals>
+							</execution>
+						</executions>
+				<configuration>
+					  <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+				</configuration>
+		    </plugin>
 		</plugins>
 	</build>
 </project>
